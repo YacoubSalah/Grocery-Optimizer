@@ -1,0 +1,17 @@
+.product {
+    border: 3px black;
+    border-style: solid;
+    width: 400px;
+    margin: 5px;
+    position: relative;
+}
+
+input {
+    width: 30px;
+}
+
+.left{
+    position: absolute;
+    right: 0px;
+   
+}
