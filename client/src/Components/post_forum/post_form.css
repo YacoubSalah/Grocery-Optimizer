@@ -1,0 +1,62 @@
+.PostForm{
+    margin-top: 50px;
+    display: grid;
+    justify-items: center;
+}
+.Form{
+    border-radius: 10px;
+    background-color: #f2f2f2;
+    padding: 20px;
+   height: 400px;
+}
+.star{
+    width: 25px;
+    height: 25px;
+}
+.star:hover{
+      color: #ccc;
+      width: 30px;
+      height: 30px;
+      cursor:pointer;
+
+}
+
+.DescriptionAndImage{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+#textarea{
+    width: 100%;
+    height: 150px;
+}
+#PriceInput , select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.PriceAndScore{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.priceDiv , .scoreDiv {
+    display: grid;
+    justify-content: center;
+}
+
+/* --------------------------------------------------------- */
+
+
+.AddIMage{
+    display: grid;
+    align-items:center;
+}
+#img{
+    margin-left: 15%;
+}
+  
