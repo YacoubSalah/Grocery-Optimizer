@@ -1,16 +1,23 @@
 import React from 'react'
 import "./product.css"
+import Photo from './img.jpg'
 function Product() {
   return (
     <div className='product'>
-        <h4>name product</h4>
-        {/* <img src='./img.jpg' alt='img' width="100px" height="100px"/> */}
-        <div className='left'>
-        <p>unit price: 7</p>
-        <p>total price: 7</p>
+      <div className='gridForCards'>
+        <div className='imageDivandText'>
+          <label>name product</label>
+          <br/>
+          <img src={Photo} alt='img' className='imageproduct'/>
         </div>
-        <input type="number"/><br/>
-        <button>add to cart</button>
+        <div className='inputsDiv'>
+          <p>unit price: 7</p>
+          <p>total price: 7</p>
+          <label>Unit Count</label>
+          <input className='unitCountNumber' type="number" />
+        </div>
+      </div>
+      <button className='addToCardButton'>Add To card</button>
     </div>
   )
 }
