@@ -1,0 +1,11 @@
+.Navbar{
+    background-color: 	blue;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+.Navbar > a {
+    margin-right: 40px;
+    color: aliceblue;
+    text-decoration:none;
+}

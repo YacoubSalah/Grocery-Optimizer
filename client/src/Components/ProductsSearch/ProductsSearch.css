@@ -1,0 +1,30 @@
+.container {
+    margin-top: 10px;
+    display: grid;
+    grid-template-areas:
+      'leftSide search search search search search rightSide'
+      'leftSide Card Card Card Card Card rightSide'
+      'leftSide Card Card Card Card Card rightSide'
+      'leftSide Card Card Card Card Card rightSide'
+      'leftSide Card Card Card Card Card rightSide'
+      'leftSide Card Card Card Card Card rightSide';
+    gap: 10px;
+    background-color: #2196F3;
+}
+
+.Search { grid-area: search; }
+.LeftSide { grid-area: leftSide; }
+.RigthSide { grid-area: rightSide; }
+.Products { 
+    grid-area: Card; 
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+
+.container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    font-size: 40px;
+}
