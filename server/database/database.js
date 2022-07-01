@@ -1,11 +1,11 @@
 let storeModel = require('../models/store')
 
-function getStoreById(id) {
+async function getStoreById(id) {
 
-    storeModel.findOne({ 'storeId': id }, function (err, res) {
-        console.log(res)
-        return res
-    })
+    let storeData = await storeModel.findOne({ id: id })
+        .exec()
+
+    return storeData
 
 }
 

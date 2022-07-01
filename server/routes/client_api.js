@@ -4,9 +4,17 @@ const database = require("../database/database")
 
 dbTestingAPI.get("/store/:id", async function (req, res) {
     let storeId = req.params.id
-    let store = await database.getStoreById(storeId)
-    //format store the way we need it
-    res.send(store)
+    let storedata = await database.getStoreById(storeId)
+    if (storedata) {
+        let store ={}
+        store.id = storedata.id
+        store.name = storedata.name
+        store.location = storedata.location
+        store.score = storedata.score
+        res.send(store)
+    } else {
+        res.status(404).send(`Store with store ID: ${storeId} was not found`)
+    }
 })
 
 dbTestingAPI.post("/store", async function (req, res) {
