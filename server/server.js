@@ -15,8 +15,8 @@ app.use(function (req, res, next) {
 })
 
 //for database testing change it to server api when needed
-const dbTestingAPI = require('./routes/client_api')
-app.use( '/' , dbTestingAPI)
+const api = require('./routes/client_api')
+app.use( '/' , api)
 //for database testing change it to server api when needed
 
 const port = 3020
