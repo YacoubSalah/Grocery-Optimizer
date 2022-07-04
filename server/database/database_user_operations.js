@@ -18,16 +18,7 @@ async function getStoresList() {
 
 }
 
-async function addStore(storeData) {
 
-    let store = new storeModel(storeData)
-    let feedback = await store.save()
-        .then(() => "New store were added")
-        .catch(() => "Adding new store failed")
-
-    return feedback
-
-}
 
 async function getPostById(id) {
 
@@ -53,4 +44,4 @@ async function addPost(postData) {
 
 
 
-module.exports = { getStoreById, addStore, getPostById, addPost }
+module.exports = { getStoreScoreById, getPostById, addPost , getStoresList }

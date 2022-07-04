@@ -1,16 +1,8 @@
 const route = require("express")
 const api = route()
-const database = require("../database/database")
+const database = require("../database/database_user_operations")
 
-api.post("/store", async function (req, res) {
-
-    let storeData = req.body
-    let feedback = await database.addStore(storeData)
-    res.send(feedback)
-
-})
-
-api.get("/store/:id", async function (req, res) {
+/* api.get("/store/:id", async function (req, res) {
 
     let storeId = req.params.id
     let storedata = await database.getStoreById(storeId)
@@ -24,7 +16,7 @@ api.get("/store/:id", async function (req, res) {
         res.status(404).send(`Store with store ID: ${storeId} was not found`)
     }
 
-})
+}) */
 
 api.post("/post", async function (req, res) {
 
@@ -34,7 +26,7 @@ api.post("/post", async function (req, res) {
 
 })
 
-api.get("/post/:id", async function (req, res) {
+/* api.get("/post/:id", async function (req, res) {
 
     let postId = req.params.id
     let postData = await database.getStoreById(postId)
@@ -42,14 +34,14 @@ api.get("/post/:id", async function (req, res) {
         let post = {}
         id = postData.name
         userID = postData.location
-        itemID = 
-        post.score = postData.score
+        itemID =
+            post.score = postData.score
         res.send(post)
     } else {
         res.status(404).send(`Post with post ID: ${postId} was not found`)
     }
 
-})
+}) */
 
 
 
