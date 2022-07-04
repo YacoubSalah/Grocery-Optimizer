@@ -48,6 +48,7 @@ function postForum() {
                         <input type="file" id="img" name="img" accept="image/*" />
                     </div>
                 </div>
+                <button className="addPostButton">Add Post</button>
             </div>
         </div>
     )
