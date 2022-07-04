@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
 function Cart() {
   return (
-    <div>Cart</div>
+    <Fragment>Cart</Fragment>
   )
 }
 

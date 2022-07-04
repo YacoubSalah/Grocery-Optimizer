@@ -1,30 +1,48 @@
-.container {
-    margin-top: 10px;
-    display: grid;
-    grid-template-areas:
-      'leftSide search search search search search rightSide'
-      'leftSide Card Card Card Card Card rightSide'
-      'leftSide Card Card Card Card Card rightSide'
-      'leftSide Card Card Card Card Card rightSide'
-      'leftSide Card Card Card Card Card rightSide'
-      'leftSide Card Card Card Card Card rightSide';
-    gap: 10px;
-    background-color: #2196F3;
+.containerProductsPage{
+    display: flex;
+    margin-top: 20px;
+    width: 100%;
 }
-
-.Search { grid-area: search; }
-.LeftSide { grid-area: leftSide; }
-.RigthSide { grid-area: rightSide; }
-.Products { 
-    grid-area: Card; 
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-}
-
-
-.container > div {
-    background-color: rgba(255, 255, 255, 0.8);
+.categoryDiv{
+    width: 10%;
     text-align: center;
-    font-size: 40px;
 }
+.bodyDiv{
+    width: 65%;
+}
+.cartDiv{
+    width: 25%;
+}
+select {
+    padding: 5px;
+    color: #000;
+    background: transparent;
+    -webkit-appearance: none;
+    border: none;
+
+}
+select option{
+background-color: #82caff;
+}
+.searchInput{
+    width: 90%;
+    height: 30px;
+    border-radius: 10px;
+}
+.bodyDiv > div{
+    margin-top: 10px;
+}
+.searchButton{
+  height: 35px;
+  margin-left: 10px;
+  border-radius: 10px;
+  background-color: blue;
+}
+
+.products{
+    display: grid;
+    grid-template-columns:  repeat(3,1fr);
+    gap: 10px;
+}
+
+

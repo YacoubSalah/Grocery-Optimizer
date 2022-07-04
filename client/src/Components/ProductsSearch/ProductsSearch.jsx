@@ -1,19 +1,30 @@
 import React from 'react'
 import Product from '../product/product'
+import Categories from '../categories/categories'
+import Cart from '../Cart/Cart'
 import './ProductsSearch.css'
 function ProductsSearch() {
-
-  let arr = []
-  for (let i = 0; i < 10; i++) {
-    arr.push(< Product />)
-  }
   return (
-    <div className='container'>
-      <div class="Search">search Component</div>
-      <div class="LeftSide">Categories</div>
-      <div class="RigthSide">Cart </div>
-      <div class="Products">
-          {arr.map(element => element)}
+    <div className='containerProductsPage'>
+      <div className='categoryDiv'>
+         <Categories />
+      </div>
+      <div className='bodyDiv'>
+        <div>
+           <input className='searchInput' placeholder='Enter name to search' />
+           <button className='searchButton'>Serach</button>
+        </div>
+        <div className='products'>
+            <Product /> 
+            <Product /> 
+            <Product /> 
+            <Product /> 
+            <Product /> 
+            <Product /> 
+        </div>
+      </div>
+      <div className='cartDiv'>
+        <Cart />
       </div>
     </div>
   )
