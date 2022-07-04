@@ -1,14 +1,17 @@
 const mongoose = require('mongoose')
 const configuration = require('../configuration')
 
-let productSchema = new mongoose.Schema({
-    productName: String,
-    productImage: { type: String, default: configuration.productNoImageUrl },
-    productDescription: { type: String, default: "No product Description" },
-    productMainCategory: { type: String, default: "Unknown" },
-    productSubCategory: { type: String, default: "unknown" },
+const Schema = mongoose.Schema
+
+let productSchema = new Schema({
+    name: String,
+    imageUrl: { type: String, default: configuration.productNoImageUrl },
+    description: { type: String, default: "No product Description" },
+    mainCategory: { type: String, default: "Unknown" },
+    subCategory: { type: String, default: "unknown" },
+    stores: [{ type: Schema.Types.ObjectId, ref: "store", default: [] }]
 })
 
-let productModel = new mongoose.model('product' , productSchema)
+let productModel = mongoose.model('product', productSchema)
 
 module.exports = productModel
