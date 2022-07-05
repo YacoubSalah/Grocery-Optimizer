@@ -2,7 +2,7 @@ const route = require("express")
 const api = route()
 const postOperations = require("../database/post_operations")
 const storeOperations = require("../database/store_operations")
-const product_operations = require("../database/product_operations")
+const productOperations = require("../database/product_operations")
 
 api.post("/post", async function (req, res) {
 
@@ -12,15 +12,21 @@ api.post("/post", async function (req, res) {
 
 })
 
-api.get("/stores", async function (req, res) {
-
-    let stores = await storeOperations.getStores()
+api.get("/storesNamesList", async function (req, res) {
+    let filter = req.body
+    let stores = await storeOperations.getStoresNamesList(filter)
     res.send(stores)
 })
 
-api.get("/products", async function (req, res) {
-    ///////////////////////////////////////////////
-    let products = await product_operations.getProducts()
+api.get("/storesLocationsList", async function (req, res) {
+    let filter = req.body
+    let stores = await storeOperations.getStoresLocationsList(filter)
+    res.send(stores)
+})
+
+api.get("/productsNamesList", async function (req, res) {
+    let filter = req.body
+    let products = await productOperations.getProductsNamesList(filter)
     res.send(products)
 })
 
