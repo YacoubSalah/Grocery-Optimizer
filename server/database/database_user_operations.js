@@ -1,46 +1,110 @@
 let storeModel = require('../models/store')
-
-async function getStoreScoreById(id) {
-
-    let storeData = await storeModel.findOne({ id: id })
-        .exec()
-
-    return storeData
-
-}
-
-async function getStoresList() {
-
-    let storesList = await storeModel.find({})
-        .exec()
-    return storesList
-
-}
+let productModel = require('../models/product')
 
 
-
-async function getPostById(id) {
-
-    let postData = await postModel.findOne({ id: id })
-        .exec()
-
-    return postData
-
-}
 
 async function addPost(postData) {
 
-    let post = new postModel(postData)
-    let date = new Date()
-    post.date = date
-    let feedback = await post.save()
-        .then(() => "New post were added")
-        .catch(() => "Adding new post failed")
+    let feedback = {}
+    feedback.status = true
+    feedback.message = "No Feedback yet"
 
-    return feedback
+    validatePostData(postData, feedback)
+    if (!feedback) {
+        return feedback
+    }
+
+    let productName = postData.productName,
+        storeName = postData.storeName,
+        storeLocation = postData.storeLocation
+
+    let currentStore = await retriveCurrentStore(storeName, storeLocation, feedback)
+    if (!feedback) {
+        return feedback
+    }
+
+    let currentProduct = await retriveCurrentProduct(productName, feedback)
+    if (!feedback) {
+        return feedback
+    }
+
+    let newPost = createPost(postData)
+
+    let currentStoreId = currentStore.id
+    currentProduct.stores.find(s => s.storeId === currentStoreId).posts.push(newPost)
+
+    await saveProduct(currentProduct, feedback)
+
+    return feedback.message
 
 }
 
 
+function validatePostData(postData, feedback) {
+    if (postData.productName && postData.storeName && postData.storeLocation) {
+        feedback.message = "Data is valid"
+        return true
+    } else {
+        feedback.message = `Missing or invalid mandatory data, request body should be:
+                    productName: String,
+                    storeName: String,
+                    storeLocation: String`
+        feedback.status = false
+        return false
+    }
+}
 
-module.exports = { getStoreScoreById, getPostById, addPost , getStoresList }
+async function retriveCurrentStore(storeName, storeLocation, feedback) {
+    {
+        let currentStore = await storeModel.findOne({ name: storeName, location: storeLocation }).exec()
+        if (currentStore) {
+            feedback.message = 'Current store was found'
+            return currentStore
+        } else {
+            feedback.message = `Store with the name ${storeName} in ${storeLocation} doesn't exist`
+            feedback.status = false
+        }
+    }
+}
+
+async function retriveCurrentProduct(productName, feedback) {
+    let currentProduct = await productModel.findOne({ name: productName }).exec()
+    if (currentProduct) {
+        feedback.message = `Product was found`
+        return currentProduct
+    } else {
+        feedback.message = `Product with the name ${productName} doesn't exist`
+        feedback.status = false
+        return feedback
+    }
+}
+
+function createPost(postData) {
+    let newPost = {}
+    if (postData.price) {
+        newPost.price = postData.price
+    }
+    if (postData.score) {
+        newPost.score = postData.score
+    }
+    if (postData.imageUrl) {
+        newPost.imageUrl = postData.imageUrl
+    }
+    if (postData.note) {
+        newPost.note = postData.note
+    }
+    return newPost
+}
+
+async function saveProduct(currentProduct, feedback) {
+    await currentProduct.save()
+        .then(() => {
+            feedback.message = "Post was added to product store"
+        })
+        .catch((err) => {
+            feedback.message = "Adding post to product store failed"
+            feedback.status = false
+        })
+}
+
+module.exports = { addPost }
