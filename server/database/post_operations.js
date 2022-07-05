@@ -21,6 +21,7 @@ async function addPost(postData) {
         return feedback
     }
 
+    console.log(currentStore)
     let currentProduct = await retriveCurrentProduct(productName, feedback)
     if (!feedback.status) {
         return feedback
