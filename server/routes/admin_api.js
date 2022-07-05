@@ -1,6 +1,6 @@
 const route = require("express")
 const api = route()
-const database = require("../database/database_admin_operations")
+const database = require("../database/admin_operations")
 
 
 api.put("/store", async function (req, res) {

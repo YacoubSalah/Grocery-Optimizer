@@ -1,8 +1,6 @@
 let storeModel = require('../models/store')
 let productModel = require('../models/product')
 
-
-
 async function addPost(postData) {
 
     let feedback = {}
@@ -38,7 +36,6 @@ async function addPost(postData) {
     return feedback.message
 
 }
-
 
 function validatePostData(postData, feedback) {
     if (postData.productName && postData.storeName && postData.storeLocation) {
