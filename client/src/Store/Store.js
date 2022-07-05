@@ -1,4 +1,6 @@
 import { action, makeObservable, observable } from 'mobx'
+import axios from 'axios'
+
 
 export class Store {
     constructor() {
@@ -31,6 +33,23 @@ export class Store {
     
 
     handelAddClick = () => {
-        /* handel add post here */
+    
+
+        axios.post('http://localhost:3020/post' , {
+            "productName": this.itemName,
+            "storeName": this.storeName,
+            "storeLocation": this.cityName, 
+            "score" :  parseInt(this.score),
+            "price" : parseInt(this.price),
+            "note" : this.note
+        })
+        .then(function (response) {
+          // handle success
+          console.log(response);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
     }
 }

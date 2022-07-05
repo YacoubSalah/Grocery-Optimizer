@@ -9,16 +9,16 @@ const PostForum = inject("store")(observer((props) => {
 
                 <label for="country">Select Store</label>
                 <select onChange={props.store.handelInputs} name="storeName">
-                    <option value="australia">Australia</option>
-                    <option value="canada">Canada</option>
-                    <option value="usa">USA</option>
+                    <option value="Basem">Basem</option>
+                    <option value="Yacoubs">Yacoubs</option>
+                    <option value="USA">USA</option>
                 </select>
 
                 <label for="country">Select City</label>
                 <select onChange={props.store.handelInputs} name="cityName">
-                    <option value="australia">Australia</option>
-                    <option value="canada">Canada</option>
-                    <option value="usa">USA</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Jerusalem">Jerusalem</option>
+                    <option value="USA">USA</option>
                 </select>
                 <div>
                     <label>item Name</label>
