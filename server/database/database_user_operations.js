@@ -10,7 +10,7 @@ async function addPost(postData) {
     feedback.message = "No Feedback yet"
 
     validatePostData(postData, feedback)
-    if (!feedback) {
+    if (!feedback.status) {
         return feedback
     }
 
@@ -19,12 +19,13 @@ async function addPost(postData) {
         storeLocation = postData.storeLocation
 
     let currentStore = await retriveCurrentStore(storeName, storeLocation, feedback)
-    if (!feedback) {
+    if (!feedback.status) {
         return feedback
     }
 
+    console.log(currentStore)
     let currentProduct = await retriveCurrentProduct(productName, feedback)
-    if (!feedback) {
+    if (!feedback.status) {
         return feedback
     }
 
