@@ -1,5 +1,4 @@
 let storeModel = require('../models/store')
-let postModel = require('../models/post')
 
 async function getStoreScoreById(id) {
 

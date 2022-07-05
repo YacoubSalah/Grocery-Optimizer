@@ -3,7 +3,7 @@ const api = route()
 const database = require("../database/database_admin_operations")
 
 
-api.post("/store", async function (req, res) {
+api.put("/store", async function (req, res) {
 
     let storeData = req.body
     let feedback = await database.addStore(storeData)
@@ -19,20 +19,13 @@ api.post("/product" , async function(req,res){
 
 })
 
-api.put("/productToStore" , async function(req,res){
+api.post("/productToStore" , async function(req,res){
     
     let storeProductData = req.body
-    let feedback = await database.refStoreToProduct(storeProductData)
-    res.send(feedback)
+    let feedback = await database.addStoreToProduct(storeProductData)
+    res.send(feedback.message)
 
 })
 
-api.post("/price" , async function (req,res){
-
-    let priceData = req.body
-    let feedback = await database.addProductPrice(priceData)
-    res.send(feedback)
-    
-})
 
 module.exports = api

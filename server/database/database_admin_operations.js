@@ -1,6 +1,5 @@
 let storeModel = require('../models/store')
 let productModel = require('../models/product')
-let priceModel = require('../models/price')
 
 async function addStore(storeData) {
 
@@ -36,59 +35,84 @@ async function addProduct(productData) {
 
 }
 
-async function refStoreToProduct(storeProductData) {
+// 1. Find product by product_name
+// 2. Find store by store_name
+// 3. Check if product exists in store
+// 4. [doesn't exist] Create ProductStoreSchema (currentStoreId, Price metrics)
+// 5. Add to currentProduct.stores array
+// 6. Update model
+async function addStoreToProduct(storeProductData) {
 
-    let productName = storeProductData.productName
-    let storeName = storeProductData.storeName
-    let storeLocation = storeProductData.storeLocation
-    let feedback = ""
+    let feedback = {}
+    feedback.message = "No Feedback yet"
+    feedback.status = true
 
-    let currentProduct = await productModel.findOne({ name: productName }).exec()
+    validateStoreProductData(storeProductData, feedback)
+    if (!feedback.status) {
+        return feedback
+    }
+
+    let productName = storeProductData.productName,
+        productInitialPrice = storeProductData.productInitialPrice,
+        storeName = storeProductData.storeName,
+        storeLocation = storeProductData.storeLocation
+
+    let currentProduct = await productModel.findOne({ name: productName }, {stores: 1}).lean()
     if (!currentProduct) {
-        feedback = `Product with the name ${productName} doesn't exist`
+        feedback.message = `Product with the name ${productName} doesn't exist`
+        feedback.status = false
         return feedback
     }
 
     let currentStore = await storeModel.findOne({ name: storeName, location: storeLocation }).exec()
     if (!currentStore) {
-        feedback = `Store with the name ${storeName} doesn't exist`
+        feedback.message = `Store with the name ${storeName} doesn't exist`
+        feedback.status = false
+        return feedback
     }
 
-    currentProduct.stores.push(currentProduct.id)
-    feedback = await currentProduct.save()
-        .then(() => "Product was added to store")
-        .catch(() => "Adding product to store failed")
+    let currentStoreId = currentStore.id
+    if (currentProduct.stores.includes(s => {
+         return s.storeId === currentStoreId
+        })) {
+        feedback.message = `Store ${storeName} already exists in ${productName}`
+        feedback.status = false
+        return feedback
+    }
+   
+    let newStoreProduct = {
+        storeId: currentStoreId,
+        initialPrice: productInitialPrice,
+        calculatedPrice: 0,
+        posts: []
+    }
+    currentProduct.stores.push(newStoreProduct)
+
+    await currentProduct.save()
+        .then(() => {
+            feedback.message = "Product was added to store"
+        })
+        .catch(() => {
+            feedback.message = "Adding product to store failed"
+            feedback.status = false
+        })
 
     return feedback
 
 }
 
-async function addProductPrice(priceData) {
-    let feedback
-    let productName = priceData.productName
-    let storeName = priceData.storeName
-    let storeLocation = priceData.storeLocation
-    let currentStore = storeModel.find({ name: storeName, location: storeLocation }).exec()
-    if (!currentStore) {
-        feedback = `Store doesn't exists`
-        return feedback
-    }
-    let currentProduct = productModel.find({ name: productName }).exec()
-    if (!currentProduct) {
-        feedback = `Product doesn't exists`
-        return feedback
+function validateStoreProductData(storeProductData, feedback) {
+    if (storeProductData.productName && typeof (storeProductData.productInitialPrice) == 'number' && storeProductData.storeName && storeProductData.storeLocation) {
+        feedback.message = "Data is valid"
+        feedback.status = true
     } else {
-        if (!currentProduct.stores.includes(store._id)) {
-            feedback = `Product is not included in the specified store, please add the store to the products list of stores first`
-            return feedback
-        }
+        feedback.message = `Missing or invalid mandatory data, request body should be:
+                    productName: String,
+                    productInitialPrice: Number,
+                    storeName: String,
+                    storeLocation: String`
+        feedback.status = false
     }
-    let newPrice = new priceModel(priceData)
-    feedback = newPrice.save()
-        .then(() => `Price was saved`)
-        .catch(() => `Failed to save price`)
-    return feedback
-
 }
 
-module.exports = { addStore, addProduct, refStoreToProduct: refStoreToProduct }
+module.exports = { addStore, addProduct, addStoreToProduct: addStoreToProduct }
