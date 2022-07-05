@@ -3,21 +3,21 @@ const configuration = require('../configuration')
 
 const Schema = mongoose.Schema
 
-let postSchema = mongoose.Schema({
+let postSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: "user", default: "Anonymous" },
     imageURL: { type: String, default: configuration.productNoImageUrl },
     price: { type: Number, default: null },
     score: { type: Number, default: null }
-}, { _id: false, timestamps: { createdAt: true } })
+}, { timestamps: { createdAt: true } })
 
-let storeSchema = mongoose.Schema({
-    storeId: Schema.Types.ObjectId,
-    initialPrice: Number,
-    calculatedPrice: Number,
+let storeSchema = new Schema({
+    storeId: String,
+    initialPrice: { type: Number, default: null },
+    calculatedPrice: { type: Number, default: null },
     posts: [postSchema]
 }, { _id: false })
 
-let productSchema = mongoose.Schema({
+let productSchema = new Schema({
     name: String,
     imageUrl: { type: String, default: configuration.productNoImageUrl },
     description: { type: String, default: "No product Description" },

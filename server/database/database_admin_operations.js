@@ -35,12 +35,6 @@ async function addProduct(productData) {
 
 }
 
-// 1. Find product by product_name
-// 2. Find store by store_name
-// 3. Check if product exists in store
-// 4. [doesn't exist] Create ProductStoreSchema (currentStoreId, Price metrics)
-// 5. Add to currentProduct.stores array
-// 6. Update model
 async function addStoreToProduct(storeProductData) {
 
     let feedback = {}
@@ -57,7 +51,8 @@ async function addStoreToProduct(storeProductData) {
         storeName = storeProductData.storeName,
         storeLocation = storeProductData.storeLocation
 
-    let currentProduct = await productModel.findOne({ name: productName }, {stores: 1}).lean()
+
+    let currentProduct = await productModel.findOne({ name: productName }).exec()
     if (!currentProduct) {
         feedback.message = `Product with the name ${productName} doesn't exist`
         feedback.status = false
@@ -66,25 +61,22 @@ async function addStoreToProduct(storeProductData) {
 
     let currentStore = await storeModel.findOne({ name: storeName, location: storeLocation }).exec()
     if (!currentStore) {
-        feedback.message = `Store with the name ${storeName} doesn't exist`
+        feedback.message = `Store with the name ${storeName} in ${storeLocation} doesn't exist`
         feedback.status = false
         return feedback
     }
 
     let currentStoreId = currentStore.id
-    if (currentProduct.stores.includes(s => {
-         return s.storeId === currentStoreId
-        })) {
-        feedback.message = `Store ${storeName} already exists in ${productName}`
+
+    if (currentProduct.stores.find(s => s.storeId === currentStoreId)) {
+        feedback.message = `${storeName} store of ${storeLocation} already exists in ${productName} `
         feedback.status = false
         return feedback
     }
-   
+
     let newStoreProduct = {
         storeId: currentStoreId,
         initialPrice: productInitialPrice,
-        calculatedPrice: 0,
-        posts: []
     }
     currentProduct.stores.push(newStoreProduct)
 
