@@ -1,57 +1,55 @@
-import React from "react";
 import './post_form.css';
-import { AiFillStar } from 'react-icons/ai';
-/* import { AiOutlineStar } from 'react-icons/ai' */
+import { Rating } from 'react-simple-star-rating'
+import { observer, inject } from 'mobx-react'
 
-
-function postForum() {
+const PostForum = inject("store")(observer((props) => {
     return (
         <div className="PostForm">
             <div className="Form">
 
                 <label for="country">Select Store</label>
-                <select id="country" name="country">
+                <select onChange={props.store.handelInputs} name="storeName">
                     <option value="australia">Australia</option>
                     <option value="canada">Canada</option>
                     <option value="usa">USA</option>
                 </select>
 
                 <label for="country">Select City</label>
-                <select id="country" name="country">
+                <select onChange={props.store.handelInputs} name="cityName">
                     <option value="australia">Australia</option>
                     <option value="canada">Canada</option>
                     <option value="usa">USA</option>
                 </select>
+                <div>
+                    <label>item Name</label>
+                    <input onChange={props.store.handelInputs} name="itemName" className='productNameInput'  />
+                </div>
                 <div className="PriceAndScore">
                     <div className="priceDiv">
                         <label>Price</label>
-                        <input type='number' id="PriceInput" />
+                        <input onChange={props.store.handelInputs} type='number' name="price" />
                     </div>
                     <div className="scoreDiv">
                         <div>Score</div>
                         <div>
-                            <AiFillStar className="star" />
-                            <AiFillStar className="star" />
-                            <AiFillStar className="star" />
-                            <AiFillStar className="star" />
-                            <AiFillStar className="star" />
+                           <Rating onClick={props.store.handelInputs} name="score" ratingValue={props.store.score}/>
                         </div>
                     </div>
                 </div>
                 <div className="DescriptionAndImage">
                     <div className="textArea">
                         <label>Note</label>
-                        <textarea id="textarea" placeholder="Enter Note here" name="comment" form="usrform"></textarea>
+                        <textarea name="note" onChange={props.store.handelInputs} className="textarea" placeholder="Enter Note here" form="usrform"></textarea>
                     </div>
                     <div className="AddIMage">
                         <label>Upload Image</label>
                         <input type="file" id="img" name="img" accept="image/*" />
                     </div>
                 </div>
-                <button className="addPostButton">Add Post</button>
+                <button onClick={props.store.handelAddClick} className="addPostButton">Add Post</button>
             </div>
         </div>
     )
-}
+}))
 
-export default postForum
+export default PostForum

@@ -1,4 +1,4 @@
-import { observable , makeAutoObservable } from 'mobx'
+import { action, makeObservable, observable } from 'mobx'
 
 export class Store {
     constructor() {
@@ -9,13 +9,28 @@ export class Store {
         this.score = 0 ; 
         this.note = '' ;
 
-        makeAutoObservable(this, {
-            itemName: observable,
-            storeName: observable,
-            cityName : observable,
-            price : observable,
+        makeObservable(this, {
+            itemName: observable ,
+            storeName: observable ,
+            cityName : observable ,
+            price : observable ,
             score : observable , 
-            note : observable
+            note : observable ,
+            handelInputs : action ,
+            handelAddClick : action
         })
+    }
+
+    handelInputs = (event) => {
+
+        typeof(event) === 'number' ?
+        this.score = parseInt(event) / 20 :
+        this[event.target.name] = event.target.value
+
+    }
+    
+
+    handelAddClick = () => {
+        /* handel add post here */
     }
 }

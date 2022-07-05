@@ -1,6 +1,6 @@
 import React from 'react'
 import './store.css'
-import { AiFillStar } from 'react-icons/ai';
+import { Rating } from 'react-simple-star-rating'
 
 function store() {
   return (
@@ -14,11 +14,7 @@ function store() {
         <div>
             <img src='https://static.wikia.nocookie.net/phobia/images/8/82/Milk2.jpg/revision/latest/scale-to-width-down/360?cb=20170124115645' alt="imageMilk" />
             <div className='starsDiv'>
-                            <AiFillStar className="star" />
-                            <AiFillStar className="star" />
-                            <AiFillStar className="star" />
-                            <AiFillStar className="star" />
-                            <AiFillStar className="star" />
+               <Rating />
             </div>
         </div>
     </div>
