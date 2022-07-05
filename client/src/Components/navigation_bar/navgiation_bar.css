@@ -1,8 +1,10 @@
 .Navbar{
     background-color: 	blue;
     border-radius: 10px;
-    display: flex;
     justify-content: center;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 .Navbar > a {
     margin-right: 40px;

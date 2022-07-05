@@ -2,14 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import { Provider } from 'mobx-react'
 import reportWebVitals from './reportWebVitals';
-import '@fortawesome/free-regular-svg-icons'
-import '@fortawesome/free-solid-svg-icons'
- 
+import '@fortawesome/free-regular-svg-icons';
+import '@fortawesome/free-solid-svg-icons';
+
+import {Store} from './Store/Store'
+
+const store = new Store()
+
+const stores = {
+    store
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />
+    <Provider {...stores}>
+        <App />
+    </Provider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

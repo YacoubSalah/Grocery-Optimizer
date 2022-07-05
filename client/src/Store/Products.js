@@ -8,6 +8,6 @@ export class Products {
             ProductsArray : observable
         })
     }
-
+    
     
 }
