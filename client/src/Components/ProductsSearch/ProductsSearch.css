@@ -13,14 +13,6 @@
 .cartDiv{
     width: 25%;
 }
-select {
-    padding: 5px;
-    color: #000;
-    background: transparent;
-    -webkit-appearance: none;
-    border: none;
-
-}
 select option{
 background-color: #82caff;
 }

@@ -1,0 +1,23 @@
+.storeCard > div{ 
+   padding: 2rem;
+   vertical-align: middle;
+}
+
+.storeCard{
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+  align-content: center;
+}
+
+.starsDiv{
+   padding: 20px;
+}
+
+.detalisButton{
+    width: 100%;
+    background-color: blue;
+    border-radius: 20px;
+    height: 40px;
+}

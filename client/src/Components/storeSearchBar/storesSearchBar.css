@@ -1,3 +1,68 @@
-.searchBar{
+.searchBar {
     margin-top: 20px;
+}
+
+.selectsDiv{
+    display: inline-block;
+    text-align: center;
+}
+
+.selectsDiv > div {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.findPriceButton {
+    background-color: blue;
+    border-radius: 10px;
+    height: 2rem;
+}
+
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+
+.containerCheckbox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.container:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+.container input:checked~.checkmark {
+    background-color: #2196F3;
+}
+
+.Checkboxes > span {
+     font-size:xx-large;
+     margin-left: 20px;
+     text-decoration:underline;
+}
+
+.containerCheckbox {
+    display: inline;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
