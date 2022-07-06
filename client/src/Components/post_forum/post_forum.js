@@ -1,33 +1,50 @@
 import './post_form.css';
 import { Rating } from 'react-simple-star-rating'
 import { observer, inject } from 'mobx-react'
+import { useEffect } from 'react';
 
 const PostForum = inject("store")(observer((props) => {
-    console.log(props.store.getStorelist())
-    console.log(props.store.storesNamesList)
+
+    useEffect(() => {
+
+        props.store.getStorelist() //initialize stores names
+
+        props.store.getStoresLocationList()  //initialize stores Loocations
+
+        props.store.getproductsNameList() //initialize products
+
+    }, [props.store]);
+
+
     return (
         <div className="PostForm">
             <div className="Form">
 
                 <label>Select Store</label>
                 <select onChange={props.store.handelInputs} name="storeName">
-                    {/* {storesNames.map(store => {
+                    {props.store.storesNamesList.map(store => {
                         return (
-                            <option value={store}>{store}</option>
+                            <option key={store} value={store}>{store}</option>
                         )
-                    })} */}
+                    })}
                 </select>
 
                 <label>Select City</label>
                 <select onChange={props.store.handelInputs} name="cityName">
-                    <option value="Australia">Australia</option>
-                    <option value="Jerusalem">Jerusalem</option>
-                    <option value="USA">USA</option>
+                    {props.store.storesLocationList.map(city => {
+                        return (
+                            <option key={city} value={city}>{city}</option>
+                        )
+                    })}
                 </select>
-                <div>
-                    <label>item Name</label>
-                    <input onChange={props.store.handelInputs} name="itemName" className='productNameInput'  />
-                </div>
+                <label>Product Name</label>
+                <select onChange={props.store.handelInputs} name="productName">
+                    {props.store.productsNameList.map(product => {
+                        return (
+                            <option key={product} value={product}>{product}</option>
+                        )
+                    })}
+                </select>
                 <div className="PriceAndScore">
                     <div className="priceDiv">
                         <label>Price</label>
@@ -36,7 +53,7 @@ const PostForum = inject("store")(observer((props) => {
                     <div className="scoreDiv">
                         <div>Score</div>
                         <div>
-                           <Rating onClick={props.store.handelInputs} name="score" ratingValue={props.store.score}/>
+                            <Rating onClick={props.store.handelInputs} name="score" ratingValue={props.store.score} />
                         </div>
                     </div>
                 </div>

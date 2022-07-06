@@ -4,18 +4,18 @@ import axios from 'axios'
 
 export class Store {
     constructor() {
-        this.itemName = '';
+        this.productName = '';
         this.storeName = '';
         this.cityName = '';
         this.price = 0 ; 
         this.score = 0 ; 
         this.note = '' ;
-        this.storesNamesList = [...this.getStorelist()] ;
-        this.storesLocationList = this.getStoresLocationList() ;
-        this.productsNameList = this.getproductsNameList()
+        this.storesNamesList = [] ;
+        this.storesLocationList = [] ;
+        this.productsNameList = []
 
         makeObservable(this, {
-            itemName: observable ,
+            productName: observable ,
             storeName: observable ,
             cityName : observable ,
             price : observable ,
@@ -26,7 +26,9 @@ export class Store {
             productsNameList : observable ,
             handelInputs : action ,
             handelAddClick : action ,
-            getStorelist : action
+            getStorelist : action ,
+            getStoresLocationList : action , 
+            getproductsNameList : action
         })
     }
 
@@ -38,7 +40,7 @@ export class Store {
 
     handelAddClick = () => {
         axios.post('http://localhost:3020/post' , {
-            "productName": this.itemName,
+            "productName": this.productName,
             "storeName": this.storeName,
             "storeLocation": this.cityName, 
             "score" :  parseInt(this.score),
@@ -53,7 +55,9 @@ export class Store {
         })
     }
 
-    getStorelist () {
+    getStorelist = () => {
+
+        let classScope = this
           
         axios.get('http://localhost:3020/storesNamesList' , {
 
@@ -62,9 +66,9 @@ export class Store {
 
         })
         .then(function (response) {
-
-          return response.data
-
+    
+          classScope.storesNamesList = [...response.data]
+    
         })
         .catch(function (error) {
           alert(error);
@@ -74,6 +78,8 @@ export class Store {
 
     getStoresLocationList = () => {
 
+        let classScope = this
+
         axios.get('http://localhost:3020/storesLocationsList' , {
 
             "storeNameFilter": null,
@@ -81,8 +87,8 @@ export class Store {
 
         })
         .then(function (response) {
-            console.log(response.data);
-          return response.data
+            
+            classScope.storesLocationList = [...response.data]
         })
         .catch(function (error) {
           alert(error);
@@ -91,6 +97,8 @@ export class Store {
 
     getproductsNameList = () => {
 
+        let classScope = this
+
         axios.get('http://localhost:3020/productsNameslist' , {
 
             "storeNameFilter": null,
@@ -98,8 +106,8 @@ export class Store {
 
         })
         .then(function (response) {
-            console.log(response.data);
-          return response.data
+
+            classScope.productsNameList = [...response.data]
         })
         .catch(function (error) {
           alert(error);
