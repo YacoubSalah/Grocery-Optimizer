@@ -30,7 +30,7 @@ const PostForum = inject("store")(observer((props) => {
                 </select>
 
                 <label>Select City</label>
-                <select onChange={props.store.handelInputs} name="cityName">
+                <select onChange={props.store.handelInputs} name="storeLocation">
                     {props.store.storesLocationList.map(city => {
                         return (
                             <option key={city} value={city}>{city}</option>
