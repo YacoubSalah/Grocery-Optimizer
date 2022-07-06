@@ -27,11 +27,11 @@ async function getProductsNamesList(filter) {
         productsNamesList = newProducts.map(p => p.name)
     }
 
-    let productSet = newSet()
+    let productSet = new Set()
     for (let product of productsNamesList) {
         productSet.add(product)
     }
-    productsNamesList = arrayFrom(productSet)
+    productsNamesList = Array.from(productSet)
     
     return productsNamesList
 }
