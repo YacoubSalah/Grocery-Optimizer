@@ -26,7 +26,7 @@ async function getStoresNamesList(filter) {
     for (let store of storesNameList) {
         storeSet.add(store)
     }
-    storesNameList = Array.from(storeSet)
+    storesNameList.from(storeSet)
 
     return storesNameList
 }
@@ -58,7 +58,7 @@ async function getStoresLocationsList(filter) {
     for (let store of StoresLocationList) {
         storeSet.add(store)
     }
-    StoresLocationList = Array.from(storeSet)
+    StoresLocationList.from(storeSet)
 
     return StoresLocationList
 }

@@ -29,5 +29,4 @@ let productSchema = new Schema({
 
 let productModel = mongoose.model('product', productSchema)
 
-
 module.exports = productModel

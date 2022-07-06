@@ -2,7 +2,6 @@ const route = require("express")
 const api = route()
 const database = require("../database/admin_operations")
 
-
 api.put("/store", async function (req, res) {
 
     let storeData = req.body
@@ -26,6 +25,5 @@ api.post("/productToStore" , async function(req,res){
     res.send(feedback.message)
 
 })
-
 
 module.exports = api
