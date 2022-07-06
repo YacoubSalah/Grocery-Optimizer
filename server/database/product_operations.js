@@ -85,6 +85,16 @@ async function productsNamesSearch(productName) {
     return products
 }
 
+async function getAllProducts() {
+    let products = await productModel.find().exec()
+    products = products.map(p => [{
+        name: p.name,
+        image: p.imageUrl,
+        avergePrice: getAvergeProductPrice(p)
+    }])
+    return products
+}
+
 function getAvergeProductPrice(product) {
     let stores = product.stores
     sumPrices = 0
@@ -97,4 +107,4 @@ function getAvergeProductPrice(product) {
     return sumPrices / index
 }
 
-module.exports = { getProductsNamesList, getCategories, getProductsByCategory, productsNamesSearch }
+module.exports = { getProductsNamesList, getCategories, getProductsByCategory, productsNamesSearch, getAllProducts }
