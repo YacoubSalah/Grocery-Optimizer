@@ -22,11 +22,11 @@ async function getStoresNamesList(filter) {
         storesNameList = storesList.map(s => s.name)
     }
 
-    let storeSet = newSet()
+    let storeSet = new Set()
     for (let store of storesNameList) {
         storeSet.add(store)
     }
-    storesNameList = arrayFrom(storeSet)
+    storesNameList.from(storeSet)
 
     return storesNameList
 }
@@ -54,11 +54,11 @@ async function getStoresLocationsList(filter) {
         StoresLocationList = storesList.map(s => s.location)
     }
 
-    let storeSet = newSet()
+    let storeSet = new Set()
     for (let store of StoresLocationList) {
         storeSet.add(store)
     }
-    StoresLocationList = arrayFrom(storeSet)
+    StoresLocationList.from(storeSet)
 
     return StoresLocationList
 }

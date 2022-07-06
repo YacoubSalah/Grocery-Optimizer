@@ -27,12 +27,12 @@ async function getProductsNamesList(filter) {
         productsNamesList = newProducts.map(p => p.name)
     }
 
-    let productSet = newSet()
+    let productSet = new Set()
     for (let product of productsNamesList) {
         productSet.add(product)
     }
-    productsNamesList = arrayFrom(productSet)
-    
+    productsNamesList.from(productSet)
+
     return productsNamesList
 }
 
@@ -55,35 +55,46 @@ async function getCategories() {
 }
 
 async function getProductsByCategory(category) {
-    let products = []
-    if (category.mainCategory) {
-        products = await productModel.find({ mainCategory: category.mainCategory }).exec()
-    } else if (category.subCategory) {
-        products = await productModel.find({ subCategory: category.subCategory }).exec()
+    let mainCategory = category.mainCategory
+    let subCategory = category.subCategory
+    let products
+    if (subCategory) {
+        products = await productModel.find({ mainCategory: mainCategory, subCategory: subCategory }).exec()
+    } else {
+        products = await productModel.find({ mainCategory: mainCategory }).exec()
     }
-        return products
+    if (products) {
+        products = products.map(p => [{
+            name: p.name,
+            image: p.imageUrl,
+            avergePrice: getAvergeProductPrice(p)
+        }])
+    } else {
+        products = []
+    }
+    return products
 }
 
 async function productsNamesSearch(productName) {
-        let products = await productModel.find({ 'name': {$regex:`${productName}.*`} }).exec()
-        products = products.map(p =>[{
-            name:p.name,
-            image:p.imageUrl,
-            avergePrice:getAvergeProductPrice(p)
-        }])
-        return products
+    let products = await productModel.find({ 'name': { $regex: `${productName}.*` } }).exec()
+    products = products.map(p => [{
+        name: p.name,
+        image: p.imageUrl,
+        avergePrice: getAvergeProductPrice(p)
+    }])
+    return products
 }
 
 function getAvergeProductPrice(product) {
     let stores = product.stores
     sumPrices = 0
     index = 0
-    if(stores.length === 0)
+    if (stores.length === 0)
         return null
     for (index = 0; index < stores.length; index++) {
         sumPrices += stores[index].initialPrice
     }
-    return sumPrices/index
+    return sumPrices / index
 }
 
-module.exports = { getProductsNamesList, getCategories , getProductsByCategory , productsNamesSearch }
+module.exports = { getProductsNamesList, getCategories, getProductsByCategory, productsNamesSearch }
