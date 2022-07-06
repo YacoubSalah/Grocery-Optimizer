@@ -31,7 +31,7 @@ async function getProductsNamesList(filter) {
     for (let product of productsNamesList) {
         productSet.add(product)
     }
-    productsNamesList.from(productSet)
+    productsNamesList = Array.from(productSet)
 
     return productsNamesList
 }

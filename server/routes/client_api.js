@@ -14,20 +14,20 @@ api.post("/post", async function (req, res) {
 
 })
 
-api.get("/storesNamesList", async function (req, res) {
-    let filter = req.body
+api.get("/storesNamesList/", async function (req, res) {
+    let filter = req.query
     let stores = await storeOperations.getStoresNamesList(filter)
     res.send(stores)
 })
 
 api.get("/storesLocationsList", async function (req, res) {
-    let filter = req.body
+    let filter = req.query
     let stores = await storeOperations.getStoresLocationsList(filter)
     res.send(stores)
 })
 
 api.get("/productsNamesList", async function (req, res) {
-    let filter = req.body
+    let filter = req.query
     let products = await productOperations.getProductsNamesList(filter)
     res.send(products)
 })
@@ -43,7 +43,7 @@ api.get("/categories", async function (req, res) {
     res.send(categories)
 })
 
-api.get("/categoryProducts" , async function (req , res){
+api.get("/categoryProducts", async function (req, res) {
     category = req.body
     products = await productOperations.getProductsByCategory(category)
     res.send(products)
