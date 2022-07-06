@@ -11,20 +11,26 @@ async function getStoresNamesList(filter) {
         storesList = await storeModel.find({}).exec()
     }
 
-    let StoresNameList = []
+    let storesNameList = []
 
     if (filter.productNameFilter) {
         for (let store of storesList) {
             let product = await productModel.findOne({ name: filter.productNameFilter, 'stores.storeId': store.id }).exec()
             if (product) {
-                StoresNameList.push(store.name)
+                storesNameList.push(store.name)
             }
         }
     } else {
-        StoresNameList = storesList.map(s => s.name)
+        storesNameList = storesList.map(s => s.name)
     }
 
-    return StoresNameList
+    let storeSet = newSet()
+    for (let store of storesNameList) {
+        storeSet.add(store)
+    }
+    storesNameList = arrayFrom(storeSet)
+
+    return storesNameList
 }
 
 async function getStoresLocationsList(filter) {
@@ -49,6 +55,12 @@ async function getStoresLocationsList(filter) {
     } else {
         StoresLocationList = storesList.map(s => s.location)
     }
+
+    let storeSet = newSet()
+    for (let store of StoresLocationList) {
+        storeSet.add(store)
+    }
+    StoresLocationList = arrayFrom(storeSet)
 
     return StoresLocationList
 }

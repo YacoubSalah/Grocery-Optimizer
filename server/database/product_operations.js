@@ -27,6 +27,12 @@ async function getProductsNamesList(filter) {
         productsNamesList = newProducts.map(p => p.name)
     }
 
+    let productSet = newSet()
+    for (let product of productsNamesList) {
+        productSet.add(product)
+    }
+    productsNamesList = arrayFrom(productSet)
+    
     return productsNamesList
 }
 
@@ -55,7 +61,7 @@ async function getProductsByCategory(category) {
     } else if (category.subCategory) {
         products = await productModel.find({ subCategory: category.subCategory }).exec()
     }
-    return products
+        return products
 }
 
 
