@@ -31,6 +31,7 @@ api.get("/productsNamesList", async function (req, res) {
     let products = await productOperations.getProductsNamesList(filter)
     res.send(products)
 })
+
 api.get("/productsNamesSearch", async function (req, res) {
     let productName = req.body.productName
     let products = await productOperations.productsNamesSearch(productName)
