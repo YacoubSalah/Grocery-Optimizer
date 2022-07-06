@@ -30,4 +30,15 @@ api.get("/productsNamesList", async function (req, res) {
     res.send(products)
 })
 
+api.get("/categories", async function (req, res) {
+    let categories = await productOperations.getCategories()
+    res.send(categories)
+})
+
+api.get("/categoryProducts" , async function (req , res){
+    category = req.body
+    products = await productOperations.getProductsByCategory(category)
+    res.send(products)
+})
+
 module.exports = api

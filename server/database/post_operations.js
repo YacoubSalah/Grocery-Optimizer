@@ -34,7 +34,7 @@ async function addPost(postData) {
 
     await saveProduct(currentProduct, feedback)
 
-    return feedback.message
+    return feedback
 
 }
 

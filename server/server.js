@@ -13,12 +13,10 @@ app.use(function (req, res, next) {
     next()
 })
 
-//for database testing change it to server api when needed
 const clientAPI = require('./routes/client_api')
 app.use( '/' , clientAPI)
 const adminAPI = require('./routes/admin_api')
 app.use( '/' , adminAPI)
-//for database testing change it to server api when needed
 
 const port = 3020
 app.listen(port, () => console.log(`GroceryOptimizer server is running on port: ${port}`))

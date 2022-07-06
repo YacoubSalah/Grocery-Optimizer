@@ -47,7 +47,7 @@ async function getStoresLocationsList(filter) {
             }
         }
     } else {
-        StoresLocationList = storesList.map(s => s.name)
+        StoresLocationList = storesList.map(s => s.location)
     }
 
     return StoresLocationList
