@@ -20,18 +20,14 @@ async function addPost(postData) {
     if (!feedback.status) {
         return feedback
     }
-
-    console.log(currentStore)
     let currentProduct = await retriveCurrentProduct(productName, feedback)
     if (!feedback.status) {
         return feedback
     }
 
     let newPost = createPost(postData)
-
     let currentStoreId = currentStore.id
     currentProduct.stores.find(s => s.storeId === currentStoreId).posts.push(newPost)
-
     await saveProduct(currentProduct, feedback)
 
     return feedback
