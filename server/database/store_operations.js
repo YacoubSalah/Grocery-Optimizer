@@ -2,17 +2,13 @@ const storeModel = require("../models/store")
 const productModel = require("../models/product")
 
 async function getStoresNamesList(filter) {
-
     let storesList = []
-
     if (filter.storeLocationFilter) {
         storesList = await storeModel.find({ location: filter.storeLocationFilter }).exec()
     } else {
         storesList = await storeModel.find({}).exec()
     }
-
     let StoresNameList = []
-
     if (filter.productNameFilter) {
         for (let store of storesList) {
             let product = await productModel.findOne({ name: filter.productNameFilter, 'stores.storeId': store.id }).exec()
@@ -23,7 +19,6 @@ async function getStoresNamesList(filter) {
     } else {
         StoresNameList = storesList.map(s => s.name)
     }
-
     return StoresNameList
 }
 
@@ -49,7 +44,6 @@ async function getStoresLocationsList(filter) {
     } else {
         StoresLocationList = storesList.map(s => s.name)
     }
-
     return StoresLocationList
 }
 
