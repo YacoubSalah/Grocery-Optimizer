@@ -3,18 +3,22 @@ import { Rating } from 'react-simple-star-rating'
 import { observer, inject } from 'mobx-react'
 
 const PostForum = inject("store")(observer((props) => {
+    console.log(props.store.getStorelist())
+    console.log(props.store.storesNamesList)
     return (
         <div className="PostForm">
             <div className="Form">
 
-                <label for="country">Select Store</label>
+                <label>Select Store</label>
                 <select onChange={props.store.handelInputs} name="storeName">
-                    <option value="Basem">Basem</option>
-                    <option value="Yacoubs">Yacoubs</option>
-                    <option value="USA">USA</option>
+                    {/* {storesNames.map(store => {
+                        return (
+                            <option value={store}>{store}</option>
+                        )
+                    })} */}
                 </select>
 
-                <label for="country">Select City</label>
+                <label>Select City</label>
                 <select onChange={props.store.handelInputs} name="cityName">
                     <option value="Australia">Australia</option>
                     <option value="Jerusalem">Jerusalem</option>
