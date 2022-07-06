@@ -64,8 +64,6 @@ async function getProductsByCategory(category) {
         return products
 }
 
-
-module.exports = { getProductsNamesList, getCategories, getProductsByCategory }
 async function productsNamesSearch(productName) {
         let products = await productModel.find({ 'name': {$regex:`${productName}.*`} }).exec()
         products = products.map(p =>[{
@@ -75,6 +73,7 @@ async function productsNamesSearch(productName) {
         }])
         return products
 }
+
 function getAvergeProductPrice(product) {
     let stores = product.stores
     sumPrices = 0
@@ -86,6 +85,5 @@ function getAvergeProductPrice(product) {
     }
     return sumPrices/index
 }
-module.exports = { getProductsNamesList, productsNamesSearch }
 
-// product => stores => if === 0 return doesnt exist => stores.initaprice+= / count price
+module.exports = { getProductsNamesList, getCategories , getProductsByCategory , productsNamesSearch }
