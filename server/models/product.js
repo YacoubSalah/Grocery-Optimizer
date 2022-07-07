@@ -20,7 +20,7 @@ const productSchema = new mongoose.Schema({
     imageUrl: { type: String, default: configuration.productNoImageUrl },
     description: { type: String, default: "No product Description" },
     mainCategory: { type: String, default: "Unknown" },
-    subCategory: { type: String, default: "unknown" },
+    subCategory: { type: String, default: "Unknown" },
     stores: [storesSchema]
 })
 

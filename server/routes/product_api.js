@@ -46,21 +46,16 @@ api.get("/categories", async function (req, res) {
     res.send(categories)
 })
 
-module.exports = api
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-
 api.get("/categoryProducts/", async function (req, res) {
     category = req.query
     products = await productOperations.getProductsByCategory(category)
     res.send(products)
 })
 
-api.get("/productsByName/:productName", async function (req, res) {
-    let productName = req.params.productName
-    let products = await productOperations.productsNamesSearch(productName)
+api.get("/products/:searchWord", async function (req, res) {
+    let searchWord = req.params.searchWord
+    let products = await productOperations.productsSearch(searchWord)
     res.send(products)
 })
 
- */
+module.exports = api

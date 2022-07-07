@@ -199,7 +199,7 @@ async function getAllProducts() {
     return products
 }
 
-function prepareCategoryObject(products){
+function prepareCategoryObject(products) {
     let categories = {}
     for (let product of products) {
         let mainCategory = product.mainCategory
@@ -213,6 +213,22 @@ function prepareCategoryObject(products){
         }
     }
     return categories
+}
+
+async function getProductsByCategory(mainCategory, subCategory) {
+    let products
+    if (subCategory) {
+        products = await productModel.find({ mainCategory: mainCategory, subCategory: subCategory }).exec()
+    } else {
+        products = await productModel.find({ mainCategory: mainCategory }).exec()
+    }
+    return products
+}
+
+async function getProductsBySearchWord(searchWord) {
+    let products = await productModel.find({ 'name': { $regex: `${searchWord}.*` } })
+        .exec()
+    return products
 }
 
 module.exports = {
@@ -232,5 +248,7 @@ module.exports = {
     getProductsByStoreName,
     getProductsNyStoreLocation,
     getAllProducts,
-    prepareCategoryObject
+    prepareCategoryObject,
+    getProductsByCategory,
+    getProductsBySearchWord
 }

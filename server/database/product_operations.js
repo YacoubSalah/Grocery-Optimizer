@@ -53,7 +53,7 @@ async function addProductStore(productStoreData) {
     await productFunctions.addProductStoreAndSave(currentProduct, currentStore.id, productStoreData.productInitialPrice, feedback)
 
     return feedback
-    
+
 }
 
 async function addProductStorePost(postData) {
@@ -115,7 +115,7 @@ async function getProductsNameList(filter) {
 
 }
 
-async function getCategories() { 
+async function getCategories() {
 
     let products = await productFunctions.getAllProducts()
 
@@ -125,41 +125,44 @@ async function getCategories() {
 
 }
 
-module.exports = { addProduct, addProductStore, addProductStorePost, getAllProducts, getProductsNameList, getCategories }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/* 
-
 async function getProductsByCategory(category) {
-    let mainCategory = category.mainCategory
-    let subCategory = category.subCategory
-    let products
-    if (subCategory) {
-        products = await productModel.find({ mainCategory: mainCategory, subCategory: subCategory }).exec()
-    } else {
-        products = await productModel.find({ mainCategory: mainCategory }).exec()
-    }
+
+    let products = await productFunctions.getProductsByCategory(category.mainCategory, category.subCategory)
+
     if (products) {
         products = products.map(p => [{
             name: p.name,
             image: p.imageUrl,
-            avergePrice: getAvergeProductPrice(p)
+            avergePrice: productFunctions.avergeProductPrice(p)
         }])
     } else {
         products = []
     }
+
     return products
+
 }
 
-async function productsNamesSearch(productName) {
-    let products = await productModel.find({ 'name': { $regex: `${productName}.* ` } }).exec()
+async function productsSearch(searchWord) {
+
+    let products = await productFunctions.getProductsBySearchWord(searchWord)
+
     products = products.map(p => [{
         name: p.name,
         image: p.imageUrl,
-        avergePrice: getAvergeProductPrice(p)
+        avergePrice: productFunctions.avergeProductPrice(p)
     }])
+
     return products
 }
 
-
- */
+module.exports = {
+    addProduct,
+    addProductStore,
+    addProductStorePost,
+    getAllProducts,
+    getProductsNameList,
+    getCategories,
+    getProductsByCategory,
+    productsSearch
+}
