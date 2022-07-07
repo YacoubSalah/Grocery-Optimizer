@@ -69,4 +69,9 @@ async function getStoresLocationList(filter) {
     return storesLocationList
 }
 
-module.exports = { addStore, getAllStores, getStoresNameList, getStoresLocationList }
+module.exports = {
+    addStore,
+    getAllStores,
+    getStoresNameList,
+    getStoresLocationList
+}
