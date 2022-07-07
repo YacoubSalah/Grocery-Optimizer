@@ -32,20 +32,25 @@ api.get("/productsNamesList", async function (req, res) {
     res.send(products)
 })
 
-api.get("/productsNamesSearch", async function (req, res) {
-    let productName = req.body.productName
-    let products = await productOperations.productsNamesSearch(productName)
-    res.send(products)
-})
-
 api.get("/categories", async function (req, res) {
     let categories = await productOperations.getCategories()
     res.send(categories)
 })
 
-api.get("/categoryProducts", async function (req, res) {
-    category = req.body
+api.get("/allProducts", async function (req, res) {
+    let products = await productOperations.getAllProducts()
+    res.send(products)
+})
+
+api.get("/categoryProducts/", async function (req, res) {
+    category = req.query
     products = await productOperations.getProductsByCategory(category)
+    res.send(products)
+})
+
+api.get("/productsByName/:productName", async function (req, res) {
+    let productName = req.params.productName
+    let products = await productOperations.productsNamesSearch(productName)
     res.send(products)
 })
 
