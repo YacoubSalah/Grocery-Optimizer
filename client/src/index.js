@@ -8,11 +8,16 @@ import '@fortawesome/free-regular-svg-icons';
 import '@fortawesome/free-solid-svg-icons';
 
 import {Store} from './Store/Store'
+import { Products } from './Store/Products';
 
 const store = new Store()
+const products = new Products()
+
+console.log(products)
 
 const stores = {
-    store
+    store,
+    products
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
