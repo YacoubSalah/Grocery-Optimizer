@@ -1,9 +1,9 @@
 import './App.css';
 import { BrowserRouter as Router , Routes , Route } from 'react-router-dom'
-import Home from './Components/home/Home';
-import ProductsSearch from './Components/ProductsSearch/ProductsSearch';
-import StoreSearch from './Components/storesSearch/storesSearch';
-import Navbar from './Components/navigation_bar/navigation_bar'
+import Home from './components/home/home';
+import ProductsSearch from './components/productsSearch/productsSearch';
+import StoreSearch from './components/storesSearch/storesSearch';
+import Navbar from './components/navigation_bar/navigation_bar'
 
 
 function App() {

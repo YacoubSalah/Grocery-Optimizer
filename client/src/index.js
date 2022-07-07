@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import '@fortawesome/free-regular-svg-icons';
 import '@fortawesome/free-solid-svg-icons';
 
-import {Store} from './Store/Store'
+import {Store} from './store/store'
 
 const store = new Store()
 
