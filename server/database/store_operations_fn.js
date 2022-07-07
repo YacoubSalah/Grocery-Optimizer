@@ -1,4 +1,5 @@
 const storeModel = require("../models/store")
+const productModel = require("../models/product")
 
 function validateStoreData(storeData, feedback) {
     if (!storeData.name || !storeData.location) {
@@ -45,9 +46,69 @@ async function validateStoreExists(name, location, feedback) {
     return store
 }
 
+async function getStoresByProductNameAndStoreLocation(productNameFilter, storeLocationFilter) {
+    let product = await productModel.findOne({
+        name: productNameFilter,
+        stores: { $elemMatch: { "stores.store.location": storeLocationFilter } }
+    })
+        .populate('stores.store')
+        .exec()
+    let stores = product.stores.filter(s => s.store.location === storeLocationFilter).map(s => s.store)
+    return stores
+}
+
+async function getStoresByProductName(productNameFilter) {
+    let product = await productModel.findOne({
+        name: productNameFilter
+    })
+        .populate('stores.store')
+        .exec()
+    let stores = product.stores.map(s => s.store)
+    return stores
+}
+
+async function getStoresByStoreLocation(storeLocationFilter) {
+    let stores = await storeModel.find({
+        location: storeLocationFilter
+    })
+        .exec()
+    return stores
+}
+
+async function getAllStores() {
+    let stores = await storeModel.find({})
+        .exec()
+    return stores
+}
+
+async function getStoresByProductNameAndStoreName(productNameFilter, storeNameFilter) {
+    let product = await productModel.findOne({
+        name: productNameFilter,
+        stores: { $elemMatch: { "stores.store.name": storeNameFilter } }
+    })
+        .populate('stores.store')
+        .exec()
+    let stores = product.stores.filter(s => s.store.name === storeNameFilter).map(s => s.store)
+    return stores
+}
+
+async function getStoresByStoreName(storeNameFilter) {
+    let stores = await storeModel.find({
+        name: storeNameFilter
+    })
+        .exec()
+    return stores
+}
+
 module.exports = {
     validateStoreData,
     validateStoreDoesntAlreadyExists,
     createAndSaveStoreModelInstance,
-    validateStoreExists
+    validateStoreExists,
+    getStoresByProductNameAndStoreLocation,
+    getStoresByProductName,
+    getStoresByStoreLocation,
+    getAllStores,
+    getStoresByProductNameAndStoreName,
+    getStoresByStoreName
 }

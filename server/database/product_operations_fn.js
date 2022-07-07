@@ -168,6 +168,37 @@ function avergeProductPrice(product) {
     return sumPrices / index
 }
 
+async function getProductsByStoreNameAndLocation(storeNameFilter, storeLocationFilter) {
+    let products = await productModel.find({
+        stores: { $elemMatch: { "stores.store.name": storeNameFilter } },
+        stores: { $elemMatch: { "stores.store.location": storeLocationFilter } }
+    })
+        .exec()
+    return products
+}
+
+async function getProductsByStoreName(storeNameFilter) {
+    let products = await productModel.find({
+        stores: { $elemMatch: { "stores.store.name": storeNameFilter } }
+    })
+        .exec()
+    return products
+}
+
+async function getProductsNyStoreLocation(storeLocationFilter) {
+    let products = await productModel.find({
+        stores: { $elemMatch: { "stores.store.location": storeLocationFilter } }
+    })
+        .exec()
+    return products
+}
+
+async function getAllProducts() {
+    let products = await productModel.find({})
+        .exec()
+    return products
+}
+
 module.exports = {
     validateProductData,
     validateProductDoesntAlreadyExists,
@@ -180,5 +211,9 @@ module.exports = {
     validateProductStoreExists,
     createProductStorePost,
     addProductStorePostAndSave,
-    avergeProductPrice
+    avergeProductPrice,
+    getProductsByStoreNameAndLocation,
+    getProductsByStoreName,
+    getProductsNyStoreLocation,
+    getAllProducts
 }

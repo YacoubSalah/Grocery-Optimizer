@@ -80,7 +80,7 @@ async function addProductStorePost(postData) {
 }
 
 async function getAllProducts() {
-    let products = await productModel.find().exec()
+    let products = await productFunctions.getAllProducts()
     products = products.map(p => [{
         name: p.name,
         image: p.imageUrl,
@@ -91,28 +91,15 @@ async function getAllProducts() {
 
 async function getProductsNameList(filter) {
 
-    const storeNameFilter = filter.storeNameFilter
-    const storeLocationFilter = filter.storeLocationFilter
     let products = []
-    if (storeNameFilter && storeLocationFilter) {
-        products = await productModel.find({
-            stores: { $elemMatch: { "stores.store.name": storeNameFilter } },
-            stores: { $elemMatch: { "stores.store.location": storeLocationFilter } }
-        })
-            .exec()
-    } else if (storeNameFilter) {
-        products = await productModel.find({
-            stores: { $elemMatch: { "stores.store.name": storeNameFilter } }
-        })
-            .exec()
-    } else if (storeLocationFilter) {
-        products = await productModel.find({
-            stores: { $elemMatch: { "stores.store.location": storeLocationFilter } }
-        })
-            .exec()
+    if (filter.storeNameFilter && filter.storeLocationFilter) {
+        products = await productFunctions.getProductsByStoreNameAndLocation(filter.storeNameFilter, filter.storeLocationFilter)
+    } else if (filter.storeNameFilter) {
+        products = await productFunctions.getProductsByStoreName(filter.storeNameFilter)
+    } else if (filter.storeLocationFilter) {
+        products = await productFunctions.getProductsNyStoreLocation(filter.storeLocationFilter)
     } else {
-        products = await productModel.find({})
-            .exec()
+        products = await productFunctions.getAllProducts()
     }
 
     productsNameList = products.map(p => p.name)
