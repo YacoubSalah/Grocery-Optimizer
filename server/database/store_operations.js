@@ -1,6 +1,30 @@
-const storeModel = require("../models/store")
-const productModel = require("../models/product")
+const storeFunctions = require("./store_operations_fn")
 
+async function addStore(storeData){
+
+    let feedback = {}
+    feedback.message = "No feedback yet"
+    feedback.status = true
+
+    storeFunctions.validateStoreData(storeData, feedback)
+    if (!feedback.status) {
+        return feedback
+    }
+
+    storeFunctions.validateStoreDoesntAlreadyExists(storeData.name , storeData.location, feedback)
+    if (!feedback.status) {
+        return feedback
+    }
+
+    await storeFunctions.createAndSaveStoreModelInstance(storeData ,feedback)
+
+    return feedback
+
+}
+
+module.exports = { addStore }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
 async function getStoresNamesList(filter) {
     let storesList = []
     if (filter.storeLocationFilter) {
@@ -62,5 +86,4 @@ async function getStoresLocationsList(filter) {
 
     return StoresLocationList
 }
-
-module.exports = { getStoresNamesList, getStoresLocationsList }
+*/

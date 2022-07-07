@@ -1,18 +1,39 @@
 const route = require("express")
-const api = route()
-const postOperations = require("../database/post_operations")
-const storeOperations = require("../database/store_operations")
 const productOperations = require("../database/product_operations")
 
-api.post("/post", async function (req, res) {
-    let postData = req.body
-    let feedback = await postOperations.addPost(postData)
+const api = route()
+
+api.post("/product", async function (req, res) {
+    const productData = req.body
+    let feedback = await productOperations.addProduct(productData)
     if (!feedback.status) {
-        return res.status(400).send(feedback.message)
+        return res.status(500).send(feedback.message)
     }
     res.send(feedback)
-
 })
+
+api.post("/productStore", async function (req, res) {
+    const productStoreData = req.body
+    let feedback = await productOperations.addProductStore(productStoreData)
+    if (!feedback.status) {
+        return res.status(500).send(feedback.message)
+    }
+    res.send(feedback)
+})
+
+api.post("/productStorePost", async function (req, res) {
+    const postData = req.body
+    let feedback = await productOperations.addProductStorePost(postData)
+    if (!feedback.status) {
+        return res.status(500).send(feedback.message)
+    }
+    res.send(feedback)
+})
+
+module.exports = api
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
 
 api.get("/storesNamesList/", async function (req, res) {
     let filter = req.query
@@ -54,4 +75,4 @@ api.get("/productsByName/:productName", async function (req, res) {
     res.send(products)
 })
 
-module.exports = api
+ */

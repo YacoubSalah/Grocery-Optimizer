@@ -1,32 +1,29 @@
 const mongoose = require('mongoose')
 const configuration = require('../configuration')
 
-const Schema = mongoose.Schema
-
-let postSchema = new Schema({
-    //user: { type: Schema.Types.ObjectId, ref: "user", default: "Anonymous" },
+let postSchema = new mongoose.Schema({
     imageURL: { type: String, default: configuration.productNoImageUrl },
     price: { type: Number, default: null },
     score: { type: Number, default: null },
-    note: { type: String, default: "User didnt leave a note" }
-}, { timestamps: { createdAt: true, updatedAt: false } })
+    note: { type: String, default: "" }
+}, { _id: false, timestamps: { createdAt: true, updatedAt: false } })
 
-let storeSchema = new Schema({
-    storeId: String,
+const storesSchema = new mongoose.Schema({
+    store: { type: mongoose.Schema.Types.ObjectId, ref: 'store' },
     initialPrice: { type: Number, default: null },
     calculatedPrice: { type: Number, default: null },
     posts: [postSchema]
 }, { _id: false })
 
-let productSchema = new Schema({
+const productSchema = new mongoose.Schema({
     name: String,
     imageUrl: { type: String, default: configuration.productNoImageUrl },
     description: { type: String, default: "No product Description" },
     mainCategory: { type: String, default: "Unknown" },
     subCategory: { type: String, default: "unknown" },
-    stores: [storeSchema]
+    stores: [storesSchema]
 })
 
-let productModel = mongoose.model('product', productSchema)
+const productModel = mongoose.model('product', productSchema)
 
 module.exports = productModel

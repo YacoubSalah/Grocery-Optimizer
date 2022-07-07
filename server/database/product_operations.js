@@ -1,6 +1,86 @@
-const productModel = require("../models/product")
-const storeModel = require("../models/store")
+const productFunctions = require("./product_operations_fn")
+const storeFunctions = require("./store_operations_fn")
 
+async function addProduct(productData) {
+
+    let feedback = {}
+    feedback.message = "No feedback yet"
+    feedback.status = true
+
+    productFunctions.validateProductData(productData, feedback)
+    if (!feedback.status) {
+        return feedback
+    }
+
+    await productFunctions.validateProductDoesntAlreadyExists(productData.name, feedback)
+    if (!feedback.status) {
+        return feedback
+    }
+
+    await productFunctions.createAndSaveProductModelInstance(productData, feedback)
+
+    return feedback
+}
+
+async function addProductStore(productStoreData) {
+
+    let feedback = {}
+    feedback.message = "No Feedback yet"
+    feedback.status = true
+
+    productFunctions.validateProductStoreData(productStoreData, feedback)
+    if (!feedback.status) {
+        return feedback
+    }
+
+    let currentProduct = await productFunctions.validateProductExists(productStoreData.productName, feedback)
+    if (!feedback.status) {
+        return feedback
+    }
+
+    let currentStore = await storeFunctions.validateStoreExists(productStoreData.storeName, productStoreData.storeLocation, feedback)
+    if (!feedback.status) {
+        return feedback
+    }
+
+    productFunctions.validateProductStoreDoesntExist(currentProduct, currentStore, feedback)
+    if (!feedback.status) {
+        return feedback
+    }
+
+    await productFunctions.addProductStoreAndSave(currentProduct, currentStore.id, productStoreData.productInitialPrice, feedback)
+
+
+    return feedback
+
+}
+
+async function addProductStorePost(postData) {
+    let feedback = {}
+    feedback.status = true
+    feedback.message = "No Feedback yet"
+
+    productFunctions.validatePostData(postData, feedback)
+    if (!feedback.status) {
+        return feedback
+    }
+
+    let currentProduct = await productFunctions.validateProductStoreExists(postData.productName , postData.storeName , postData.storeLocation, feedback)
+    if (!feedback.status) {
+        return feedback
+    }
+
+    let porductStorePost = productFunctions.createProductStorePost(postData)
+    
+    await productFunctions.addProductStorePostAndSave(porductStorePost, currentProduct , postData.storeName , postData.storeLocation, feedback)
+
+    return feedback
+}
+
+module.exports = { addProduct, addProductStore , addProductStorePost }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/* 
 async function getProductsNamesList(filter) {
 
     let stores = []
@@ -76,7 +156,7 @@ async function getProductsByCategory(category) {
 }
 
 async function productsNamesSearch(productName) {
-    let products = await productModel.find({ 'name': { $regex: `${productName}.*` } }).exec()
+    let products = await productModel.find({ 'name': { $regex: `${productName}.* ` } }).exec()
     products = products.map(p => [{
         name: p.name,
         image: p.imageUrl,
@@ -106,5 +186,4 @@ function getAvergeProductPrice(product) {
     }
     return sumPrices / index
 }
-
-module.exports = { getProductsNamesList, getCategories, getProductsByCategory, productsNamesSearch, getAllProducts }
+ */
