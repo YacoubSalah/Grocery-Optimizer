@@ -21,7 +21,8 @@ const PostForum = inject("store")(observer((props) => {
             <div className="Form">
 
                 <label>Select Store</label>
-                <select onChange={props.store.handelInputs} name="storeName">
+                <select onChange={props.store.handelInputs} name="storeName" defaultValue={'default'}>
+                    <option value="default" disabled>Choose a Store...</option>
                     {props.store.storesNamesList.map(store => {
                         return (
                             <option key={store} value={store}>{store}</option>
@@ -30,7 +31,8 @@ const PostForum = inject("store")(observer((props) => {
                 </select>
 
                 <label>Select City</label>
-                <select onChange={props.store.handelInputs} name="storeLocation">
+                <select onChange={props.store.handelInputs} name="storeLocation" defaultValue={'default'}>
+                    <option value="default"  disabled>Choose a Location...</option>
                     {props.store.storesLocationList.map(city => {
                         return (
                             <option key={city} value={city}>{city}</option>
@@ -38,7 +40,8 @@ const PostForum = inject("store")(observer((props) => {
                     })}
                 </select>
                 <label>Product Name</label>
-                <select onChange={props.store.handelInputs} name="productName">
+                <select onChange={props.store.handelInputs} name="productName" defaultValue={'default'}>
+                    <option value="default"  disabled>Choose a Product...</option>
                     {props.store.productsNameList.map(product => {
                         return (
                             <option key={product} value={product}>{product}</option>

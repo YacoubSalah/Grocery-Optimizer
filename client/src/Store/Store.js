@@ -4,9 +4,9 @@ import axios from 'axios'
 
 export class Store {
   constructor() {
-    this.productName = '';
-    this.storeName = '';
-    this.storeLocation = '';
+    this.productName = null;
+    this.storeName = null;
+    this.storeLocation = null;
     this.price = 0;
     this.score = 0;
     this.note = '';
@@ -28,7 +28,11 @@ export class Store {
       handelAddClick: action,
       getStorelist: action,
       getStoresLocationList: action,
-      getproductsNameList: action
+      getproductsNameList: action , 
+      getFilteredProductsNames : action , 
+      getFilteredLocations : action , 
+      getFilteredStoresNames : action 
+
     })
   }
 
@@ -36,22 +40,35 @@ export class Store {
 
     switch (event.target.name) {
       case 'storeName':
+
         this[event.target.name] = event.target.value
-        this.filterSelectOptions()
+        this.getFilteredProductsNames()
+        this.getFilteredLocations()
+
         break;
       case 'productName':
-        // code block
+
+        console.log(event.target.name)
+        console.log(event.target.value)
+        this[event.target.name] = event.target.value
+        this.getFilteredStoresNames()
+        this.getFilteredLocations()
+       
         break;
       case 'storeLocation':
-        // code block
+        
+        this[event.target.name] = event.target.value
+        this.getFilteredStoresNames()
+        this.getFilteredProductsNames()
+
         break;
       default:
-      // code block
+          typeof (event) === 'number' ?
+          this.score = parseInt(event) / 20 :
+          this[event.target.name] = event.target.value
     }
 
-    /* typeof (event) === 'number' ?
-    this.score = parseInt(event) / 20 :
-    this[event.target.name] = event.target.value */
+
   }
 
   handelAddClick = () => {
@@ -80,8 +97,9 @@ export class Store {
         "productNamefilter": null,
 
       })
+
       this.storesNamesList = [...response.data]
-      this.storeName = response.data[0]
+
     }
     catch (e) {
       alert(e)
@@ -100,7 +118,6 @@ export class Store {
       })
 
       this.storesLocationList = [...response.data]
-      this.storeLocation = response.data[0]
 
     }
     catch (error) {
@@ -121,7 +138,7 @@ export class Store {
       })
 
       this.productsNameList = [...response.data]
-      this.productName = response.data[0]
+
     }
     catch (error) {
       alert(error);
@@ -129,18 +146,51 @@ export class Store {
 
   }
 
-  filterSelectOptions = async () => {
+  getFilteredProductsNames = async () => {
 
-    try{
-        
-       const response = await  axios.get(`http://localhost:3020/storesLocationsList?storeNameFilter=${this.storeName}&productNameFilter=${''}`)
+    try {
 
-       this.storesLocationList = [...response.data]
-       this.storeLocation = response.data[0]
+      const response = await axios.get(`http://localhost:3020/productsNameslist?storeNameFilter=${this.storeName}&productNamefilter=${this.storeLocation}`)
+
+      this.productsNameList = [...response.data]
+
     }
-    catch(error){
+    catch (error) {
       alert(error);
     }
+  }
+
+  getFilteredLocations = async () => {
+
+    try {
+
+      const response = await axios.get(`http://localhost:3020/storesLocationsList?storeNameFilter=${this.storeName}&productNamefilter=${this.productName}`)
+
+      this.storesLocationList = [...response.data]
+
+    }
+    catch (error) {
+      alert(error);
+    }
+
+  }
+
+  getFilteredStoresNames = async () => {
+    
+    try {
+
+      console.log("a",this.storeLocation)
+      console.log("d",this.productName)
+
+      const response = await axios.get(`http://localhost:3020/storesNamesList?storeLocationFilter=${this.storeLocation}&productNamefilter=${this.productName}`)
+
+      this.storesNamesList = [...response.data]
+
+    }
+    catch (error) {
+      alert(error);
+    }
+    
   }
 
 }
