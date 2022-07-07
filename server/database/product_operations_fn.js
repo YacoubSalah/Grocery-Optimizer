@@ -156,6 +156,18 @@ async function addProductStorePostAndSave(productStorePost, product, storeName, 
         })
 }
 
+function avergeProductPrice(product) {
+    let stores = product.stores
+    sumPrices = 0
+    index = 0
+    if (stores.length === 0)
+        return null
+    for (index = 0; index < stores.length; index++) {
+        sumPrices += stores[index].initialPrice
+    }
+    return sumPrices / index
+}
+
 module.exports = {
     validateProductData,
     validateProductDoesntAlreadyExists,
@@ -167,5 +179,6 @@ module.exports = {
     validatePostData,
     validateProductStoreExists,
     createProductStorePost,
-    addProductStorePostAndSave
+    addProductStorePostAndSave,
+    avergeProductPrice
 }

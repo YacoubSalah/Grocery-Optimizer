@@ -9,5 +9,22 @@ api.post("/store/", async function (req, res) {
     res.send(feedback)
 })
 
-
 module.exports = api
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+
+api.get("/storesNamesList/", async function (req, res) {
+    let filter = req.query
+    let stores = await storeOperations.getStoresNamesList(filter)
+    res.send(stores)
+})
+
+api.get("/storesLocationsList", async function (req, res) {
+    let filter = req.query
+    let stores = await storeOperations.getStoresLocationsList(filter)
+    res.send(stores)
+})
+
+*/

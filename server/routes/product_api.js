@@ -30,38 +30,28 @@ api.post("/productStorePost", async function (req, res) {
     res.send(feedback)
 })
 
+api.get("/allProducts", async function (req, res) {
+    let products = await productOperations.getAllProducts()
+    res.send(products)
+})
+
+api.get("/productsNameList", async function (req, res) {
+    const filter = req.query
+    let products = await productOperations.getProductsNameList(filter)
+    res.send(products)
+})
+
 module.exports = api
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
-
-api.get("/storesNamesList/", async function (req, res) {
-    let filter = req.query
-    let stores = await storeOperations.getStoresNamesList(filter)
-    res.send(stores)
-})
-
-api.get("/storesLocationsList", async function (req, res) {
-    let filter = req.query
-    let stores = await storeOperations.getStoresLocationsList(filter)
-    res.send(stores)
-})
-
-api.get("/productsNamesList", async function (req, res) {
-    let filter = req.query
-    let products = await productOperations.getProductsNamesList(filter)
-    res.send(products)
-})
 
 api.get("/categories", async function (req, res) {
     let categories = await productOperations.getCategories()
     res.send(categories)
 })
 
-api.get("/allProducts", async function (req, res) {
-    let products = await productOperations.getAllProducts()
-    res.send(products)
-})
+
 
 api.get("/categoryProducts/", async function (req, res) {
     category = req.query

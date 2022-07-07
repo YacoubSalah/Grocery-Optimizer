@@ -1,5 +1,6 @@
 const productFunctions = require("./product_operations_fn")
 const storeFunctions = require("./store_operations_fn")
+const productModel = require("../models/product")
 
 async function addProduct(productData) {
 
@@ -65,56 +66,63 @@ async function addProductStorePost(postData) {
         return feedback
     }
 
-    let currentProduct = await productFunctions.validateProductStoreExists(postData.productName , postData.storeName , postData.storeLocation, feedback)
+    let currentProduct = await productFunctions.validateProductStoreExists(postData.productName, postData.storeName, postData.storeLocation, feedback)
     if (!feedback.status) {
         return feedback
     }
 
     let porductStorePost = productFunctions.createProductStorePost(postData)
-    
-    await productFunctions.addProductStorePostAndSave(porductStorePost, currentProduct , postData.storeName , postData.storeLocation, feedback)
+
+    await productFunctions.addProductStorePostAndSave(porductStorePost, currentProduct, postData.storeName, postData.storeLocation, feedback)
 
     return feedback
 }
 
-module.exports = { addProduct, addProductStore , addProductStorePost }
+async function getAllProducts() {
+    let products = await productModel.find().exec()
+    products = products.map(p => [{
+        name: p.name,
+        image: p.imageUrl,
+        avergePrice: productFunctions.avergeProductPrice(p)
+    }])
+    return products
+}
+
+async function getProductsNameList(filter) {
+
+    const storeNameFilter = filter.storeNameFilter
+    const storeLocationFilter = filter.storeLocationFilter
+    let products = []
+    if (storeNameFilter && storeLocationFilter) {
+        products = await productModel.find({
+            stores: { $elemMatch: { "stores.store.name": storeNameFilter } },
+            stores: { $elemMatch: { "stores.store.location": storeLocationFilter } }
+        })
+            .exec()
+    } else if (storeNameFilter) {
+        products = await productModel.find({
+            stores: { $elemMatch: { "stores.store.name": storeNameFilter } }
+        })
+            .exec()
+    } else if (storeLocationFilter) {
+        products = await productModel.find({
+            stores: { $elemMatch: { "stores.store.location": storeLocationFilter } }
+        })
+            .exec()
+    } else {
+        products = await productModel.find({})
+            .exec()
+    }
+
+    productsNameList = products.map(p => p.name)
+    return productsNameList
+}
+
+module.exports = { addProduct, addProductStore, addProductStorePost, getAllProducts, getProductsNameList }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /* 
-async function getProductsNamesList(filter) {
 
-    let stores = []
-    let productsNamesList = []
-    if (filter.storeNameFilter || filter.storeLocationFilter) {
-        if (filter.storeNameFilter && filter.storeLocationFilter) {
-            stores = await storeModel.find({ name: filter.storeNameFilter, location: filter.storeLocationFilter }).exec()
-        } else {
-            if (filter.storeNameFilter) {
-                stores = await storeModel.find({ name: filter.storeNameFilter }).exec()
-            }
-            if (filter.storeLocationFilter) {
-                stores = await storeModel.find({ location: filter.storeLocationFilter }).exec()
-            }
-        }
-        let storesId = stores.map(s => s.id)
-        for (let storeId of storesId) {
-            let newProducts = await productModel.find({ 'stores.storeId': storeId }).exec()
-            let newProductsNames = newProducts.map(p => p.name)
-            productsNamesList = productsNamesList.concat(newProductsNames)
-        }
-    } else {
-        let newProducts = await productModel.find({}).exec()
-        productsNamesList = newProducts.map(p => p.name)
-    }
-
-    let productSet = new Set()
-    for (let product of productsNamesList) {
-        productSet.add(product)
-    }
-    productsNamesList = Array.from(productSet)
-
-    return productsNamesList
-}
 
 async function getCategories() {
     let categories = {}
@@ -165,25 +173,5 @@ async function productsNamesSearch(productName) {
     return products
 }
 
-async function getAllProducts() {
-    let products = await productModel.find().exec()
-    products = products.map(p => [{
-        name: p.name,
-        image: p.imageUrl,
-        avergePrice: getAvergeProductPrice(p)
-    }])
-    return products
-}
 
-function getAvergeProductPrice(product) {
-    let stores = product.stores
-    sumPrices = 0
-    index = 0
-    if (stores.length === 0)
-        return null
-    for (index = 0; index < stores.length; index++) {
-        sumPrices += stores[index].initialPrice
-    }
-    return sumPrices / index
-}
  */
