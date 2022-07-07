@@ -1,4 +1,5 @@
 const productFunctions = require("./product_operations_fn")
+const miscFunctions = require("./misc_functions")
 const storeFunctions = require("./store_operations_fn")
 const productModel = require("../models/product")
 
@@ -115,6 +116,8 @@ async function getProductsNameList(filter) {
     }
 
     productsNameList = products.map(p => p.name)
+    productsNameList = miscFunctions.removeDuplication(productsNameList)
+
     return productsNameList
 }
 

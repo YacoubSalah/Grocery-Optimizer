@@ -1,6 +1,9 @@
 const storeFunctions = require("./store_operations_fn")
+const miscFunctions = require("./misc_functions")
+const storeModel = require("../models/store")
+const productModel = require("../models/product")
 
-async function addStore(storeData){
+async function addStore(storeData) {
 
     let feedback = {}
     feedback.message = "No feedback yet"
@@ -11,79 +14,92 @@ async function addStore(storeData){
         return feedback
     }
 
-    storeFunctions.validateStoreDoesntAlreadyExists(storeData.name , storeData.location, feedback)
+    storeFunctions.validateStoreDoesntAlreadyExists(storeData.name, storeData.location, feedback)
     if (!feedback.status) {
         return feedback
     }
 
-    await storeFunctions.createAndSaveStoreModelInstance(storeData ,feedback)
+    await storeFunctions.createAndSaveStoreModelInstance(storeData, feedback)
 
     return feedback
 
 }
 
-module.exports = { addStore }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-async function getStoresNamesList(filter) {
-    let storesList = []
-    if (filter.storeLocationFilter) {
-        storesList = await storeModel.find({ location: filter.storeLocationFilter }).exec()
+async function getAllStores(){
+    let stores = await storeModel.find({}).exec()
+    return stores
+}
+
+async function getStoresNameList(filter) {
+
+    const productNameFilter = filter.productNameFilter
+    const storeLocationFilter = filter.storeLocationFilter
+    let stores = []
+    if (productNameFilter && storeLocationFilter) {
+        product = await productModel.findOne({
+            name: productNameFilter,
+            stores: { $elemMatch: { "stores.store.location": storeLocationFilter } }
+        })
+            .populate('stores.store')
+            .exec()
+        stores = product.stores.filter(s => s.store.location === storeLocationFilter).map(s => s.store)
+    } else if (productNameFilter) {
+        product= await productModel.findOne({
+            name: productNameFilter
+        })
+            .populate('stores.store')
+            .exec()
+        stores = product.stores.map(s => s.store)
+    } else if (storeLocationFilter) {
+        stores = await storeModel.find({
+            location: storeLocationFilter
+        })
+            .exec()
     } else {
-        storesList = await storeModel.find({}).exec()
+        stores = await storeModel.find({})
+            .exec()
     }
 
-    let storesNameList = []
-
-    if (filter.productNameFilter) {
-        for (let store of storesList) {
-            let product = await productModel.findOne({ name: filter.productNameFilter, 'stores.storeId': store.id }).exec()
-            if (product) {
-                storesNameList.push(store.name)
-            }
-        }
-    } else {
-        storesNameList = storesList.map(s => s.name)
-    }
-
-    let storeSet = new Set()
-    for (let store of storesNameList) {
-        storeSet.add(store)
-    }
-    storesNameList = Array.from(storeSet)
+    storesNameList = stores.map(s => s.name)
+    storesNameList = miscFunctions.removeDuplication(storesNameList)
 
     return storesNameList
 }
 
-async function getStoresLocationsList(filter) {
+async function getStoresLocationList(filter) {
 
-    let storesList = []
-
-    if (filter.storeNameFilter) {
-        storesList = await storeModel.find({ name: filter.storeNameFilter }).exec()
+    const productNameFilter = filter.productNameFilter
+    const storeNameFilter = filter.storeNameFilter
+    let stores = []
+    if (productNameFilter && storeNameFilter) {
+        product = await productModel.findOne({
+            name: productNameFilter,
+            stores: { $elemMatch: { "stores.store.name": storeNameFilter } }
+        })
+            .populate('stores.store')
+            .exec()
+        stores = product.stores.filter(s => s.store.name === storeNameFilter).map(s => s.store)
+    } else if (productNameFilter) {
+        product= await productModel.findOne({
+            name: productNameFilter
+        })
+            .populate('stores.store')
+            .exec()
+        stores = product.stores.map(s => s.store)
+    } else if (storeNameFilter) {
+        stores = await storeModel.find({
+            name: storeNameFilter
+        })
+            .exec()
     } else {
-        storesList = await storeModel.find({}).exec()
+        stores = await storeModel.find({})
+            .exec()
     }
 
-    let StoresLocationList = []
+    storesLocationList = stores.map(s => s.location)
+    storesLocationList = miscFunctions.removeDuplication(storesLocationList)
 
-    if (filter.productNameFilter) {
-        for (let store of storesList) {
-            let product = await productModel.findOne({ name: filter.productNameFilter, 'stores.storeId': store.id }).exec()
-            if (product) {
-                StoresLocationList.push(store.location)
-            }
-        }
-    } else {
-        StoresLocationList = storesList.map(s => s.location)
-    }
-
-    let storeSet = new Set()
-    for (let store of StoresLocationList) {
-        storeSet.add(store)
-    }
-    StoresLocationList = Array.from(storeSet)
-
-    return StoresLocationList
+    return storesLocationList
 }
-*/
+
+module.exports = { addStore, getAllStores, getStoresNameList, getStoresLocationList }

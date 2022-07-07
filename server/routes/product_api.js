@@ -37,8 +37,8 @@ api.get("/allProducts", async function (req, res) {
 
 api.get("/productsNameList", async function (req, res) {
     const filter = req.query
-    let products = await productOperations.getProductsNameList(filter)
-    res.send(products)
+    let productsNameList = await productOperations.getProductsNameList(filter)
+    res.send(productsNameList)
 })
 
 module.exports = api
