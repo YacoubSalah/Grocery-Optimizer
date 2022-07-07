@@ -199,6 +199,22 @@ async function getAllProducts() {
     return products
 }
 
+function prepareCategoryObject(products){
+    let categories = {}
+    for (let product of products) {
+        let mainCategory = product.mainCategory
+        let subCategory = product.subCategory
+        if (!categories[mainCategory]) {
+            categories[mainCategory] = [subCategory]
+        } else {
+            if (!categories[mainCategory].includes(subCategory)) {
+                categories[mainCategory].push(subCategory)
+            }
+        }
+    }
+    return categories
+}
+
 module.exports = {
     validateProductData,
     validateProductDoesntAlreadyExists,
@@ -215,5 +231,6 @@ module.exports = {
     getProductsByStoreNameAndLocation,
     getProductsByStoreName,
     getProductsNyStoreLocation,
-    getAllProducts
+    getAllProducts,
+    prepareCategoryObject
 }

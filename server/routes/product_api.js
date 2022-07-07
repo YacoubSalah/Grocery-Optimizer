@@ -41,17 +41,15 @@ api.get("/productsNameList", async function (req, res) {
     res.send(productsNameList)
 })
 
-module.exports = api
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-
 api.get("/categories", async function (req, res) {
     let categories = await productOperations.getCategories()
     res.send(categories)
 })
 
+module.exports = api
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
 
 api.get("/categoryProducts/", async function (req, res) {
     category = req.query

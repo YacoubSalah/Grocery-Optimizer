@@ -1,7 +1,6 @@
 const productFunctions = require("./product_operations_fn")
 const miscFunctions = require("./misc_functions")
 const storeFunctions = require("./store_operations_fn")
-const productModel = require("../models/product")
 
 async function addProduct(productData) {
 
@@ -22,6 +21,7 @@ async function addProduct(productData) {
     await productFunctions.createAndSaveProductModelInstance(productData, feedback)
 
     return feedback
+
 }
 
 async function addProductStore(productStoreData) {
@@ -52,12 +52,12 @@ async function addProductStore(productStoreData) {
 
     await productFunctions.addProductStoreAndSave(currentProduct, currentStore.id, productStoreData.productInitialPrice, feedback)
 
-
     return feedback
-
+    
 }
 
 async function addProductStorePost(postData) {
+
     let feedback = {}
     feedback.status = true
     feedback.message = "No Feedback yet"
@@ -77,21 +77,26 @@ async function addProductStorePost(postData) {
     await productFunctions.addProductStorePostAndSave(porductStorePost, currentProduct, postData.storeName, postData.storeLocation, feedback)
 
     return feedback
+
 }
 
 async function getAllProducts() {
+
     let products = await productFunctions.getAllProducts()
+
     products = products.map(p => [{
         name: p.name,
         image: p.imageUrl,
         avergePrice: productFunctions.avergeProductPrice(p)
     }])
+
     return products
 }
 
 async function getProductsNameList(filter) {
 
     let products = []
+
     if (filter.storeNameFilter && filter.storeLocationFilter) {
         products = await productFunctions.getProductsByStoreNameAndLocation(filter.storeNameFilter, filter.storeLocationFilter)
     } else if (filter.storeNameFilter) {
@@ -103,34 +108,27 @@ async function getProductsNameList(filter) {
     }
 
     productsNameList = products.map(p => p.name)
+
     productsNameList = miscFunctions.removeDuplication(productsNameList)
 
     return productsNameList
+
 }
 
-module.exports = { addProduct, addProductStore, addProductStorePost, getAllProducts, getProductsNameList }
+async function getCategories() { 
+
+    let products = await productFunctions.getAllProducts()
+
+    let categories = productFunctions.prepareCategoryObject(products)
+
+    return categories
+
+}
+
+module.exports = { addProduct, addProductStore, addProductStorePost, getAllProducts, getProductsNameList, getCategories }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /* 
-
-
-async function getCategories() {
-    let categories = {}
-    let products = await productModel.find({}).exec()
-    for (let product of products) {
-        let mainCategory = product.mainCategory
-        let subCategory = product.subCategory
-        if (!categories[mainCategory]) {
-            categories[mainCategory] = [subCategory]
-        } else {
-            if (!categories[mainCategory].includes(subCategory)) {
-                categories[mainCategory].push(subCategory)
-            }
-        }
-
-    }
-    return categories
-}
 
 async function getProductsByCategory(category) {
     let mainCategory = category.mainCategory
