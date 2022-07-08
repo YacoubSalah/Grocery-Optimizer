@@ -28,10 +28,10 @@ export class Store {
       handelAddClick: action,
       getStorelist: action,
       getStoresLocationList: action,
-      getproductsNameList: action , 
-      getFilteredProductsNames : action , 
-      getFilteredLocations : action , 
-      getFilteredStoresNames : action 
+      getproductsNameList: action,
+      getFilteredProductsNames: action,
+      getFilteredLocations: action,
+      getFilteredStoresNames: action
 
     })
   }
@@ -53,17 +53,17 @@ export class Store {
         this[event.target.name] = event.target.value
         this.getFilteredStoresNames()
         this.getFilteredLocations()
-       
+
         break;
       case 'storeLocation':
-        
+
         this[event.target.name] = event.target.value
         this.getFilteredStoresNames()
         this.getFilteredProductsNames()
 
         break;
       default:
-          typeof (event) === 'number' ?
+        typeof (event) === 'number' ?
           this.score = parseInt(event) / 20 :
           this[event.target.name] = event.target.value
     }
@@ -176,11 +176,11 @@ export class Store {
   }
 
   getFilteredStoresNames = async () => {
-    
+
     try {
 
-      console.log("a",this.storeLocation)
-      console.log("d",this.productName)
+      console.log("a", this.storeLocation)
+      console.log("d", this.productName)
 
       const response = await axios.get(`http://localhost:3020/storesNamesList?storeLocationFilter=${this.storeLocation}&productNamefilter=${this.productName}`)
 
@@ -190,7 +190,7 @@ export class Store {
     catch (error) {
       alert(error);
     }
-    
+
   }
 
 }

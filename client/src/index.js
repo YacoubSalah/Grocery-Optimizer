@@ -13,8 +13,6 @@ import { Products } from './Store/Products';
 const store = new Store()
 const products = new Products()
 
-console.log(products)
-
 const stores = {
     store,
     products

@@ -1,13 +1,14 @@
 import React from 'react'
 import "./product.css"
-import Photo from './img.jpg'
-function Product() {
+
+function Product(props) {
+
   return (
     <div className='product'>
-      <img src={Photo} alt="productImage" />
-      <p>Product Name</p>
+      <img src={props.product[0].image} alt="productImage" />
+      <p>{props.product[0].name}</p>
       <p>
-        <span>Avg unit Price : 10</span>
+        <span>Avg unit Price : {props.product[0].avergePrice}</span>
       </p>
       <p>Count : <input type="number" /></p>
       <button className='AddToCartButton'>Add</button>

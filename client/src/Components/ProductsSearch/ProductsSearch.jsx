@@ -11,10 +11,10 @@ const ProductsSearch = inject("products")(observer((props) => {
 
 
   useEffect(() => {
-      
-      console.log(props.products)
+    
       props.products.initializeProductsList()
-  })
+
+  },[props.products])
 
   return (
     <div className='containerProductsPage'>
@@ -27,8 +27,11 @@ const ProductsSearch = inject("products")(observer((props) => {
            <button className='searchButton'>Serach</button>
         </div>
         <div className='products'>
-               <Product />
-               <Product />
+               {props.products.ProductsList.map(product => {
+                return (
+                  <Product key={product[0].name} product={product} />
+                )
+               })}
         </div>
       </div>
       <div className='cartDiv'>
