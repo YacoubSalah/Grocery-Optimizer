@@ -37,37 +37,39 @@ export class Store {
   }
 
   handelInputs = (event) => {
+    
+    if(typeof (event) !== 'number'){
 
-    switch (event.target.name) {
-      case 'storeName':
-
-        this[event.target.name] = event.target.value
-        this.getFilteredProductsNames()
-        this.getFilteredLocations()
-
-        break;
-      case 'productName':
-
-        console.log(event.target.name)
-        console.log(event.target.value)
-        this[event.target.name] = event.target.value
-        this.getFilteredStoresNames()
-        this.getFilteredLocations()
-
-        break;
-      case 'storeLocation':
-
-        this[event.target.name] = event.target.value
-        this.getFilteredStoresNames()
-        this.getFilteredProductsNames()
-
-        break;
-      default:
-        typeof (event) === 'number' ?
-          this.score = parseInt(event) / 20 :
+      switch (event.target.name) {
+        case 'storeName':
+  
           this[event.target.name] = event.target.value
-    }
+          this.getFilteredProductsNames()
+          this.getFilteredLocations()
+  
+          break;
+        case 'productName':
+  
+          this[event.target.name] = event.target.value
+          this.getFilteredStoresNames()
+          this.getFilteredLocations()
+  
+          break;
+        case 'storeLocation':
+  
+          this[event.target.name] = event.target.value
+          this.getFilteredStoresNames()
+          this.getFilteredProductsNames()
+  
+          break;
+        default:
+          this[event.target.name] = event.target.value
+          break;
+      }
 
+    } else {
+      this.score = parseInt(event) / 20 
+    }
 
   }
 
@@ -180,7 +182,7 @@ export class Store {
 
     try {
 
-      const response = await axios.get(`http://localhost:3020/storesNameList?storeLocationFilter=${this.storeLocation}&productNameFilter=${this.productName}`)
+      const response = await axios.get(`http://localhost:3020/storesNameList?storeLocationFilter=${this.storeLocation}&storeNameFilter=${this.storeName}`)
 
       this.storesNamesList = response.data
 
