@@ -71,12 +71,12 @@ export class Store {
     axios.post('http://localhost:3020/productStorePost', {
       "productName": this.productName,
       "storeName": this.storeName,
-      "storeLocation": this.cityName,
+      "storeLocation": this.storeLocation,
       "score": parseInt(this.score),
       "price": parseInt(this.price),
       "note": this.note
-      //image
     })
+      //image
       .then(function (response) {
         console.log(response);
       })
