@@ -4,9 +4,9 @@ import axios from 'axios'
 
 export class Store {
   constructor() {
-    this.productName = null;
-    this.storeName = null;
-    this.storeLocation = null;
+    this.productName = '';
+    this.storeName = '';
+    this.storeLocation = '';
     this.price = 0;
     this.score = 0;
     this.note = '';
@@ -73,13 +73,14 @@ export class Store {
 
   handelAddClick = () => {
 
-    axios.post('http://localhost:3020/post', {
+    axios.post('http://localhost:3020/productStorePost', {
       "productName": this.productName,
       "storeName": this.storeName,
       "storeLocation": this.cityName,
       "score": parseInt(this.score),
       "price": parseInt(this.price),
       "note": this.note
+      //image
     })
       .then(function (response) {
         console.log(response);
@@ -91,14 +92,14 @@ export class Store {
 
   getStorelist = async () => {
     try {
-      const response = await axios.get('http://localhost:3020/storesNamesList', {
+      const response = await axios.get('http://localhost:3020/storesNameList', {
 
         "storeLocationFilter": null,
-        "productNamefilter": null,
+        "productNameFilter": null,
 
       })
 
-      this.storesNamesList = [...response.data]
+      this.storesNamesList = response.data
 
     }
     catch (e) {
@@ -110,14 +111,14 @@ export class Store {
   getStoresLocationList = async () => {
 
     try {
-      const response = await axios.get('http://localhost:3020/storesLocationsList', {
+      const response = await axios.get('http://localhost:3020/storesLocationList', {
 
         "storeNameFilter": null,
-        "productNamefilter": null,
+        "productNameFilter": null,
 
       })
 
-      this.storesLocationList = [...response.data]
+      this.storesLocationList = response.data
 
     }
     catch (error) {
@@ -130,14 +131,14 @@ export class Store {
 
     try {
 
-      const response = await axios.get('http://localhost:3020/productsNameslist', {
+      const response = await axios.get('http://localhost:3020/productsNameList', {
 
         "storeNameFilter": null,
         "storeLocationFilter": null,
 
       })
 
-      this.productsNameList = [...response.data]
+      this.productsNameList = response.data
 
     }
     catch (error) {
@@ -150,9 +151,9 @@ export class Store {
 
     try {
 
-      const response = await axios.get(`http://localhost:3020/productsNameslist?storeNameFilter=${this.storeName}&productNamefilter=${this.storeLocation}`)
+      const response = await axios.get(`http://localhost:3020/productsNameList?storeNameFilter=${this.storeName}&productNameFilter=${this.storeLocation}`)
 
-      this.productsNameList = [...response.data]
+      this.productsNameList = response.data
 
     }
     catch (error) {
@@ -164,9 +165,9 @@ export class Store {
 
     try {
 
-      const response = await axios.get(`http://localhost:3020/storesLocationsList?storeNameFilter=${this.storeName}&productNamefilter=${this.productName}`)
+      const response = await axios.get(`http://localhost:3020/storesLocationList?storeNameFilter=${this.storeName}&productNameFilter=${this.productName}`)
 
-      this.storesLocationList = [...response.data]
+      this.storesLocationList = response.data
 
     }
     catch (error) {
@@ -179,12 +180,9 @@ export class Store {
 
     try {
 
-      console.log("a", this.storeLocation)
-      console.log("d", this.productName)
+      const response = await axios.get(`http://localhost:3020/storesNameList?storeLocationFilter=${this.storeLocation}&productNameFilter=${this.productName}`)
 
-      const response = await axios.get(`http://localhost:3020/storesNamesList?storeLocationFilter=${this.storeLocation}&productNamefilter=${this.productName}`)
-
-      this.storesNamesList = [...response.data]
+      this.storesNamesList = response.data
 
     }
     catch (error) {

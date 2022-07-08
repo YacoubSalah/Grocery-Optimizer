@@ -1,5 +1,8 @@
 const mongoose = require("mongoose")
 const express = require("express")
+const productApi = require('./routes/product_api')
+const storeApi = require("./routes/store_api")
+
 const app = express()
 
 app.use(express.urlencoded())
@@ -13,14 +16,12 @@ app.use(function (req, res, next) {
     next()
 })
 
-const clientAPI = require('./routes/client_api')
-app.use( '/' , clientAPI)
-const adminAPI = require('./routes/admin_api')
-app.use( '/' , adminAPI)
+app.use( '/' , productApi)
+app.use( '/' , storeApi)
 
 const port = 3020
 app.listen(port, () => console.log(`GroceryOptimizer server is running on port: ${port}`))
 
-mongoose.connect("mongodb+srv://GroceryOptimizer:GroceryOptimizer@cluster0.uiyjv.mongodb.net/GroceryOptimizer?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://GroceryOptimizer:GroceryOptimizer@cluster0.uiyjv.mongodb.net/GroceryOptimizerTesting?retryWrites=true&w=majority")
     .then(() => console.log('Atlas was connected sucessfully'))
     .catch(() => console.log('Atlas failed to connect'))

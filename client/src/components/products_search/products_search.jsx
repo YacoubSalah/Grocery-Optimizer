@@ -1,8 +1,8 @@
 import React from 'react'
 import Product from '../product/product'
 import Categories from '../categories/categories'
-import Cart from '../Cart/Cart'
-import './ProductsSearch.css'
+import Cart from '../cart/cart'
+import './products_search.css'
 import { observer, inject } from 'mobx-react'
 import { useEffect } from 'react'
 

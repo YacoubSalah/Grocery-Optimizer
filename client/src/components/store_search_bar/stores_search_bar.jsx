@@ -1,5 +1,5 @@
 import React from 'react'
-import './storesSearchBar.css'
+import './stores_search_bar.css'
 
 function storesSearchBar() {
   return (

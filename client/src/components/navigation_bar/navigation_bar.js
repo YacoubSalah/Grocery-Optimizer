@@ -6,8 +6,8 @@ function navigationBar(){
     return(
         <div className="Navbar">
             <Link  to="/"><h3>Home</h3></Link>
-            <Link  to="/Products"><h3>Products</h3></Link>
-            <Link  to="/Stores"><h3>Stores</h3></Link>
+            <Link  to="/products"><h3>Products</h3></Link>
+            <Link  to="/stores"><h3>Stores</h3></Link>
         </div>
     );
 }

@@ -1,7 +1,7 @@
 import React from 'react'
-import SearchBar from '../storeSearchBar/storesSearchBar'
+import SearchBar from '../store_search_bar/stores_search_bar'
 import Stores from '../stores/stores'
-import './storesSearch.css'
+import './stores_search.css'
 
 function storesSearch() {
   return (

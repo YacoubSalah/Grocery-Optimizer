@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import App from './app';
 import { Provider } from 'mobx-react'
 import reportWebVitals from './reportWebVitals';
 import '@fortawesome/free-regular-svg-icons';
 import '@fortawesome/free-solid-svg-icons';
 
-import {Store} from './Store/Store'
-import { Products } from './Store/Products';
+import { Products } from './store/products';
+import {Store} from './store/store'
 
 const store = new Store()
 const products = new Products()
