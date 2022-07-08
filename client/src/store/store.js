@@ -7,7 +7,7 @@ export class Store {
     this.storeName = '';
     this.storeLocation = '';
     this.price = 0;
-    this.score = 0;
+    this.score = 50;
     this.note = '';
     this.storesNameList = [];
     this.storesLocationList = [];
@@ -24,6 +24,7 @@ export class Store {
       storesNameList: observable,
       productsNameList: observable,
       handelInputs: action,
+      handelScore: action,
       handelAddClick: action,
       updateProductsNameList: action,
       updateStoresLocationList: action,
@@ -34,39 +35,35 @@ export class Store {
 
   handelInputs = (event) => {
 
-    if (typeof (event) !== 'number') {
+    switch (event.target.name) {
+      case 'storeName':
+        this[event.target.name] = event.target.value
+        this.getProductsNameList()
+        this.getStoresLocationList()
+        break;
 
-      switch (event.target.name) {
-        case 'storeName':
+      case 'storeLocation':
+        this[event.target.name] = event.target.value
+        this.getStoresNameList()
+        this.getProductsNameList()
+        break;
 
-          this[event.target.name] = event.target.value
-          this.getProductsNameList()
-          this.getStoresLocationList()
+      case 'productName':
+        this[event.target.name] = event.target.value
+        this.getStoresNameList()
+        this.getStoresLocationList()
+        break;
 
-          break;
-        case 'productName':
+      default:
+        this[event.target.name] = event.target.value
+        break;
 
-          this[event.target.name] = event.target.value
-          this.getStoresNameList()
-          this.getStoresLocationList()
-
-          break;
-        case 'storeLocation':
-
-          this[event.target.name] = event.target.value
-          this.getStoresNameList()
-          this.getProductsNameList()
-
-          break;
-        default:
-          this[event.target.name] = event.target.value
-          break;
-      }
-
-    } else {
-      this.score = parseInt(event) / 20
     }
 
+  }
+
+  handelScore = (value) => {
+    this.score = value / 20
   }
 
   handelAddClick = () => {

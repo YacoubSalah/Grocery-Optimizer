@@ -7,13 +7,13 @@ const PostForum = inject("store")(observer((props) => {
 
     useEffect(() => {
 
-        props.store.getProductsNameList() //initialize stores names
+        props.store.getProductsNameList()
 
-        props.store.getStoresNameList()  //initialize stores Loocations
+        props.store.getStoresNameList()
 
-        props.store.getStoresLocationList() //initialize products
+        props.store.getStoresLocationList()
 
-    }, [props.store])      //should be empty array if OnMount
+    }, [props.store])
 
 
     return (
@@ -21,7 +21,7 @@ const PostForum = inject("store")(observer((props) => {
             <div className="Form">
 
                 <label>Select Store</label>
-                <select onChange={props.store.handelInputs} name="storeName" defaultValue={'default'}>
+                <select name="storeName" onChange={props.store.handelInputs} defaultValue={'default'}>
                     <option value="">Choose a Store...</option>
                     {props.store.storesNameList.map(store => {
                         return (
@@ -31,7 +31,7 @@ const PostForum = inject("store")(observer((props) => {
                 </select>
 
                 <label>Select City</label>
-                <select onChange={props.store.handelInputs} name="storeLocation" defaultValue={'default'}>
+                <select name="storeLocation" onChange={props.store.handelInputs} defaultValue={'default'}>
                     <option value="" >Choose a Location...</option>
                     {props.store.storesLocationList.map(city => {
                         return (
@@ -41,7 +41,7 @@ const PostForum = inject("store")(observer((props) => {
                 </select>
 
                 <label>Product Name</label>
-                <select onChange={props.store.handelInputs} name="productName" defaultValue={'default'}>
+                <select name="productName" onChange={props.store.handelInputs} defaultValue={'default'}>
                     <option value="" >Choose a Product...</option>
                     {props.store.productsNameList.map(product => {
                         return (
@@ -54,13 +54,13 @@ const PostForum = inject("store")(observer((props) => {
 
                     <div className="priceDiv">
                         <label>Price</label>
-                        <input onChange={props.store.handelInputs} type='number' name="price" />
+                        <input name="price" onChange={props.store.handelInputs} type='number' />
                     </div>
 
                     <div className="scoreDiv">
                         <div>Score</div>
                         <div>
-                            <Rating onClick={props.store.handelInputs} name="score" ratingValue={props.store.score} />
+                            <Rating name="score" onClick={props.store.handelScore} ratingValue={props.store.score * 20} />
                         </div>
                     </div>
 
