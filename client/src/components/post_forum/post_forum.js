@@ -14,8 +14,7 @@ const PostForum = inject("store")(observer((props) => {
         props.store.getStoresLocationList()
 
     }, [props.store])
-
-
+    
     return (
         <div className="PostForm">
             <div className="Form">
@@ -85,6 +84,7 @@ const PostForum = inject("store")(observer((props) => {
             </div>
         </div>
     )
+
 }))
 
 export default PostForum

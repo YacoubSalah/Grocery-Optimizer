@@ -1,13 +1,18 @@
-.Navbar{
-    background-color: 	blue;
+.Navbar {
+    background-color: #219ebc;
     border-radius: 10px;
     justify-content: center;
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 1fr 1fr;
 }
-.Navbar > a {
+
+.Navbar>a {
     margin-right: 40px;
     color: aliceblue;
-    text-decoration:none;
+    text-decoration: none;
+}
+
+.Navbar>a:hover{
+    color: rgba(0, 0, 0, 0.26);
 }

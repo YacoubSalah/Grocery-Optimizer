@@ -1,5 +1,5 @@
 .PostForm {
-    margin-top: 50px;
+    margin-top: 3vh;
     display: grid;
     justify-items: center;
 }
@@ -23,7 +23,7 @@
     border-radius: 4px;
     font-size: 16px;
     background-color: white;
-    background-position: 10px 10px; 
+    background-position: 10px 10px;
     background-repeat: no-repeat;
     padding: 12px 20px 12px 40px;
 }
@@ -87,9 +87,18 @@ select {
 
 .addPostButton {
     margin-top: 20px;
-    background-color: #008CBA;
-    ;
+    background-image: radial-gradient(circle, rgba(33, 157, 188, 0.8) 0%, rgba(142,202,230,.8) 100%);
+    border-radius: .5rem;
+    box-sizing: border-box;
     width: 80%;
     height: 40px;
-    border-radius: 10px;
+    font-size: 18px;
+    
+    color: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.295);
+    border-style:groove;
 }
+
+.addPostButton:hover {
+    background-image: radial-gradient(circle, rgba(33,158,188,1) 0%, rgba(142,202,230,1) 100%);
+  }
