@@ -1,7 +1,6 @@
 import { action, makeObservable, observable } from 'mobx'
 import axios from 'axios'
 
-
 export class Store {
   constructor() {
     this.productName = '';
@@ -10,7 +9,7 @@ export class Store {
     this.price = 0;
     this.score = 0;
     this.note = '';
-    this.storesNamesList = [];
+    this.storesNameList = [];
     this.storesLocationList = [];
     this.productsNameList = []
 
@@ -22,45 +21,42 @@ export class Store {
       score: observable,
       note: observable,
       storesLocationList: observable,
-      storesNamesList: observable,
+      storesNameList: observable,
       productsNameList: observable,
       handelInputs: action,
       handelAddClick: action,
-      getStorelist: action,
-      getStoresLocationList: action,
-      getproductsNameList: action,
-      getFilteredProductsNames: action,
-      getFilteredLocations: action,
-      getFilteredStoresNames: action
+      updateProductsNameList: action,
+      updateStoresLocationList: action,
+      updateStoresNameList: action
 
     })
   }
 
   handelInputs = (event) => {
-    
-    if(typeof (event) !== 'number'){
+
+    if (typeof (event) !== 'number') {
 
       switch (event.target.name) {
         case 'storeName':
-  
+
           this[event.target.name] = event.target.value
-          this.getFilteredProductsNames()
-          this.getFilteredLocations()
-  
+          this.getProductsNameList()
+          this.getStoresLocationList()
+
           break;
         case 'productName':
-  
+
           this[event.target.name] = event.target.value
-          this.getFilteredStoresNames()
-          this.getFilteredLocations()
-  
+          this.getStoresNameList()
+          this.getStoresLocationList()
+
           break;
         case 'storeLocation':
-  
+
           this[event.target.name] = event.target.value
-          this.getFilteredStoresNames()
-          this.getFilteredProductsNames()
-  
+          this.getStoresNameList()
+          this.getProductsNameList()
+
           break;
         default:
           this[event.target.name] = event.target.value
@@ -68,7 +64,7 @@ export class Store {
       }
 
     } else {
-      this.score = parseInt(event) / 20 
+      this.score = parseInt(event) / 20
     }
 
   }
@@ -92,105 +88,34 @@ export class Store {
       })
   }
 
-  getStorelist = async () => {
-    try {
-      const response = await axios.get('http://localhost:3020/storesNameList', {
-
-        "storeLocationFilter": null,
-        "productNameFilter": null,
-
-      })
-
-      this.storesNamesList = response.data
-
-    }
-    catch (e) {
-      alert(e)
-    }
-
+  getProductsNameList = () => {
+    axios.get(`http://localhost:3020/productsNameList?storeNameFilter=${this.storeName}&storeLocationFilter=${this.storeLocation}`)
+      .then((response) => this.updateProductsNameList(response.data))
+      .catch((error) => alert(error))
   }
 
-  getStoresLocationList = async () => {
-
-    try {
-      const response = await axios.get('http://localhost:3020/storesLocationList', {
-
-        "storeNameFilter": null,
-        "productNameFilter": null,
-
-      })
-
-      this.storesLocationList = response.data
-
-    }
-    catch (error) {
-      alert(error);
-    }
-
+  updateProductsNameList(newProductsNameList) {
+    this.productsNameList = newProductsNameList
   }
 
-  getproductsNameList = async () => {
-
-    try {
-
-      const response = await axios.get('http://localhost:3020/productsNameList', {
-
-        "storeNameFilter": null,
-        "storeLocationFilter": null,
-
-      })
-
-      this.productsNameList = response.data
-
-    }
-    catch (error) {
-      alert(error);
-    }
-
+  getStoresLocationList = () => {
+    axios.get(`http://localhost:3020/storesLocationList?storeNameFilter=${this.storeName}&productNameFilter=${this.productName}`)
+      .then((response) => this.updateStoresLocationList(response.data))
+      .catch((error) => alert(error))
   }
 
-  getFilteredProductsNames = async () => {
-
-    try {
-
-      const response = await axios.get(`http://localhost:3020/productsNameList?storeNameFilter=${this.storeName}&storeLocationFilter=${this.storeLocation}`)
-
-      this.productsNameList = response.data
-
-    }
-    catch (error) {
-      alert(error);
-    }
+  updateStoresLocationList(newStoresLocationList) {
+    this.storesLocationList = newStoresLocationList
   }
 
-  getFilteredLocations = async () => {
-
-    try {
-
-      const response = await axios.get(`http://localhost:3020/storesLocationList?storeNameFilter=${this.storeName}&productNameFilter=${this.productName}`)
-
-      this.storesLocationList = response.data
-
-    }
-    catch (error) {
-      alert(error);
-    }
-
+  getStoresNameList = () => {
+    axios.get(`http://localhost:3020/storesNameList?storeLocationFilter=${this.storeLocation}&productNameFilter=${this.productName}`)
+      .then((response) => this.updateStoresNameList(response.data))
+      .catch((error) => alert(error))
   }
 
-  getFilteredStoresNames = async () => {
-
-    try {
-
-      const response = await axios.get(`http://localhost:3020/storesNameList?storeLocationFilter=${this.storeLocation}&productNameFilter=${this.productName}`)
-
-      this.storesNamesList = response.data
-
-    }
-    catch (error) {
-      alert(error);
-    }
-
+  updateStoresNameList(newStoresNameList) {
+    this.storesNameList = newStoresNameList
   }
 
 }
