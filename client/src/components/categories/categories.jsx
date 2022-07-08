@@ -22,14 +22,14 @@ const categories = inject("products")(observer((props) => {
           
           ? 
          
-          Object.entries(categories).map(([key, value])  => {
+          Object.entries(categories).map(([mainCategory, value])  => {
           
           return (
 
-             <select defaultValue={'default'} >
-                 <option value="default" disabled>{key}</option>
+             <select key={mainCategory} onChange={props.products.handelSelectEvent} name={mainCategory} defaultValue={'default'} >
+                 <option value="default"  disabled>{mainCategory}</option>
                  {value.map(option => {
-                  return ( <option>{option}</option> )
+                  return ( <option key={option} value={option} >{option}</option> )
                  })}
              </select>
               

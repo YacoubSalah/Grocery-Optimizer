@@ -9,6 +9,9 @@ import { useEffect } from 'react'
 
 const ProductsSearch = inject("products")(observer((props) => {
 
+  let cartProducts = []
+
+  cartProducts = JSON.parse(localStorage.ItemsInCart || "[]")
 
   useEffect(() => {
     
@@ -23,8 +26,8 @@ const ProductsSearch = inject("products")(observer((props) => {
       </div>
       <div className='bodyDiv'>
         <div className='searchDiv'>
-           <input className='searchInput' placeholder='Enter name to search' />
-           <button className='searchButton'>Serach</button>
+           <input className='searchInput' name='search_Value' onChange={props.products.handelOnChangeEvent} placeholder='Enter name to search' />
+           <button className='searchButton' onClick={props.products.handelSearchClickEvent}>Serach</button>
         </div>
         <div className='products'>
                {props.products.ProductsList.map(product => {
@@ -35,10 +38,7 @@ const ProductsSearch = inject("products")(observer((props) => {
         </div>
       </div>
       <div className='cartDiv'>
-        <Cart />
-        <div className='card'>
-           cabaabsabsabsbabsb
-        </div>
+        <Cart cartProducts={cartProducts} />
       </div>
     </div>
   )
