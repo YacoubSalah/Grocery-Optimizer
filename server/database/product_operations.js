@@ -66,7 +66,9 @@ async function addProductStorePost(postData) {
     if (!feedback.status) {
         return feedback
     }
-
+    
+    let currentProduct = await productFunctions.getProductStore(postData.productName, postData.storeName, postData.storeLocation)
+    
     let porductStorePost = productFunctions.createProductStorePost(postData)
 
     await productFunctions.addProductStorePostAndSave(porductStorePost, currentProduct, postData.storeName, postData.storeLocation, feedback)

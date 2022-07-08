@@ -108,6 +108,18 @@ function validatePostData(postData, feedback) {
     }
 }
 
+async function getProductStore(productName, storeName, storeLocation) {
+    let store = await storeModel.findOne({ name: storeName, location: storeLocation }).exec()
+    let storeId = store.id
+    let product = await productModel.findOne({
+        name: productName,
+        stores: { $elemMatch: { store: storeId } }
+    })
+        .populate('stores.store')
+        .exec()
+    return product
+}
+
 function createProductStorePost(postData) {
     let newPost = {}
     if (postData.price) {
@@ -157,7 +169,7 @@ function avergeProductPrice(product) {
 
 //need cleaning
 async function getProductsByStoreNameAndLocation(storeNameFilter, storeLocationFilter) {
-    let stores = await storeModel.find({ name: storeNameFilter , location : storeLocationFilter}).exec()
+    let stores = await storeModel.find({ name: storeNameFilter, location: storeLocationFilter }).exec()
     let storesId = stores.map(s => s.id)
     let products = await productModel.find({
         stores: { $elemMatch: { store: { $in: storesId } } }
@@ -233,6 +245,7 @@ module.exports = {
     validateProductStoreDoesntExist,
     addProductStoreAndSave,
     validatePostData,
+    getProductStore,
     createProductStorePost,
     addProductStorePostAndSave,
     avergeProductPrice,
