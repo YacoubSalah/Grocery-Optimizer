@@ -7,8 +7,6 @@ const categories = inject("products")(observer((props) => {
 
   let categories = toJS(props.products.categories)
 
-  console.log(categories)
-
   useEffect(() => {
 
     props.products.initializeCategories()
