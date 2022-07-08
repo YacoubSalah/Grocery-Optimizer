@@ -142,13 +142,13 @@ async function productsSearch(searchWord) {
 
     let products = await productFunctions.getProductsBySearchWord(searchWord)
 
-    products = products.map(p => {
-        return ({
+    products = products.map(p => [{
+       
             name: p.name,
             image: p.imageUrl,
             avergePrice: productFunctions.avergeProductPrice(p)
-        })
-    })
+       
+    }])
 
     return products
 }

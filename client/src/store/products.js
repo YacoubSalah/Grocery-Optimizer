@@ -102,9 +102,7 @@ export class Products {
 
       const response = await axios.get(`http://localhost:3020/products/${this.search_Value}`)
 
-      this.categories = response.data
-
-      console.log(response.data)
+      this.ProductsList = response.data
 
     }
     catch (e) {
