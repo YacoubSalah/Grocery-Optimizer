@@ -155,14 +155,17 @@ function avergeProductPrice(product) {
     return sumPrices / index
 }
 
+//need cleaning
 async function getProductsByStoreNameAndLocation(storeNameFilter, storeLocationFilter) {
+    let stores = await storeModel.find({ name: storeNameFilter , location : storeLocationFilter}).exec()
+    let storesId = stores.map(s => s.id)
     let products = await productModel.find({
-        stores: { $elemMatch: { "stores.store.name": storeNameFilter } },
-        stores: { $elemMatch: { "stores.store.location": storeLocationFilter } }
+        stores: { $elemMatch: { store: { $in: storesId } } }
     })
         .exec()
     return products
 }
+
 //need cleaning
 async function getProductsByStoreName(storeNameFilter) {
     let stores = await storeModel.find({ name: storeNameFilter }).exec()
@@ -171,7 +174,6 @@ async function getProductsByStoreName(storeNameFilter) {
         stores: { $elemMatch: { store: { $in: storesId } } }
     })
         .exec()
-
     return products
 }
 
