@@ -153,7 +153,7 @@ export class Store {
 
     try {
 
-      const response = await axios.get(`http://localhost:3020/productsNameList?storeNameFilter=${this.storeName}&productNameFilter=${this.storeLocation}`)
+      const response = await axios.get(`http://localhost:3020/productsNameList?storeNameFilter=${this.storeName}&storeLocationFilter=${this.storeLocation}`)
 
       this.productsNameList = response.data
 
@@ -182,7 +182,7 @@ export class Store {
 
     try {
 
-      const response = await axios.get(`http://localhost:3020/storesNameList?storeLocationFilter=${this.storeLocation}&storeNameFilter=${this.storeName}`)
+      const response = await axios.get(`http://localhost:3020/storesNameList?storeLocationFilter=${this.storeLocation}&productNameFilter=${this.productName}`)
 
       this.storesNamesList = response.data
 

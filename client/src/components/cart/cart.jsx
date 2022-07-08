@@ -1,9 +1,21 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import { observer, inject } from 'mobx-react'
 
-function Cart() {
+const Cart = inject("products")(observer((props) => {
+
+
   return (
-    <Fragment>Cart</Fragment>
+    <div className='cart'>
+         <p>Item     Count    Price</p>
+         {props.products.cartProducts.map(item => {
+
+           return(
+            <div>{item.productName}    {item.count}    {item.avgPrice}</div>
+           )
+
+         })}
+    </div>
   )
-}
+}))
 
 export default Cart
