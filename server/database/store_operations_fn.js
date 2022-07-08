@@ -80,16 +80,17 @@ async function getAllStores() {
         .exec()
     return stores
 }
-
+//need cleaning
 async function getStoresByProductNameAndStoreName(productNameFilter, storeNameFilter) {
+    let stores = await storeModel.find({ name: storeNameFilter }).exec()
+    let storesId = stores.map(s => s.id)
     let product = await productModel.findOne({
         name: productNameFilter,
-        stores: { $elemMatch: { "stores.store.name": storeNameFilter } }
+        stores: { $elemMatch: { store: { $in: storesId } } }
     })
-        .populate('stores.store')
         .exec()
-    let stores = product.stores.filter(s => s.store.name === storeNameFilter).map(s => s.store)
-    return stores
+    let resultingStores = product.stores.filter(s => s.store.name === storeNameFilter).map(s => s.store)
+    return resultingStores
 }
 
 async function getStoresByStoreName(storeNameFilter) {

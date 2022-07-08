@@ -58,4 +58,9 @@ api.get("/products/:searchWord", async function (req, res) {
     res.send(products)
 })
 
+api.get("/allProductsWithDetails" , async function (req,res){
+    let allProductsWithDetails = await productOperations.getAllProductsWithDetails()
+    res.send(allProductsWithDetails)
+})
+
 module.exports = api

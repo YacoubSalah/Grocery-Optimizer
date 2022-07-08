@@ -67,11 +67,6 @@ async function addProductStorePost(postData) {
         return feedback
     }
 
-    let currentProduct = await productFunctions.validateProductStoreExists(postData.productName, postData.storeName, postData.storeLocation, feedback)
-    if (!feedback.status) {
-        return feedback
-    }
-
     let porductStorePost = productFunctions.createProductStorePost(postData)
 
     await productFunctions.addProductStorePostAndSave(porductStorePost, currentProduct, postData.storeName, postData.storeLocation, feedback)
@@ -147,13 +142,20 @@ async function productsSearch(searchWord) {
 
     let products = await productFunctions.getProductsBySearchWord(searchWord)
 
-    products = products.map(p => [{
-        name: p.name,
-        image: p.imageUrl,
-        avergePrice: productFunctions.avergeProductPrice(p)
-    }])
+    products = products.map(p => {
+        return ({
+            name: p.name,
+            image: p.imageUrl,
+            avergePrice: productFunctions.avergeProductPrice(p)
+        })
+    })
 
     return products
+}
+
+async function getAllProductsWithDetails() {
+    let allProductsWithDetails = await productFunctions.getAllProducts()
+    return allProductsWithDetails
 }
 
 module.exports = {
@@ -164,5 +166,6 @@ module.exports = {
     getProductsNameList,
     getCategories,
     getProductsByCategory,
-    productsSearch
+    productsSearch,
+    getAllProductsWithDetails
 }

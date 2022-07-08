@@ -1,4 +1,5 @@
 const productModel = require("../models/product")
+const storeModel = require("../models/store")
 
 function validateProductData(productData, feedback) {
     if (!productData.name) {
@@ -107,20 +108,6 @@ function validatePostData(postData, feedback) {
     }
 }
 
-async function validateProductStoreExists(productName, storeName, storeLocation, feedback) {
-    let product = await productModel.findOne({ name: productName, stores: { $elemMatch: { "stores.store.name": storeName } }, stores: { $elemMatch: { "stores.store.location": storeLocation } } })
-        .populate('stores.store')
-        .exec()
-    if (product) {
-        feedback.message = `productStore exists`
-        return product
-
-    } else {
-        feedback.message = `Product: ${productName} doesn't have a store with name: ${storeName} and location: ${storeLocation}`
-        feedback.status = false
-    }
-}
-
 function createProductStorePost(postData) {
     let newPost = {}
     if (postData.price) {
@@ -176,12 +163,15 @@ async function getProductsByStoreNameAndLocation(storeNameFilter, storeLocationF
         .exec()
     return products
 }
-
+//need cleaning
 async function getProductsByStoreName(storeNameFilter) {
+    let stores = await storeModel.find({ name: storeNameFilter }).exec()
+    let storesId = stores.map(s => s.id)
     let products = await productModel.find({
-        stores: { $elemMatch: { "stores.store.name": storeNameFilter } }
+        stores: { $elemMatch: { store: { $in: storesId } } }
     })
         .exec()
+
     return products
 }
 
@@ -195,6 +185,7 @@ async function getProductsNyStoreLocation(storeLocationFilter) {
 
 async function getAllProducts() {
     let products = await productModel.find({})
+        .populate('stores.store')
         .exec()
     return products
 }
@@ -240,7 +231,6 @@ module.exports = {
     validateProductStoreDoesntExist,
     addProductStoreAndSave,
     validatePostData,
-    validateProductStoreExists,
     createProductStorePost,
     addProductStorePostAndSave,
     avergeProductPrice,
