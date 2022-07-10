@@ -17,7 +17,7 @@ const Product = inject("products")(observer((props) => {
       <p>{productName}</p>
 
       <p>
-        <span>Avg unit Price : {products[productName].avergePrice}</span>
+        <span>Avg unit Price : {products[productName].averagePrice}</span>
       </p>
 
       <p>Quantity : <input value={products[productName].quantity} name={productName} onChange={props.products.updateProductQuantity} type="number" /></p>
