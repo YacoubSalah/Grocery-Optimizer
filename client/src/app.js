@@ -1,10 +1,11 @@
-import './app.css';
 import { BrowserRouter as Router , Routes , Route } from 'react-router-dom'
-import Home from './components/home/home';
-import ProductsSearch from './components/products_search/products_search';
-import StoreSearch from './components/stores_search/stores_search';
-import Navbar from './components/navigation_bar/navigation_bar'
 
+import Navbar from './components/navigation_bar/navigation_bar'
+import Home from './components/home/home';
+import ProductsSearch from './components/products_search/products_search'
+import StoreSearch from './components/stores_search/stores_search'
+
+import './app.css'
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         </Routes>
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
