@@ -2,15 +2,19 @@ import React from 'react'
 
 import { observer, inject } from 'mobx-react'
 
+import "./cartItem.css"
+
 const Cart = inject("products")(observer((props) => {
 
-  let name = props.cartItem
-  let quantity = props.products.cart[name]
-  let price = props.products.products[name] ? props.products.products[name].averagePrice : null
+  let productName = props.cartItem
+  let productQuantity = props.products.cart[productName]
+  let productUnitPrice = props.products.products[productName] ? props.products.products[productName].averagePrice : null
 
   return (
-    <div className='cart'>
-      <div>{name} {quantity} {Math.round(price*quantity*10)/10} </div>
+    <div className='cartItem'>
+      <div className='cartProductName' onClick={props.products.deleteCartItem}>{productName}</div>
+      <input className='cartProductQuantity' name={productName} value={productQuantity} onChange={props.products.bindCartItemQuantity} type="number" />
+      <div className='cartProductTotalPrice'>{Math.round(productUnitPrice * productQuantity * 10) / 10}</div>
     </div>
   )
 }))

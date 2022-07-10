@@ -1,0 +1,13 @@
+.cartProductQuantity {
+    display: inline-block;
+    width: 50%;
+}
+
+.cartProductTotalPrice {
+    display: inline-block;
+    padding-left: 5%;
+}
+
+.cartProductName:hover {
+    color: red;
+}

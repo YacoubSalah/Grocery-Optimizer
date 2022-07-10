@@ -29,7 +29,9 @@ export class Products {
       updateCartItem: action,
       getCategories: action,
       updateCategories: action,
-      getproductsByCategory: action
+      getproductsByCategory: action,
+      bindCartItemQuantity: action,
+      deleteCartItem:action
     })
   }
 
@@ -101,6 +103,17 @@ export class Products {
     axios.get(`http://localhost:3020/categoryProducts?mainCategory=${mainCategory}&subCategory=${subCategory}`)
       .then((newProducts) => this.checkInCartAndUpdateProducts(newProducts.data))
       .catch((error) => alert(error))
+  }
+
+  bindCartItemQuantity = (event) => {
+    let productName = event.target.name
+    let productQuantity = event.target.value
+    this.cart[productName] = productQuantity
+  }
+
+  deleteCartItem = (event) =>{
+    let productName = event.target.textContent
+    delete this.cart[productName]
   }
 
 }
