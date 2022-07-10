@@ -155,7 +155,7 @@ async function addProductStorePostAndSave(productStorePost, product, storeName, 
         })
 }
 
-function avergeProductPrice(product) {
+function averageProductPrice(product) {
     let stores = product.stores
     sumPrices = 0
     index = 0
@@ -221,7 +221,7 @@ function prepareCategoryObject(products) {
 }
 
 async function getProductsByCategory(mainCategory, subCategory) {
-    let products
+    let products = []
     if (subCategory) {
         products = await productModel.find({ mainCategory: mainCategory, subCategory: subCategory }).exec()
     } else {
@@ -231,8 +231,15 @@ async function getProductsByCategory(mainCategory, subCategory) {
 }
 
 async function getProductsBySearchWord(searchWord) {
-    let products = await productModel.find({ 'name': { $regex: `${searchWord}.*` } })
-        .exec()
+    let products
+    if (searchWord === "Initiate") {
+        products = await productModel.find({})
+            .exec()
+    } else {
+        products = await productModel.find({ 'name': { $regex: `${searchWord}.*` } })
+            .exec()
+    }
+
     return products
 }
 
@@ -248,7 +255,7 @@ module.exports = {
     getProductStore,
     createProductStorePost,
     addProductStorePostAndSave,
-    avergeProductPrice,
+    averageProductPrice,
     getProductsByStoreNameAndLocation,
     getProductsByStoreName,
     getProductsNyStoreLocation,

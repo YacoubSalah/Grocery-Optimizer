@@ -1,135 +1,107 @@
-import { observable, makeObservable, action  } from 'mobx'
+import { observable, makeObservable, action, computed } from 'mobx'
 import axios from 'axios'
 
 
 export class Products {
   constructor() {
 
-    this.ProductsList = [];
-    this.categories = null;
-    this.search_Value = '';
-    this.cartProducts = JSON.parse(localStorage.ItemsInCart || "[]");
-    this.countForAddProducttoCart = 0
+    this.products = {}
+    this.productsNameList = []
+    this.categories = {}
+    this.searchWord = ''
+    this.cart = JSON.parse(localStorage.cart || "{}")
 
 
     makeObservable(this, {
 
-      ProductsList : observable,
-      categories : observable,
-      search_Value:observable,
-      cartProducts : observable ,
-      countForAddProducttoCart : observable ,
-      initializeProductsList : action ,
-      initializeCategories : action ,
-      filterCategoryProducts : action , 
-      handelSelectEvent : action ,
-      handelOnChangeEvent : action,
-      handelAddToCart:action
+      products: observable,
+      productsNameList: observable,
+      categories: observable,
+      searchWord: observable,
+      cart: observable,
 
+      cartAveragePrice: computed,
+
+      handelInputChange: action,
+      search: action,
+      checkInCartAndUpdateProducts: action,
+      updateProductQuantity: action,
+      updateCartItem: action,
+      getCategories: action,
+      updateCategories: action,
+      getproductsByCategory: action
     })
   }
 
-  handelSelectEvent = async (event) => {
+  handelInputChange = (event) => this[event.target.name] = event.target.value
 
-      let mainCategory =  event.target.name
-      let subCategory =  event.target.value
+  search = () => {
+    if (!this.searchWord) {
+      this.searchWord = 'Initiate'
+    }
+    axios.get(`http://localhost:3020/products/${this.searchWord}`)
+      .then((newProductsList) => this.checkInCartAndUpdateProducts(newProductsList.data))
+      .catch((error) => alert(error))
+  }
 
-      try {
-      
-        const response = await axios.get(`http://localhost:3020/categoryProducts?mainCategory=${mainCategory}&subCategory=${subCategory}`)
-  
-        this.ProductsList = response.data
-  
+  checkInCartAndUpdateProducts(newProducts) {
+    this.productsNameList = Object.keys(newProducts)
+    for (let productName of this.productsNameList) {
+      newProducts[productName].quantity = 1
+      if (this.cart[productName]) {
+        newProducts[productName].inCart = true
+      } else {
+        newProducts[productName].inCart = false
       }
-      catch (e) {
-        alert(e)
-      }
-
-
+    }
+    this.products = newProducts
   }
 
-  handelOnChangeEvent = (event) => this[event.target.name] = event.target.value
-
-  initializeProductsList = async () => {
-
-
-    try {
-      
-      const response = await axios.get('http://localhost:3020/allProducts')
-
-      this.ProductsList = response.data
-
-    }
-    catch (e) {
-      alert(e)
-    }
-
+  updateProductQuantity = (event) => {
+    let productName = event.target.name
+    let quantity = event.target.value
+    this.products[productName].quantity = quantity
   }
 
-  initializeCategories = async () => {
-
-    try {
-
-      const response = await axios.get('http://localhost:3020/categories')
-
-      this.categories = response.data
-
+  updateCartItem = (event) => {
+    let productName = event.target.name
+    if (this.cart[productName]) {
+      delete this.cart[productName]
+    } else {
+      this.cart[productName] = this.products[productName].quantity || 0
     }
-    catch (e) {
-      alert(e)
-    }
-
+    localStorage.cart = JSON.stringify(this.cart)
   }
 
-  filterCategoryProducts = async () => {
-
-    try {
-
-      const response = await axios.get(`http://localhost:3020/categoryProducts?mainCategory=${this.mainCategory}&subCategory=${this.subCategory}`)
-
-      this.categories = response.data
-
+  get cartAveragePrice() {
+    let price = 0
+    let cartItems = Object.keys(this.cart)
+    for (let cartItem of cartItems) {
+      let cartItemQuantity = this.cart[cartItem]
+      let cartItemPrice = this.products[cartItem] ? this.products[cartItem].averagePrice : 0
+      price += cartItemPrice * cartItemQuantity
     }
-    catch (e) {
-      alert(e)
-    }
-
+    return price
   }
 
-  handelSearchClickEvent = async () => {
+  getCategories = () => {
+    const response = axios.get('http://localhost:3020/categories')
+      .then((response) => this.updateCategories(response.data))
+      .catch((error) => alert(error))
 
-    try {
-
-      const response = await axios.get(`http://localhost:3020/products/${this.search_Value}`)
-
-      this.ProductsList = response.data
-
-    }
-    catch (e) {
-      alert(e)
-    }
-        
+    this.categories = response.data
   }
 
-  handelAddToCart = (avgPrice , productName) => {
-
-    let cartArray = []
-
-    cartArray = JSON.parse(localStorage.ItemsInCart || "[]")
-
-    cartArray.push({
-      "avgPrice":avgPrice,
-      "productName":productName,
-      "count":this.countForAddProducttoCart
-    })
-
-    localStorage.ItemsInCart = JSON.stringify(cartArray)
-
-    this.cartProducts = [...cartArray]
-
-    this.countForAddProducttoCart = 0
-
+  updateCategories(newCategories) {
+    this.categories = newCategories
   }
+
+  getproductsByCategory = (event) => {
+    let mainCategory = event.target.dataset.mainCategory || ''
+    let subCategory = event.target.dataset.subCategory || ''
+    axios.get(`http://localhost:3020/categoryProducts?mainCategory=${mainCategory}&subCategory=${subCategory}`)
+      .then((newProducts) => this.checkInCartAndUpdateProducts(newProducts.data))
+      .catch((error) => alert(error))
+  }
+
 }
-
-

@@ -1,0 +1,19 @@
+.allCategories{
+    width: 10vw;
+    text-align: left;
+}
+
+.mainCategory{
+    text-align: left;
+    padding-left: 5%;
+}
+
+.subCategory{
+    text-align: left;
+    padding-left: 10%;
+}
+
+.allCategories:hover, .mainCategory:hover, .subCategory:hover{
+    color:cadetblue;
+    cursor:pointer;
+}

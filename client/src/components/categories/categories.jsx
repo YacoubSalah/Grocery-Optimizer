@@ -1,47 +1,41 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { observer, inject } from 'mobx-react'
-import { toJS } from 'mobx'
+
+import "./categories.css"
 
 const categories = inject("products")(observer((props) => {
 
-  let categories = toJS(props.products.categories)
-
   useEffect(() => {
 
-    props.products.initializeCategories()
+    props.products.getCategories()
 
   }, [props.products])
 
+  let categories = props.products.categories
+  let mainCategories = categories ? Object.keys(categories) : []
+
   return (
-    <div className='categories'>
-
-      {  categories !== null 
-          
-          ? 
-         
-          Object.entries(categories).map(([mainCategory, value])  => {
-          
-          return (
-
-             <select key={mainCategory} onChange={props.products.handelSelectEvent} name={mainCategory} defaultValue={'default'} >
-                 <option value="default"  disabled>{mainCategory}</option>
-                 {value.map(option => {
-                  return ( <option key={option} value={option} >{option}</option> )
-                 })}
-             </select>
-              
-          )
-
-         })
-
-         :
-
-         null
-       } 
-
+    <div>
+      <p className="allCategories" onClick={props.products.search}>All categories</p>
+      {mainCategories.map(mainCategory => {
+        let subCategories = categories[mainCategory]
+        return (
+          <div key={Math.random()}>
+            <div
+              className='mainCategory' onClick={props.products.getproductsByCategory}
+              data-main-category={mainCategory}>{mainCategory}
+            </div>
+            {subCategories.map(subCategory => <p
+              className='subCategory' key={Math.random()} onClick={props.products.getproductsByCategory}
+              data-main-category={mainCategory} data-sub-category={subCategory}>{subCategory}
+            </p>)}
+          </div>
+        )
+      })}
     </div>
   )
+
 }))
 
 export default categories
