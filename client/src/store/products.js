@@ -24,7 +24,7 @@ export class Products {
       filterCategoryProducts : action , 
       handelSelectEvent : action ,
       handelOnChangeEvent : action,
-      AddToCart:action
+      handelAddToCart:action
 
     })
   }
@@ -111,11 +111,23 @@ export class Products {
         
   }
 
-  AddToCart = (cart) => {
+  handelAddToCart = (avgPrice , productName) => {
 
-    this.cartProducts = [...cart]
+    let cartArray = []
 
-    console.log("asas",this.cartProducts)
+    cartArray = JSON.parse(localStorage.ItemsInCart || "[]")
+
+    cartArray.push({
+      "avgPrice":avgPrice,
+      "productName":productName,
+      "count":this.countForAddProducttoCart
+    })
+
+    localStorage.ItemsInCart = JSON.stringify(cartArray)
+
+    this.cartProducts = [...cartArray]
+
+    this.countForAddProducttoCart = 0
 
   }
 }

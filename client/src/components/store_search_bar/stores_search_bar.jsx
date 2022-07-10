@@ -26,26 +26,26 @@ function storesSearchBar() {
       </div>
       <div className='Checkboxes'>
         <span>Sort :</span>
-        <label class="containerCheckbox">By Price
+        <label className="containerCheckbox">By Price
           <input type="checkbox" />
-          <span class="checkmark"></span>
+          <span className="checkmark"></span>
         </label>
-        <label class="containerCheckbox">By Score
+        <label className="containerCheckbox">By Score
           <input type="checkbox" />
-          <span class="checkmark"></span>
+          <span className="checkmark"></span>
         </label>
 
         {/* --------------------------------- */}
 
         <span>filter :</span>
 
-        <label class="containerCheckbox">Incomplete
+        <label className="containerCheckbox">Incomplete
           <input type="checkbox" />
-          <span class="checkmark"></span>
+          <span className="checkmark"></span>
         </label>
-        <label class="containerCheckbox">Only scored
+        <label className="containerCheckbox">Only scored
           <input type="checkbox" />
-          <span class="checkmark"></span>
+          <span className="checkmark"></span>
         </label>
       </div>
     </div>
