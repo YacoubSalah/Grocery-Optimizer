@@ -66,9 +66,9 @@ async function addProductStorePost(postData) {
     if (!feedback.status) {
         return feedback
     }
-    
+
     let currentProduct = await productFunctions.getProductStore(postData.productName, postData.storeName, postData.storeLocation)
-    
+
     let porductStorePost = productFunctions.createProductStorePost(postData)
 
     await productFunctions.addProductStorePostAndSave(porductStorePost, currentProduct, postData.storeName, postData.storeLocation, feedback)
@@ -78,16 +78,19 @@ async function addProductStorePost(postData) {
 }
 
 async function getAllProducts() {
-
+    averagePrice
     let products = await productFunctions.getAllProducts()
 
-    products = products.map(p => [{
-        name: p.name,
-        image: p.imageUrl,
-        avergePrice: productFunctions.avergeProductPrice(p)
-    }])
+    let productsFinalForm = {}
 
-    return products
+    products.forEach(p => {
+        let x = {}
+        x.image = p.imageUrl || ""
+        x.averagePrice = productFunctions.averageProductPrice(p) || null
+        productsFinalForm[p.name] = x
+    })
+
+    return productsFinalForm
 }
 
 async function getProductsNameList(filter) {
@@ -125,32 +128,35 @@ async function getCategories() {
 async function getProductsByCategory(category) {
 
     let products = await productFunctions.getProductsByCategory(category.mainCategory, category.subCategory)
+    
+    let productsFinalForm = {}
 
     if (products) {
-        products = products.map(p => [{
-            name: p.name,
-            image: p.imageUrl,
-            avergePrice: productFunctions.avergeProductPrice(p)
-        }])
-    } else {
-        products = []
+        products.forEach(p => {
+            let x = {}
+            x.image = p.imageUrl || ""
+            x.averagePrice = productFunctions.averageProductPrice(p) || null
+            productsFinalForm[p.name] = x
+        })   
     }
-
-    return products
-
+    
+    return productsFinalForm
 }
 
 async function productsSearch(searchWord) {
 
     let products = await productFunctions.getProductsBySearchWord(searchWord)
 
-    products = products.map(p => [{
-        name: p.name,
-        image: p.imageUrl,
-        avergePrice: productFunctions.avergeProductPrice(p)
-    }])
+    let productsFinalForm = {}
 
-    return products
+    products.forEach(p => {
+        let x = {}
+        x.image = p.imageUrl || ""
+        x.averagePrice = productFunctions.averageProductPrice(p) || null
+        productsFinalForm[p.name] = x
+    })
+
+    return productsFinalForm
 }
 
 async function getAllProductsWithDetails() {
