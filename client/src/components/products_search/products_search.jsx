@@ -13,6 +13,7 @@ const ProductsSearch = inject("products")(observer((props) => {
   useEffect(() => {
 
     props.products.search()
+    props.products.getCategories()
 
   }, [props.products])
 

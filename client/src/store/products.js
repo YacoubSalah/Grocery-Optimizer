@@ -88,7 +88,6 @@ export class Products {
     const response = axios.get('http://localhost:3020/categories')
       .then((response) => this.updateCategories(response.data))
       .catch((error) => alert(error))
-
     this.categories = response.data
   }
 

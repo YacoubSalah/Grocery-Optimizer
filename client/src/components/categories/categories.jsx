@@ -6,12 +6,6 @@ import "./categories.css"
 
 const categories = inject("products")(observer((props) => {
 
-  useEffect(() => {
-
-    props.products.getCategories()
-
-  }, [props.products])
-
   let categories = props.products.categories
   let mainCategories = categories ? Object.keys(categories) : []
 
