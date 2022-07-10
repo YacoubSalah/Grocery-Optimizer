@@ -9,10 +9,6 @@ import './products_search.css'
 
 const ProductsSearch = inject("products")(observer((props) => {
 
-  let cartProducts = []
-
-  cartProducts = JSON.parse(localStorage.ItemsInCart || "[]") 
-
   useEffect(() => {
     
       props.products.initializeProductsList()
@@ -44,7 +40,7 @@ const ProductsSearch = inject("products")(observer((props) => {
       </div>
 
       <div className='cartDiv'>
-        <Cart cartProducts={cartProducts} />
+        <Cart />
       </div>
 
     </div>

@@ -5,24 +5,14 @@ import { observer, inject } from 'mobx-react'
 
 const Product = inject("products")(observer((props) => {
 
-  let avgPrice = props.product[0].avergePrice
-  
-  let productName = props.product[0].name
-
   const handelAddToCart = () => {
 
-    let cartArray = []
-         
-    cartArray = JSON.parse(localStorage.ItemsInCart || "[]")
-    cartArray.push({
-      "avgPrice":avgPrice,
-      "productName":productName,
-      "count":props.products.countForAddProducttoCart
-    })
+    let avgPrice = props.product[0].avergePrice
+  
+    let productName = props.product[0].name
 
-    props.products.AddToCart(cartArray)
+    props.products.handelAddToCart(avgPrice , productName)
 
-    localStorage.ItemsInCart = JSON.stringify(cartArray)
   }
 
   return (
@@ -32,7 +22,7 @@ const Product = inject("products")(observer((props) => {
       <p>
         <span>Avg unit Price : {props.product[0].avergePrice}</span>
       </p>
-      <p>Count : <input value={1} name="countForAddProducttoCart" onChange={props.products.handelOnChangeEvent} type="number" /></p>
+      <p>Count : <input value={props.products.countForAddProducttoCart} name="countForAddProducttoCart" onChange={props.products.handelOnChangeEvent} type="number" /></p>
       <button className='AddToCartButton'  onClick={handelAddToCart} >Add</button>
     </div>
   )
