@@ -3,45 +3,58 @@ const storeModel = require("../models/store")
 
 async function getStoresPrices(cart) {
     let stores = await getStoresByCart(cart)
-    let products =await  getProductsByCart(cart)
-    let allS = await getStores(stores,products)
-    return allS
+    let products = await getProductsByCart(cart)
+    let allStores = await getStores(stores, products)
+    return allStores
 }
 
 
 
-async function getStores(stores,products) {
+async function getStores(stores, products) {
     let allStoresFinal = []
     productCart = {}
-    st = {}
-    productshelp  = []
-    for(let store in stores){
+    dommyStore = {}
+    productshelp = []
+    for (let store in stores) {
         productCart = {}
-        st = {}
-        productshelp  = []
-        let s =await storeModel.findById(store).exec()
-        st.name = s.name
-        st.location = s.location
+        dommyStore = {}
+        productshelp = []
+        let s = await storeModel.findById(store).exec()
+        dommyStore.name = s.name
+        dommyStore.location = s.location
+        dommyStore.id = s.id
         totalPrice = 0
-        st.isComplete = true
-        for(let product of stores[store]){
+        dommyStore.isComplete = true
+        for (let product of stores[store]) {
             productCart[Object.keys(product)[0]] = Object.values(product)[0]
             totalPrice += Object.values(product)[0]
             productshelp.push(Object.keys(product)[0])
         }
-        st.totalPrice = totalPrice
-       products.map(p => {
-            if(!productshelp.includes(p)){
-                productCart[p]=null
-                st.isComplete = false
+        dommyStore.totalPrice = totalPrice
+        products.map(p => {
+            if (!productshelp.includes(p)) {
+                productCart[p] = null
+                dommyStore.isComplete = false
             }
         })
-        st.productCart = productCart
-        allStoresFinal.push(st)
+        dommyStore.productCart = productCart
+        allStoresFinal.push(dommyStore)
     }
     return allStoresFinal
 }
+async function getPostsProduct(productName, storeId) {
+    let posts = {}
+    let product = await productModel.findOne({ name: productName })
+        .populate("stores.store")
+        .exec()
+    product.stores.map(s => {
+        if (s.store.id === storeId) {
+            posts = s.posts
+        }
+    })
+    return posts
 
+}
 
 async function getProductsByCart(cart) {
     let products = []
