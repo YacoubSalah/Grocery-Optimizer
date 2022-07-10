@@ -9,9 +9,9 @@ import './products_search.css'
 
 const ProductsSearch = inject("products")(observer((props) => {
 
-  let cartProducts = [] //why here ? why not in mobx Store ?
+  let cartProducts = []
 
-  cartProducts = JSON.parse(localStorage.ItemsInCart || "[]") // this too
+  cartProducts = JSON.parse(localStorage.ItemsInCart || "[]") 
 
   useEffect(() => {
     
@@ -46,7 +46,7 @@ const ProductsSearch = inject("products")(observer((props) => {
       <div className='cartDiv'>
         <Cart cartProducts={cartProducts} />
       </div>
-      
+
     </div>
   )
 }))
