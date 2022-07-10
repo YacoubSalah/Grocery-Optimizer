@@ -4,6 +4,7 @@ const productOperations = require("../database/product_operations")
 const api = route()
 
 api.post("/product", async function (req, res) {
+
     const productData = req.body
     let feedback = await productOperations.addProduct(productData)
     if (!feedback.status) {
@@ -11,6 +12,7 @@ api.post("/product", async function (req, res) {
     }
     res.send(feedback)
 })
+
 
 api.post("/productStore", async function (req, res) {
     const productStoreData = req.body

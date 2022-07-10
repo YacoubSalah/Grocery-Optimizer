@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 const express = require("express")
 const productApi = require('./routes/product_api')
 const storeApi = require("./routes/store_api")
+const cartApi = require("./routes/cart_api")
 
 const app = express()
 
@@ -18,6 +19,7 @@ app.use(function (req, res, next) {
 
 app.use( '/' , productApi)
 app.use( '/' , storeApi)
+app.use('/', cartApi)
 
 const port = 3020
 app.listen(port, () => console.log(`GroceryOptimizer server is running on port: ${port}`))

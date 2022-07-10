@@ -3,7 +3,7 @@ const miscFunctions = require("./misc_functions")
 const storeFunctions = require("./store_operations_fn")
 
 async function addProduct(productData) {
-
+   
     let feedback = {}
     feedback.message = "No feedback yet"
     feedback.status = true
