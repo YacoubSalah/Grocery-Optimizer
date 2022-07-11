@@ -31,7 +31,7 @@ export class Products {
       updateCategories: action,
       getproductsByCategory: action,
       bindCartItemQuantity: action,
-      deleteCartItem:action
+      deleteCartItem: action
     })
   }
 
@@ -83,7 +83,7 @@ export class Products {
       let cartItemPrice = this.products[cartItem] ? this.products[cartItem].averagePrice : 0
       price += cartItemPrice * cartItemQuantity
     }
-    return price
+    return (Math.round(price * 100) / 100)
   }
 
   getCategories = () => {
@@ -111,7 +111,7 @@ export class Products {
     this.cart[productName] = productQuantity
   }
 
-  deleteCartItem = (event) =>{
+  deleteCartItem = (event) => {
     let productName = event.target.textContent
     delete this.cart[productName]
   }
