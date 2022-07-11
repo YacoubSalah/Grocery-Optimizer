@@ -12,19 +12,27 @@ const Product = inject("products")(observer((props) => {
   return (
     <div className='product'>
 
-      <img src={products[productName].image} alt="productImage" />
+      <img className='productImage' src={products[productName].image} alt="productImage" />
 
-      <p>{productName}</p>
+      <div className='productName'>{productName}</div>
 
-      <p>
-        <span>Avg unit Price : {products[productName].averagePrice}</span>
-      </p>
+      <div className='productAveragePriceContainer'>
+        <div className='productAveragePriceTitle'>Average price: </div>
+        <div className='productAveragePriceValue'>   {Math.round(products[productName].averagePrice * 100) / 100} ₪</div>
+      </div>
 
-      <p>Quantity : <input value={products[productName].quantity} name={productName} onChange={props.products.updateProductQuantity} type="number" /></p>
+       <input
+        className='productQuantityValue' name={productName} type="number"
+        value={products[productName].quantity} onChange={props.products.updateProductQuantity}
+      />
+ 
+ 
+      <button
+        className='productAddRemoveButton' name={productName}
+        onClick={props.products.updateCartItem} >{cart[productName] ? "Remove" : "Add"}
+      </button>
 
-      <button name={productName} className='AddToCartButton' onClick={props.products.updateCartItem} >{cart[productName]   ? "Remove" : "Add"}</button>
-
-    </div>
+    </div >
   )
 
 }))

@@ -1,59 +1,68 @@
-.containerProductsPage {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
-    width: 100vw;
+.productSearchContainer {
+    display: grid;
+    grid-template-columns: .8fr 5fr 1.2fr;
+    grid-gap: .5rem;
+    background-color: azure;
 }
 
-.categoryDiv {
-    flex-grow: 1;
+.categoryMenu {
+    padding: .5rem;
+    border-style: none solid none none;
+    border-color: rgba(64, 221, 245, 0.132);
+    background-color: aliceblue;
 }
 
-.bodyDiv {
-    flex-grow: 6;
-    display: inline;
+.productsAndSearchBar {
+    display: grid;
+    grid-gap: .5rem;
+    padding: .5rem;
 }
 
-.cartDiv {
-    flex-grow: 3;
-    width: 100%;
-}
-
-.searchDiv {
-    width: 100%;
+.searchMenu {
+    display: grid;
+    padding: .5rem;
+    grid-gap: .5rem;
+    grid-template-columns: repeat(4 , 1fr);
+    grid-template-rows: minmax(3rem , 3rem) ;
 }
 
 .searchInput {
-    width: 70%;
-    background-color: #b7bcb7;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
+    grid-column: 1 / span 3;
+    background-color: lightgray;
+    color: darkgray;
+    font-size: large;
+    padding-left: 14px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.searchInput:hover{
+    background-color: rgba(211, 211, 211, 0.841);
 }
 
 .searchButton {
-    width: 20%;
-    background-color: #4CAF50;
+    grid-column: 4;
+    background-color: #4caf4fea;
+    font-size: large;
     color: white;
-    padding: 14px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-left: 1rem;
+}
+
+.searchButton:hover{
+    background-color: #4caf4fc8;
 }
 
 .products {
-    width: 100%;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: .5rem; 
 }
 
-.products>div {
-    flex: 0 0 calc(25% - 1em);
-    min-height: 120px;
-    margin: 0.25em 0.5em;
+.cart {
+    border-style: none none none solid;
+    border-color: rgba(64, 221, 245, 0.132);
+    background-color: aliceblue;
 }
