@@ -17,16 +17,33 @@ export class Carts {
             updateStoresCartList: action,
             addItemToShow: action ,
             updateFeedBack: action ,
-            sumTotalPrice : action
+            calculateTotalPrices : action
         })
     }
 
     getStoresByProducts = (cart) => {
 
         axios.post(`http://localhost:3020/cartPrices`, { cart })
-            .then((response) => this.updateStoresCartList(response.data))
+            .then((response) => {
+                this.updateStoresCartList(response.data)
+                this.calculateTotalPrices()
+            })
             .catch((error) => alert(error))
 
+    }
+
+    calculateTotalPrices = () => {
+        
+        let cart = JSON.parse(localStorage.cart || "{}")
+
+        if(this.storesCartsList.length!==0){
+            this.storesCartsList.forEach(store => {
+                 Object.keys(store.productCart).forEach(key => {
+                      store.productCart[key]['totalPrice'] = store.productCart[key].initialPrice * cart[key]
+                 })
+            })
+
+        }
     }
 
     updateStoresCartList = (storesList) => {
@@ -42,17 +59,27 @@ export class Carts {
         console.log(itemName , id)
 
         axios.get(`http://localhost:3020/postsProduct/?productName=${itemName}&&storeId=${id}`)
-            .then((response) =>  this.updateFeedBack(response.data.length) )
+            .then((response) =>  {
+                console.log(response.data)
+                this.updateFeedBack(response.data.length) 
+            })
             .catch((error) => alert(error))
 
     }
 
     updateFeedBack = (value) => {
-        console.log(value)
           this.feedBack = value
     }
 
-    sumTotalPrice = ( count , price ) => {
-        this.totalPrice += Math.round((price * count) * 100 ) / 100 
+    sumTotalPriceForStore = (itemsCart) => {
+
+        let sum = 0
+
+        Object.keys(itemsCart).forEach(key => {
+            sum += Math.round(itemsCart[key].totalPrice * 100) / 100
+        })
+
+        return sum
+
     }
 }

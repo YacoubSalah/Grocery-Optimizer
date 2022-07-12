@@ -3,10 +3,19 @@ import './store.css'
 import { Rating } from 'react-simple-star-rating'
 import { Link } from 'react-router-dom'
 import './store.css'
+import { observer, inject } from 'mobx-react'
+import { useEffect } from 'react'
 
-function store(props) {
+
+const store = inject("carts" , "products")(observer((props) => {
 
   const id = props.store.id
+
+  useEffect(() => {
+    
+    props.carts.calculateTotalPrices()
+
+  } , [props.carts])
 
   return (
     <div className='storeCard'>
@@ -17,12 +26,12 @@ function store(props) {
       <div className='DetailsDiv'>
          <h3>{props.store.name}</h3>
          <h3>{props.store.location}</h3>
-         <h3>Total Price : {props.store.totalPrice}$</h3>
+         <h3>Total Price : {props.carts.sumTotalPriceForStore(props.store.productCart)}$</h3>
       </div>
       <label className='incompletelabel'>{ props.store.isComplete ? null : "InComplete" }</label>
       <Link  to="/details" state={id}><button className="btn">Details</button></Link>
     </div>
   )
-}
+}))
 
 export default store
