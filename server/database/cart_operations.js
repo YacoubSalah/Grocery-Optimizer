@@ -42,6 +42,7 @@ async function getStores(stores, products) {
     }
     return allStoresFinal
 }
+
 async function getPostsProduct(productName, storeId) {
     let posts = {}
     let product = await productModel.findOne({ name: productName })

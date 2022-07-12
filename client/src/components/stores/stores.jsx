@@ -1,13 +1,21 @@
 import React from 'react'
 import './stores.css'
 import Store from '../store/store'
+import { observer, inject } from 'mobx-react'
+import { toJS } from 'mobx'
 
-function stores() {
+const stores = inject("carts")(observer((props) => {
+
+  let storesList = toJS(props.carts.storesCartsList)
   return (
     <div className='stores'>
-        <Store />
+      {storesList.map(store => {
+        return(
+           <Store key={store.id} store={store} />
+        )
+      })}
     </div>
   )
-}
+}))
 
 export default stores

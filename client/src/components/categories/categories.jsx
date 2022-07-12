@@ -1,5 +1,4 @@
 import React from 'react'
-import { useEffect } from 'react'
 import { observer, inject } from 'mobx-react'
 
 import "./categories.css"
