@@ -41,7 +41,13 @@ const ProductsSearch = inject("products")(observer((props) => {
       <h2>CART</h2>
         {Object.keys(props.products.cart).map(cartItem => <CartItem key={cartItem} cartItem={cartItem} />)}
       <p>Total average price :</p>  {props.products.cartAveragePrice}
-      <Link  to="/stores"><h3>Calculate Cart</h3></Link>
+
+      <Link  to={"/stores"} >
+
+        <h3>Calculate Cart</h3>
+
+      </Link>
+
       </div>
 
     </div>

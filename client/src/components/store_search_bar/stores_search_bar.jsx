@@ -1,29 +1,44 @@
 import React from 'react'
 import './stores_search_bar.css'
+import { observer, inject } from 'mobx-react'
 
-function storesSearchBar() {
+
+const storesSearchBar = inject("store")(observer((props) => {
+
+
   return (
     <div className='searchBar'>
       <div className='selectsDiv'>
-        <div>
+        
+        <div className='CitySelectedDiv'>
           <span>City Name :</span>
-          <select>
-            <option>
-              haifa
-            </option>
+          <select defaultValue={'default'}>
+            <option value="" >Choose a Location...</option>
+            {props.store.storesLocationList.map(city => {
+              return (
+                <option key={city} value={city}>{city}</option>
+              )
+            })}
           </select>
         </div>
-        <div>
+
+        <div className='StoreSelectedDiv'>
           <span>Store :</span>
-          <select>
-            <option>
-              supersall
-            </option>
+          <select defaultValue={'default'}>
+            <option value="">Choose a Store...</option>
+            {props.store.storesNameList.map(store => {
+              return (
+                <option key={store} value={store}>{store}</option>
+              )
+            })}
           </select>
         </div>
 
         <button className='findPriceButton'>Find price</button>
+
       </div>
+
+      
       <div className='Checkboxes'>
         <span>Sort :</span>
         <label className="containerCheckbox">By Price
@@ -50,6 +65,6 @@ function storesSearchBar() {
       </div>
     </div>
   )
-}
+}))
 
 export default storesSearchBar
