@@ -16,7 +16,6 @@ const PostForum = inject("store")(observer((props) => {
     }, [props.store])
     
     return (
-        <div className="PostForm">
             <div className="Form">
 
                 <label>Select Store</label>
@@ -82,7 +81,6 @@ const PostForum = inject("store")(observer((props) => {
                 <button onClick={props.store.handelAddClick} className="addPostButton">Add Post</button>
 
             </div>
-        </div>
     )
 
 }))
