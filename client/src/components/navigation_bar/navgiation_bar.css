@@ -1,15 +1,37 @@
-.Navbar {
-    background-color: #219ebc;
-    border-radius: 10px;
+.Navbar {   
+    background-color: rgba(0, 0, 0, 0.1);
     justify-content: center;
     display: grid;
     width: 100%;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 4rem 3fr repeat(3 , 1fr);
+    grid-template-rows: minmax(3rem , 3rem);
+    justify-items: center;
+    align-items: center;
 }
 
-.Navbar>a {
-    margin-right: 40px;
-    color: aliceblue;
+.logoImage{
+    max-width: 3rem;
+    padding-left: 1.5rem;
+    justify-self: left;
+}
+
+.logoImage>img{
+    max-width: 2rem;
+}
+
+.logoText{
+    justify-self: left;
+    font-style: italic;
+    font-size: larger;
+    font-family: serif;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.916);
+}
+
+.link {
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    font-size: larger;
     text-decoration: none;
 }
 

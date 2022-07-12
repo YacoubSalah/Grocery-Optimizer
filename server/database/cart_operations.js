@@ -3,8 +3,10 @@ const cartFunctions = require("./cart_operations_fn")
 
 async function getStoresPrices(cart) {
     let stores = await cartFunctions.getStoresByCart(cart)
-    let products = await cartFunctions.getProductsByCart(cart)
-    let allStores = await cartFunctions.getStores(stores, products)
+    let productsQuentity = await cartFunctions.getProductsByCart(cart)
+    let quentity = productsQuentity.quentity
+    products = productsQuentity.products
+    let allStores = await cartFunctions.getStores(stores, products,quentity)
     return allStores
 }
 

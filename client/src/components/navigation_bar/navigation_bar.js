@@ -2,13 +2,19 @@ import React from "react";
 import { Link } from 'react-router-dom'
 import './navgiation_bar.css'
 
-function navigationBar(){
-    return(
+function navigationBar() {
+    return (
         <div className="Navbar">
-            <Link  to="/"><h3>Home</h3></Link>
-            <Link  to="/products"><h3>Products</h3></Link>
-            <Link  to="/stores"><h3>Stores</h3></Link>
-        </div>
+            <Link className='logoImage' to="/">
+                <img src="https://i.ibb.co/JkxRMhr/GO-Logo.png"></img>
+            </Link>
+            <Link className="logoText" to="/">
+                <div>GroceryOptimizer</div>
+            </Link>
+            <Link className='link' to="/">Home</Link>
+            <Link className='link' to="/products">Products</Link>
+            <Link className='link' to="/stores">Stores</Link>
+        </div >
     );
 }
 
