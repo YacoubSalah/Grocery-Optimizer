@@ -23,8 +23,6 @@ export class Carts {
 
     getStoresByProducts = (cart) => {
 
-        console.log(cart)
-
         axios.post(`http://localhost:3020/cartPrices`, { cart })
             .then((response) => this.updateStoresCartList(response.data))
             .catch((error) => alert(error))
