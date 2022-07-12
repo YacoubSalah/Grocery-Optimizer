@@ -4,17 +4,17 @@ import axios from 'axios'
 export class Carts {
     constructor() {
 
-        this.storesCartsList = []
+        this.storesCartsList = [] ;
 
         makeObservable(this, {
-            storesCartsList: observable,
-            updateStoresCartList: action
+            storesCartsList : observable ,
+            updateStoresCartList : action ,
         })
     }
 
     getStoresByProducts = (cart) => {
 
-        axios.post(`http://localhost:3020/cartPrices`, {cart})
+        axios.post(`http://localhost:3020/cartPrices`, { cart })
             .then((response) => this.updateStoresCartList(response.data))
             .catch((error) => alert(error))
 
