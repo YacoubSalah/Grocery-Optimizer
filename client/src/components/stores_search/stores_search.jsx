@@ -10,7 +10,7 @@ const StoresSearch = inject("carts" , "products")(observer((props) => {
   useEffect(() => {
 
     props.carts.getStoresByProducts(props.products.cart)
-    
+
   });
 
   return (
