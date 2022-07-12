@@ -12,13 +12,14 @@ function store(props) {
     <div className='storeCard'>
       <div className='imagAndScoreDiv'>
         <img className='storeImage' src='https://bombyxplm.com/wp-content/uploads/2021/01/421-4213053_default-avatar-icon-hd-png-download.png' alt="defult" />
-        <div><Rating className='ratingSpan' ratingValue={20} /></div>
+        <div><Rating className='ratingSpan' ratingValue={20} readonly={true} /></div>
       </div>
       <div className='DetailsDiv'>
          <h3>{props.store.name}</h3>
          <h3>{props.store.location}</h3>
          <h3>Total Price : {props.store.totalPrice}$</h3>
       </div>
+      <label className='incompletelabel'>{ props.store.isComplete ? null : "InComplete" }</label>
       <Link  to="/details" state={id}><button className="btn">Details</button></Link>
     </div>
   )

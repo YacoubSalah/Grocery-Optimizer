@@ -15,9 +15,7 @@ const details_component = inject("carts")(observer((props) => {
 
     props.carts.addItemToShow(params.state)
 
-    props.carts.gettotalPrice()
-
-  })
+  },[params.state, props.carts, props.storesCartsList])
 
   return (
     <div className='DetailsContainer'>
@@ -27,10 +25,11 @@ const details_component = inject("carts")(observer((props) => {
           <h3>{props.carts.itemToShow ? props.carts.itemToShow.location : null}</h3>
         </div>
         <div className='gridcontent'>
+          
              <GridHeader />
              {props.carts.itemToShow ? 
                 Object.keys(props.carts.itemToShow.productCart).map(key => {
-                   return ( <Item key={key} item={props.carts.itemToShow.productCart[key]} itemName={key} /> )
+                   return ( <Item key={key}  id={props.carts.itemToShow.id !== null ? props.carts.itemToShow.id : null }  item={props.carts.itemToShow.productCart[key]} itemName={key} /> )
                 })
                  :
                  null

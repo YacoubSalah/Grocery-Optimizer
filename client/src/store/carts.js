@@ -17,7 +17,7 @@ export class Carts {
             updateStoresCartList: action,
             addItemToShow: action ,
             updateFeedBack: action ,
-            gettotalPrice : action
+            sumTotalPrice : action
         })
     }
 
@@ -39,24 +39,20 @@ export class Carts {
 
     getFeedBack = (itemName, id) => {
 
-        axios.get(`http://localhost:3020/postsProduct/?productName=Baby Cucumber&&storeId=62c7df3cce122ba23a5c46f2`)
+        console.log(itemName , id)
+
+        axios.get(`http://localhost:3020/postsProduct/?productName=${itemName}&&storeId=${id}`)
             .then((response) =>  this.updateFeedBack(response.data.length) )
             .catch((error) => alert(error))
 
     }
 
     updateFeedBack = (value) => {
+        console.log(value)
           this.feedBack = value
     }
 
-    gettotalPrice = () => {
-
-        let sumTotal = 0
-
-        for(let key in this.itemToShow.productCart){
-            sumTotal += this.itemToShow.productCart[key].initialPrice * this.itemToShow.productCart[key].quentity
-        }
-
-        this.totalPrice = Math.round(sumTotal * 100 ) / 100 
+    sumTotalPrice = ( count , price ) => {
+        this.totalPrice += Math.round((price * count) * 100 ) / 100 
     }
 }

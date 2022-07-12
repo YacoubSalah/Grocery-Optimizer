@@ -15,10 +15,10 @@ function Home() {
             </div>
             <div className='buttons'>
                 <Link to="/products">
-                    <button class="homeButton">View products</button>
+                    <button className="homeButton">View products</button>
                 </Link>
                 <Link to="/stores">
-                    <button class="homeButton">Add feedback</button>
+                    <button className="homeButton">Add feedback</button>
                 </Link>
             </div>
         </div >
