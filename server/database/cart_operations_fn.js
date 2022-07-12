@@ -1,23 +1,23 @@
 const productModel = require("../models/product")
 const storeModel = require("../models/store")
 
-async function getStores(stores, products,quentity) {
+async function getStores(stores, products) {
     let allStoresFinal = []
     productCart = {}
     dommyStore = {}
     productshelp = []
-    index = 0
     for (let store in stores) {
         productCart = {}
         dommyStore = {}
         productshelp = []
+
         let s = await storeModel.findById(store).exec()
-       
         dommyStore.name = s.name
         dommyStore.location = s.location
         dommyStore.id = s.id
-        totalPrice = 0
+        dommyStore.score = s.score
         dommyStore.isComplete = true
+        
         for (let product of stores[store]) {
             let p = await productModel.findOne({'name':Object.keys(product)[0]})
             .populate("stores.store")
@@ -25,27 +25,25 @@ async function getStores(stores, products,quentity) {
             
             productCart[Object.keys(product)[0]] = {
                 "initialPrice": Object.values(product)[0],
-                "score":await getScoreProduct(Object.keys(product)[0], s.id),
-                "quentity": quentity[index]
+                "score":await getScoreProduct(Object.keys(product)[0], s.id)
             }
-            totalPrice += Object.values(product)[0]
             productshelp.push(Object.keys(product)[0])
-            index += 1
+            
         }
-        dommyStore.totalPrice = totalPrice
         products.map(p => {
+            
             if (!productshelp.includes(p)) {
                 productCart[p] = {
                     "initialPrice": null,
-                    "score": 0,
-                    "quentity": quentity[index]
+                    "score": 0
                 }
-                index += 1
+                
                 dommyStore.isComplete = false
             }
         })
         dommyStore.productCart = productCart
         allStoresFinal.push(dommyStore)
+        
     }
     return allStoresFinal
 }
@@ -65,13 +63,11 @@ async function getScoreProduct(productName, storeId) {
 }
 async function getProductsByCart(cart) {
     let products = []
-    quentity = []
     for (let item in cart) {
         products.push(item)
-        quentity.push(cart[item])
 
     }
-    return {products,quentity}
+    return products
 }
 async function getStoresByCart(cart) {
     let allStores = {}
