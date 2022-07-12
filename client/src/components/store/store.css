@@ -7,6 +7,10 @@
    height: 100px;
 }
 
+.incompletelabel{
+   color: red;
+}
+
 .btn
 {
   display: block;
