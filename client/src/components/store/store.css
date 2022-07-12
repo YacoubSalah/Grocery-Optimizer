@@ -1,23 +1,29 @@
-.storeCard > div{ 
-   padding: 2rem;
-   vertical-align: middle;
-}
-
 .storeCard{
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: 1fr 1fr;
-    justify-content: center;
-  align-content: center;
+   display: grid;
+   justify-content: center;
+}
+.storeImage{
+   width: 100px;
+   height: 100px;
 }
 
-.starsDiv{
-   padding: 20px;
+.btn
+{
+  display: block;
+  margin: 40px 0;
+  width: 240px;
+  height: 80px;
+  border: none;
+  background-color: #00a8ff;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  transition: .3s linear;
 }
 
-.detalisButton{
-    width: 100%;
-    background-color: blue;
-    border-radius: 20px;
-    height: 40px;
-}
+.btn:hover {
+   transform: rotateY(-15deg);
+   box-shadow: 15px 0 15px #00a8ff;
+ }
