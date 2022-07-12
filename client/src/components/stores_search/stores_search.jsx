@@ -4,6 +4,7 @@ import Stores from '../stores/stores'
 import './stores_search.css'
 import { useEffect } from 'react'
 import { observer, inject } from 'mobx-react'
+import Details from '../details_component/details_component'
 
 const StoresSearch = inject("carts" , "products")(observer((props) => {
 
@@ -16,7 +17,7 @@ const StoresSearch = inject("carts" , "products")(observer((props) => {
   return (
     <div className='containerStores'>
         <SearchBar/>
-        <Stores />
+        {props.carts.flagShowDestails ? <Details /> : <Stores />}
     </div>
   )
 }))

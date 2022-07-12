@@ -26,6 +26,16 @@
     grid-template-rows: minmax(3rem , 3rem) ;
 }
 
+/* @media only screen and (max-width: 600px) {
+    .searchMenu {
+        display: grid;
+        padding: .5rem;
+        grid-gap: .5rem;
+        grid-template-columns: repeat(1 , 1fr);`
+        grid-template-rows: minmax(3rem , 3rem) ;
+    }
+  } */
+
 .searchInput {
     grid-column: 1 / span 3;
     background-color: lightgray;

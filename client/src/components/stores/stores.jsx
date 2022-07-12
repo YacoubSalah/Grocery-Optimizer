@@ -11,7 +11,7 @@ const stores = inject("carts")(observer((props) => {
     <div className='stores'>
       {storesList.map(store => {
         return(
-           <Store key={store.id} store={store} />
+           <Store  key={store.id} showDetailsCompnonet={props.carts.showDetailsCompnonet} store={store} />
         )
       })}
     </div>

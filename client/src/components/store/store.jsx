@@ -1,10 +1,10 @@
 import React from 'react'
 import './store.css'
 import { Rating } from 'react-simple-star-rating'
+import { Link } from 'react-router-dom'
+import './store.css'
 
 function store(props) {
-
-  console.log(props.store)
   return (
     <div className='storeCard'>
       <div className='imagAndScoreDiv'>
@@ -16,7 +16,7 @@ function store(props) {
          <h3>{props.store.location}</h3>
          <h3>Total Price : {props.store.totalPrice}$</h3>
       </div>
-      <button class="btn">Details</button>
+      <Link  to="/details"><button class="btn">Details</button></Link>
     </div>
   )
 }
