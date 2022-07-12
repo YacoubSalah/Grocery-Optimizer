@@ -3,34 +3,34 @@
     justify-content: center;
     display: grid;
     width: 100%;
-    grid-template-columns: 5.5rem 3fr repeat(3 , 1fr);
+    grid-template-columns: 4rem 3fr repeat(3 , 1fr);
+    grid-template-rows: minmax(3rem , 3rem);
     justify-items: center;
     align-items: center;
 }
 
-.navBarLogo{
+.logoImage{
     max-width: 3rem;
     padding-left: 1.5rem;
     justify-self: left;
 }
 
-.navBarLogo>img{
-    max-width: 3rem;
+.logoImage>img{
+    max-width: 2rem;
 }
 
-.name{
+.logoText{
     justify-self: left;
     font-style: italic;
     font-size: larger;
-    font-weight:450 ;
     font-family: serif;
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.562);
+    color: rgba(255, 255, 255, 0.916);
 }
 
 .link {
     color: rgb(255, 255, 255);
-    font-weight: 450;
+    font-weight: 500;
     font-size: larger;
     text-decoration: none;
 }
