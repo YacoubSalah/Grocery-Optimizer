@@ -1,15 +1,10 @@
 import React, { Fragment } from 'react'
 import { Rating } from 'react-simple-star-rating'
 import { observer, inject } from 'mobx-react'
-import { useEffect } from 'react'
+import {Button } from '@mui/material';
+
 
 const item = inject("carts" , "products")(observer((props) => {
-
-  useEffect(()=>{
-
-      props.carts.getFeedBack(props.itemName , props.id)
-
-   },[props])
     
   return (
     <Fragment>
@@ -19,7 +14,7 @@ const item = inject("carts" , "products")(observer((props) => {
         <span>{props.products.cart[props.itemName]}</span> 
         <span>{props.item.initialPrice === null ?  "Not in store" :  
         Math.round(props.item.totalPrice * 100 ) / 100}</span>
-        <span><button >{props.carts.feedBack}</button></span>
+        <span><Button onClick={() => props.handelClickOpenSnackbar(props.itemName , props.id)} >0</Button></span>
     </Fragment>
   )
 

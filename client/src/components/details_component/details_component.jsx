@@ -1,15 +1,32 @@
-import React from 'react'
+import React , { useEffect, useState } from 'react'
 import './details_component.css'
 import { observer, inject } from 'mobx-react'
 import GridHeader from './GridHeader' 
 import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 import Item from './item'
 import { Link } from 'react-router-dom'
+import Snackbarcomponent from '../snackbar_component/snackbar_component'
 
 const details_component = inject("carts")(observer((props) => {
 
   const params = useLocation()
+
+  const [open, setOpen] = useState(false);
+
+  const [item, setItem] = useState('');
+
+  const handleClickEvent = async (itemName , id) =>  {
+
+    await props.carts.getFeedBack(itemName , id)
+
+    setOpen(true)
+    setItem(itemName)
+
+  };
+
+  const handleToClose = () =>  {
+    setOpen(false);
+  }
 
   useEffect(()=> {
 
@@ -29,7 +46,13 @@ const details_component = inject("carts")(observer((props) => {
              <GridHeader />
              {props.carts.itemToShow ? 
                 Object.keys(props.carts.itemToShow.productCart).map(key => {
-                   return ( <Item key={key}  id={props.carts.itemToShow.id !== null ? props.carts.itemToShow.id : null }  item={props.carts.itemToShow.productCart[key]} itemName={key} /> )
+                   return ( 
+                        <Item key={key}
+                            handelClickOpenSnackbar={handleClickEvent}
+                            id={props.carts.itemToShow.id !== null ? props.carts.itemToShow.id : null }
+                            item={props.carts.itemToShow.productCart[key]} itemName={key} 
+                         />
+                         )
                 })
                  :
                  null
@@ -41,6 +64,14 @@ const details_component = inject("carts")(observer((props) => {
            null
          }
         <Link  to="/stores" ><button className='hideDetailsButton'>hide Details</button></Link>
+
+        <Snackbarcomponent 
+          open={open} 
+          posts={props.carts.feedBack} 
+          storeName = { props.carts.itemToShow.name }
+          storeLocation = { props.carts.itemToShow.location}
+          itemName = {item}
+          handleToClose = {handleToClose} />
       </div>
     </div>
   )

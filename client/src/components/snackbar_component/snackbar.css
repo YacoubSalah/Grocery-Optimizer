@@ -1,0 +1,26 @@
+.snackbar{
+    position: fixed;
+    overflow: scroll;
+    resize:vertical;
+    max-width: 60vw;
+    max-height: 60vh;
+    left: 50%;
+    top: 50%;
+    transform: translate( -50% , -50%);
+    width: 60vw;
+    height: 60vh;
+    border-radius: 5px;
+    background-color: #9A8584;
+}
+
+#show{
+    visibility: visible;
+}
+
+#hide{
+    visibility: hidden;
+}
+.posts{
+    display: grid;
+    justify-content: center;
+}
