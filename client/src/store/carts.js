@@ -58,6 +58,7 @@ export class Carts {
 
         axios.get(`http://localhost:3020/postsProduct/?productName=${itemName}&&storeId=${id}`)
             .then((response) =>  {
+                console.log(response.data)
                 this.updateFeedBack(response.data) 
             })
             .catch((error) => alert(error))

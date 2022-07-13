@@ -11,7 +11,9 @@ export class Store {
     this.note = '';
     this.storesNameList = [];
     this.storesLocationList = [];
-    this.productsNameList = []
+    this.productsNameList = [] ;
+    this.addPostStatus = false ;
+    this.clickOnAddPost = false ;
 
     makeObservable(this, {
       productName: observable,
@@ -20,6 +22,7 @@ export class Store {
       price: observable,
       score: observable,
       note: observable,
+      addPostStatus : observable ,
       storesLocationList: observable,
       storesNameList: observable,
       productsNameList: observable,
@@ -28,7 +31,8 @@ export class Store {
       handelAddClick: action,
       updateProductsNameList: action,
       updateStoresLocationList: action,
-      updateStoresNameList: action
+      updateStoresNameList: action ,
+      updateAddPostStatus : action
 
     })
   }
@@ -76,13 +80,13 @@ export class Store {
       "price": parseInt(this.price),
       "note": this.note
     })
-      //image
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
+      .then((response) =>  this.updateAddPostStatus(true))
+      .catch((error) => this.updateAddPostStatus(false))
+  }
+
+  updateAddPostStatus (value){
+       this.addPostStatus = value
+       this.clickOnAddPost = true
   }
 
   getProductsNameList = () => {

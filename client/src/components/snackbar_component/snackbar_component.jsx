@@ -1,6 +1,7 @@
 import React from 'react'
 import './snackbar.css'
 import Post from '../post/post'
+import {Button } from '@mui/material';
 
 function snackbar(props) {
 
@@ -22,7 +23,7 @@ function snackbar(props) {
             })}
         </div>
         <div className='fotter' >
-            <button onClick={handelClickClose} >close</button>
+            <Button onClick={handelClickClose} >close</Button>
         </div>
     </div>
   )
