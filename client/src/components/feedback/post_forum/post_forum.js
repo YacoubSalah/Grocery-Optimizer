@@ -1,48 +1,21 @@
 import './post_form.css';
 import { Rating } from 'react-simple-star-rating'
 import { observer, inject } from 'mobx-react'
-import React , { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Button, Snackbar } from '@mui/material';
 
 //firebase
 import { useState } from "react";
-import { storage } from "./firebase";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { async } from '@firebase/util';
+
 //
 
 const PostForum = inject("store")(observer((props) => {
-{/* //firebas */}
-    /* const [image, setImage] = useState(null);
-    const [url, setUrl] = useState(null);
 
-    const handleImageChange = (e) => {
-        if (e.target.files[0]) {
-            setImage(e.target.files[0]);
-        }
-    };
 
-    const handleSubmit = async () => {
-        const imageRef = ref(storage, "image");
-        await uploadBytes(imageRef, image)
-            .then(() => {
-                getDownloadURL(imageRef)
-                    .then((newURL) => {
-                        console.log(newURL)
-                        setUrl(url)
 
-                    })
-                    .catch((error) => {
-                        console.log(error.message, "error getting the image url");
-                    });
-                setImage(null);
-            })
-            .catch((error) => {
-                console.log(error.message);
-            });
-    }; */
-    {/* //firebas */}
+  
 
+ 
     useEffect(() => {
 
         props.store.getProductsNameList()
@@ -116,22 +89,18 @@ const PostForum = inject("store")(observer((props) => {
                 </div>
 
                 <div className="AddIMage">
-                    {/* <label>Upload Image</label>
-                        <input type="file" id="img" name="img" accept="image/*" /> */}
-                        {/* //firebas */}
-                    {/* <label>Upload Image</label>
-                    <img src={url} sx={{ width: 150, height: 150 }} />
-                    <input type="file" onChange={handleImageChange} />
-                    <button onClick={handleSubmit}>Submit</button> */}
-                    {/* //firebas */}
                     <label>Upload Image</label>
-                    <input type="file" id="img" name="img" accept="image/*" />
+                    
+                    <img src={props.store.imageUrl} sx={{ width: 150, height: 150 }} alt='no pics' />
+                    <input type="file" onChange={props.store.handleImageChange} />
+                    
+                    
                 </div>
 
             </div>
 
             <Button onClick={props.store.handelAddClick} className="addPostButton">Add Post</Button>
-
+            
         </div>
     )
 

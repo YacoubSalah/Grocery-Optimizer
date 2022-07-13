@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const configuration = require('../configuration')
 
 let postSchema = new mongoose.Schema({
-    imageURL: { type: String, default: configuration.productNoImageUrl },
+    imageUrl: { type: String, default: configuration.productNoImageUrl },
     price: { type: Number, default: null },
     score: { type: Number, default: null },
     note: { type: String, default: "" }
