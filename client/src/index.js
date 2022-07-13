@@ -6,11 +6,9 @@ import { Provider } from 'mobx-react'
 import reportWebVitals from './reportWebVitals';
 import '@fortawesome/free-regular-svg-icons';
 import '@fortawesome/free-solid-svg-icons';
-
 import { Products } from './store/products';
 import {Store} from './store/store'
 import { Carts } from './store/carts';
-
 const store = new Store()
 const products = new Products()
 const carts = new Carts()

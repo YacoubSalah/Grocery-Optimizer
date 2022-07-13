@@ -90,7 +90,26 @@ export class Store {
       .then((response) => this.updateProductsNameList(response.data))
       .catch((error) => alert(error))
   }
+  handleImageChange = (e) => {
+    var settings = {
+      "url": "https://api.imgbb.com/1/upload?key=8d5867a9512390fb5e5dc97839aa36f6",
+      "method": "POST",
+      "timeout": 0,
+      "processData": false,
+      "mimeType": "multipart/form-data",
+      "contentType": false,
+      "data": form
+    };
 
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+      var jx = JSON.parse(response);
+      console.log(jx.data.url);
+    })
+    axios.post(`https://api.imgbb.com/1/upload?key=7257e4d65326de019d7f13b2ca0550fd&name=+${e.target.value}`)
+      .then((response) => console.log(response.data))
+      .catch((error) => console.log(error))
+  }
   updateProductsNameList(newProductsNameList) {
     this.productsNameList = newProductsNameList
   }
