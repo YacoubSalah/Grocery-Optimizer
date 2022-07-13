@@ -3,7 +3,7 @@ import { observer, inject } from 'mobx-react'
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import GridHeader from './GridHeader' 
-import Snackbarcomponent from '../snackbar_component/snackbar_component'
+import Snackbarcomponent from './snackbar_component/snackbar_component'
 
 import Item from './item'
 

@@ -3,7 +3,6 @@ import axios from 'axios'
 
 import { storage } from "./firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { async } from '@firebase/util';
 
 export class Store {
   constructor() {

@@ -1,15 +1,11 @@
-import './post_form.css';
-import { Rating } from 'react-simple-star-rating'
-import { observer, inject } from 'mobx-react'
 import React, { useEffect } from 'react'
+import { observer, inject } from 'mobx-react'
 import { Button, Snackbar } from '@mui/material';
+import { Rating } from 'react-simple-star-rating'
+
+import './post_form.css';
 
 const PostForum = inject("store")(observer((props) => {
-
-
-
-  
-
  
     useEffect(() => {
 

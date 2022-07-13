@@ -8,7 +8,7 @@ import './feedback.css'
 function Home() {
   return (
     <>
-    <img className='background' src={background}></img>
+    <img className='background' src={background} alt='background'></img>
     <div className='feedbackContainer'>
     <Fragment>
          <PostForum />

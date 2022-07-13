@@ -9,7 +9,7 @@ function Home() {
 
     return (
         <>
-            <img className='background' src={background}></img>
+            <img className='background' src={background} alt='background'></img>
             <div className='homeContainer'>
                 <div className='title'>Grocery Optimizer</div>
                 <div className='description'>Grocery Optimizer is your best assitance when it comes to chosing grocery stores.
