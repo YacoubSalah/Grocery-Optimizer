@@ -20,15 +20,9 @@ function App() {
           <div className="appBody">
             <Routes >
               <Route path='/' element={<Home />} />
-<<<<<<< HEAD
-              {/* <Route path='/' element={<Home />} /> */}
-              <Route path='/products' element={<ProductsSearch />} />
-              <Route path='/stores' element={<StoreSearch />} />
-=======
               <Route path='/products' element={<Products />} />
               <Route path='/stores' element={<Stores />} />
               <Route path='/feedback' element={<Feedback />} />
->>>>>>> 691c929fc56bff1344cb968038c5e9d718a13801
               <Route path='/details' element={<Details />} />
             </Routes>
           </div>
