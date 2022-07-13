@@ -2,15 +2,8 @@ import React, { Fragment } from 'react'
 import { Rating } from 'react-simple-star-rating'
 import { observer, inject } from 'mobx-react'
 import { useEffect } from 'react'
-/* import { useSnackbar } from 'react-simple-snackbar' */
 
 const item = inject("carts" , "products")(observer((props) => {
-
-  /* const [openSnackbar, closeSnackbar] = useSnackbar()
-
-  const snackbar = () => {
-    openSnackbar('This is the content of the Snackbar.')
-  } */
 
   useEffect(()=>{
 
