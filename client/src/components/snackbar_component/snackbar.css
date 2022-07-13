@@ -1,7 +1,9 @@
 .snackbar{
     position: fixed;
-    overflow: scroll;
-    resize:vertical;
+    resize: both;
+    overflow: auto;
+    box-shadow: 0 15px 30px 1px grey;
+	background: rgba(255, 255, 255, 0.90);
     max-width: 60vw;
     max-height: 60vh;
     left: 50%;
@@ -10,7 +12,8 @@
     width: 60vw;
     height: 60vh;
     border-radius: 5px;
-    background-color: #9A8584;
+    background-color: #F2A6B3;
+    display: grid;
 }
 
 #show{
@@ -19,8 +22,4 @@
 
 #hide{
     visibility: hidden;
-}
-.posts{
-    display: grid;
-    justify-content: center;
 }

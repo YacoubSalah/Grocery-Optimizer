@@ -1,7 +1,8 @@
 import './post_form.css';
 import { Rating } from 'react-simple-star-rating'
 import { observer, inject } from 'mobx-react'
-import { useEffect } from 'react';
+import React , { useEffect } from 'react'
+import { Button, Snackbar } from '@mui/material';
 
 //firebase
 import { useState } from "react";
@@ -54,6 +55,12 @@ const PostForum = inject("store")(observer((props) => {
 
     return (
         <div className="Form">
+
+            <Snackbar
+                open={props.store.clickOnAddPost}
+                autoHideDuration={5000}
+                message={props.store.addPostStatus ? "Store was added successfully" : "Adding store failed"}
+            />
 
             <label>Select Store</label>
             <select name="storeName" onChange={props.store.handelInputs} defaultValue={'default'}>
@@ -112,16 +119,18 @@ const PostForum = inject("store")(observer((props) => {
                     {/* <label>Upload Image</label>
                         <input type="file" id="img" name="img" accept="image/*" /> */}
                         {/* //firebas */}
-                    <label>Upload Image</label>
+                    {/* <label>Upload Image</label>
                     <img src={url} sx={{ width: 150, height: 150 }} />
                     <input type="file" onChange={handleImageChange} />
-                    <button onClick={handleSubmit}>Submit</button>
+                    <button onClick={handleSubmit}>Submit</button> */}
                     {/* //firebas */}
+                    <label>Upload Image</label>
+                    <input type="file" id="img" name="img" accept="image/*" />
                 </div>
 
             </div>
 
-            <button onClick={props.store.handelAddClick} className="addPostButton">Add Post</button>
+            <Button onClick={props.store.handelAddClick} className="addPostButton">Add Post</Button>
 
         </div>
     )

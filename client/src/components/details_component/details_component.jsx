@@ -63,13 +63,13 @@ const details_component = inject("carts")(observer((props) => {
            <h1>Total Price : {props.carts.sumTotalPriceForStore(props.carts.itemToShow.productCart)}</h1> :
            null
          }
-        <Link  to="/stores" ><button className='hideDetailsButton'>hide Details</button></Link>
+        <Link  to="/stores" ><button className='hideDetailsButton'>Back to stores</button></Link>
 
         <Snackbarcomponent 
           open={open} 
           posts={props.carts.feedBack} 
-          storeName = { props.carts.itemToShow.name }
-          storeLocation = { props.carts.itemToShow.location}
+          storeName = {props.carts.itemToShow ? props.carts.itemToShow.name : null}
+          storeLocation = {props.carts.itemToShow ? props.carts.itemToShow.location : null}
           itemName = {item}
           handleToClose = {handleToClose} />
       </div>

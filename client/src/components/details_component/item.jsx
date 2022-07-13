@@ -5,6 +5,8 @@ import {Button } from '@mui/material';
 
 
 const item = inject("carts" , "products")(observer((props) => {
+
+  console.log(props)
     
   return (
     <Fragment>
@@ -14,7 +16,7 @@ const item = inject("carts" , "products")(observer((props) => {
         <span>{props.products.cart[props.itemName]}</span> 
         <span>{props.item.initialPrice === null ?  "Not in store" :  
         Math.round(props.item.totalPrice * 100 ) / 100}</span>
-        <span><Button onClick={() => props.handelClickOpenSnackbar(props.itemName , props.id)} >0</Button></span>
+        <span><Button onClick={() => props.handelClickOpenSnackbar(props.itemName , props.id)} >{props.item.postQuantity}</Button></span>
     </Fragment>
   )
 
