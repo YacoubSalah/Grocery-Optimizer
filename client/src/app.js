@@ -1,35 +1,39 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import Navbar from './components/navigation_bar/navigation_bar'
+import NavigationBar from './components/navigation_bar/navigation_bar'
 import Home from './components/home/home';
-import ProductsSearch from './components/products_search/products_search'
-import StoreSearch from './components/stores_search/stores_search'
-import Details from './components/details_component/details_component'
-import NewHome from './components/new-home/new-home'
-import SnackbarProvider from 'react-simple-snackbar'
+import Products from './components/products/products/products'
+import Stores from './components/stores/stores/stores'
+import Feedback from './components/feedback/feedback/feedback'
+import Details from './components/details/details'
 
 import './app.css'
 
 function App() {
+
   return (
-    <SnackbarProvider>
       <div className='app'>
         <Router >
           <div className="appHeader">
-            <Navbar />
+            <NavigationBar />
           </div>
           <div className="appBody">
             <Routes >
               <Route path='/' element={<Home />} />
+<<<<<<< HEAD
               {/* <Route path='/' element={<Home />} /> */}
               <Route path='/products' element={<ProductsSearch />} />
               <Route path='/stores' element={<StoreSearch />} />
+=======
+              <Route path='/products' element={<Products />} />
+              <Route path='/stores' element={<Stores />} />
+              <Route path='/feedback' element={<Feedback />} />
+>>>>>>> 691c929fc56bff1344cb968038c5e9d718a13801
               <Route path='/details' element={<Details />} />
             </Routes>
           </div>
         </Router>
       </div>
-    </SnackbarProvider>
   )
 }
 

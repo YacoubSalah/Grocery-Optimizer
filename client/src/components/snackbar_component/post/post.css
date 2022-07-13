@@ -1,0 +1,12 @@
+.feedbackpost{
+    display: grid;
+    width: 100%;
+    height: max-content;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom: 1px solid;
+    margin-top: 10px;
+}
+.postIMage > img {
+    width: 100px;
+    height: 100px;
+}

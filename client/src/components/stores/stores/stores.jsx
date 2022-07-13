@@ -1,9 +1,11 @@
 import React from 'react'
-import SearchBar from '../store_search_bar/stores_search_bar'
-import Stores from '../stores/stores'
-import './stores_search.css'
 import { useEffect } from 'react'
+import SearchBar from '../store_search_bar/stores_search_bar'
 import { observer, inject } from 'mobx-react'
+
+import StoresElem from '../stores_elem/stores-elem'
+
+import './stores.css'
 
 const StoresSearch = inject("carts" , "products")(observer((props) => {
 
@@ -12,6 +14,8 @@ const StoresSearch = inject("carts" , "products")(observer((props) => {
     props.carts.getStoresByProducts(props.products.cart)
 
   },[props.carts, props.products.cart]);
+
+  
 
   useEffect(() => {
 
@@ -22,7 +26,7 @@ const StoresSearch = inject("carts" , "products")(observer((props) => {
   return (
     <div className='containerStores'>
         <SearchBar/>
-        <Stores />
+        <StoresElem />
     </div>
   )
 }))

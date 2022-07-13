@@ -11,9 +11,9 @@ function navigationBar() {
             <Link className="logoText" to="/">
                 <div>GroceryOptimizer</div>
             </Link>
-            <Link className='link' to="/">Home</Link>
             <Link className='link' to="/products">Products</Link>
             <Link className='link' to="/stores">Stores</Link>
+            <Link className='link' to="/feedback">Feedback</Link>
         </div >
     );
 }

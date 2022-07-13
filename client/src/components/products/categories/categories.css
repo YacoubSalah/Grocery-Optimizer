@@ -5,21 +5,21 @@
 }
 
 .allCategories {
-    color: #414341;
+    color: #1c1e1c;
     font-size: 1.25rem;
     font-weight: 600;
     padding: .5rem 0 .5rem 0;
 }
 
 .mainCategory {
-    color: #414341;
+    color: #2b2c2b;
     font-size: 1.1rem;
     font-weight: 400;
     padding: .6rem 0 .3rem 5%;
 }
 
 .subCategory {
-    color: #6d716d;
+    color: #4a4d4a;
     font-size: 1rem;
     font-weight: 200;
     padding: .3rem 0 .3rem 10%;

@@ -1,0 +1,25 @@
+.snackbar{
+    position: fixed;
+    resize: both;
+    overflow: auto;
+    box-shadow: 0 15px 30px 1px grey;
+	background: rgba(255, 255, 255, 0.90);
+    max-width: 60vw;
+    max-height: 60vh;
+    left: 50%;
+    top: 50%;
+    transform: translate( -50% , -50%);
+    width: 60vw;
+    height: 60vh;
+    border-radius: 5px;
+    background-color: #F2A6B3;
+    display: grid;
+}
+
+#show{
+    visibility: visible;
+}
+
+#hide{
+    visibility: hidden;
+}

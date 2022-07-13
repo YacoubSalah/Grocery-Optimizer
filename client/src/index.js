@@ -13,11 +13,14 @@ const store = new Store()
 const products = new Products()
 const carts = new Carts()
 
+
 const stores = {
     store,
     products,
     carts
 }
+
+window.React1 = require('react');
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
