@@ -8,7 +8,7 @@ const Cart = inject("products")(observer((props) => {
 
   let productName = props.cartItem
   let productQuantity = props.products.cart[productName]
-  let productUnitPrice = props.products.products[productName] ? props.products.products[productName].averagePrice : null
+  let productUnitPrice = props.products.prices[productName] ? props.products.prices[productName] : null
 
   return (
     <div className='cartItem'>
