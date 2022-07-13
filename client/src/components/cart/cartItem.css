@@ -1,11 +1,33 @@
+.cartItem {
+    display: grid;
+    grid-template-columns: 2fr repeat(2, 1fr);
+    background-color: rgb(211, 211, 211, .7);
+    padding: .5rem;
+    border-radius: 1rem;
+    justify-items: center;
+    align-items: center;
+}
+
+.cartProductName {
+    grid-column: 1/2;
+    justify-self: left;
+}
+
 .cartProductQuantity {
-    display: inline-block;
+    grid-column: 2/3;
     width: 50%;
+    padding: .5rem;
+    border-style: none;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255, .5);
+}
+
+.cartProductQuantity:focus{
+    outline: none;
 }
 
 .cartProductTotalPrice {
-    display: inline-block;
-    padding-left: 5%;
+    grid-column: 3/4;
 }
 
 .cartProductName:hover {

@@ -13,8 +13,8 @@ const Cart = inject("products")(observer((props) => {
   return (
     <div className='cartItem'>
       <div className='cartProductName' onClick={props.products.deleteCartItem}>{productName}</div>
-      <input className='cartProductQuantity' name={productName} value={productQuantity} onChange={props.products.bindCartItemQuantity} type="number" />
-      <div className='cartProductTotalPrice'>{Math.round(productUnitPrice * productQuantity * 10) / 10}</div>
+      <input className='cartProductQuantity' name={productName} value={productQuantity} onChange={props.products.bindCartItemQuantity} type="number" min="0" />
+      <div className='cartProductTotalPrice'>{Math.round(productUnitPrice * productQuantity * 10) / 10} ₪</div>
     </div>
   )
 }))

@@ -1,4 +1,5 @@
 .allCategories{
+    color: #414341;
     width: 10vw;
     text-align: left;
 }
@@ -9,6 +10,7 @@
 }
 
 .subCategory{
+    color: #6d716d;
     text-align: left;
     padding-left: 10%;
 }

@@ -1,20 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
+
 .productSearchContainer {
+    padding: .5rem;
     display: grid;
-    grid-template-columns: .8fr 5fr 1.2fr;
+    grid-template-columns: 14% 5fr 20%;
     grid-gap: .5rem;
-    background-color: azure;
+    font-family: 'Noto Serif', serif;
 }
 
 .categoryMenu {
+    background-color: rgba(165, 165, 165, 0.2);
+    border-radius: 10px;
     padding: .5rem;
-    border-style: none solid none none;
-    border-color: rgba(64, 221, 245, 0.132);
-    background-color: aliceblue;
 }
 
 .productsAndSearchBar {
-    display: grid;
-    grid-gap: .5rem;
+    background-color: rgba(165, 165, 165, 0.2);
+    border-radius: 10px;
     padding: .5rem;
 }
 
@@ -22,47 +24,105 @@
     display: grid;
     padding: .5rem;
     grid-gap: .5rem;
-    grid-template-columns: repeat(4 , 1fr);
-    grid-template-rows: minmax(3rem , 3rem) ;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: minmax(3rem, 3rem);
 }
 
 .searchInput {
     grid-column: 1 / span 3;
-    background-color: lightgray;
+    background-color: rgb(211, 211, 211, .5);
     color: darkgray;
     font-size: large;
     padding-left: 14px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
+    border: none;
 }
 
-.searchInput:hover{
-    background-color: rgba(211, 211, 211, 0.841);
+.searchInput:focus-visible {
+    outline: none;
+    background-color: rgb(211, 211, 211, .8);
+    color: white;
+    border-style: solid;
+    border-color: darkgray;
+    border-width: .01rem;
 }
 
 .searchButton {
     grid-column: 4;
-    background-color: #4caf4fea;
+    background-color: hsla(122, 39%, 49%, 0.8);
     font-size: large;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
+    box-shadow: .2px .2px 3px 1px rgb(169, 169, 169, .8);
 }
 
-.searchButton:hover{
+.searchButton:hover {
     background-color: #4caf4fc8;
+    box-shadow: none;
 }
 
 .products {
+    padding: 1rem;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: .5rem; 
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2rem;
 }
 
 .cart {
-    border-style: none none none solid;
-    border-color: rgba(64, 221, 245, 0.132);
-    background-color: aliceblue;
+    padding-bottom: 2rem;
+    height: max-content;
+    grid-gap: .3rem;
+    background-color: rgba(165, 165, 165, 0.2);
+    border-radius: 10px;
+}
+
+.cartTitle {
+    padding: 1rem;
+    color: #414341;
+    font-size: 2.2rem;
+    text-align: center;
+}
+
+.cartItem {
+    margin: .5rem;
+    margin-left: 0px;
+}
+
+.totalPriceContainer {
+    margin-left: 0px;
+    padding: .5rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    padding: .5 rem;
+    border-radius: .5rem;
+    background-color: rgba(202, 226, 48, 0.7);
+}
+
+.totalPriceText {
+    grid-column: 1;
+    justify-self: right;
+}
+
+.totalPriceValue {
+    grid-column: 2;
+    justify-self: center;
+    width: fit-content;
+}
+
+.cartButton {
+    display: block;
+    margin: 2rem auto 2rem auto;
+    text-align: center;
+    padding: .5rem;
+    font-size: 1.4rem;
+    text-decoration: none;
+    font-style: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .products {}
 }

@@ -33,13 +33,18 @@
 .homeButton {
     
     width: 100%;
-    color: #414341;
-    background-color: transparent;
+    color: #666866;
+    background-color: rgba(128, 128, 128, 0.05);
     border-style: solid;
-    border-color: #6d716d;
-    box-shadow: 1px 1px 10px 2px rgb(141, 141, 141);
-    border-radius: 5px;
-    font-size: 1.6rem;
+    border-color: #6d716d56;
+    box-shadow: 1px 1px 5px .3px rgba(141, 141, 141, 0.3);
+    border-radius: 20px;
+    font-size: 1.5rem;
     padding: .8rem;
 
+}
+
+.homeButton:hover{
+    background-color: rgba(128, 128, 128, 0.3);
+    box-shadow: .5px .5px 5px 1px rgba(141, 141, 141, 0.2);
 }
