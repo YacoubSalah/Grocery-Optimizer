@@ -6,7 +6,7 @@ function post(props) {
   return (
     <div className='feedbackpost'>
         <div className='postIMage' >
-            <img  src={props.post.imageURL} alt="item" />
+            <img  src={props.post.imageUrl} alt="item" />
             <h3>{props.itemName}</h3>
         </div>
         <div className='postStoreData'>

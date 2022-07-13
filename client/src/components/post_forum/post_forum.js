@@ -1,16 +1,11 @@
+
 import './post_form.css';
 import { Rating } from 'react-simple-star-rating'
 import { observer, inject } from 'mobx-react'
-import React, { useEffect } from 'react'
-import { Button, Snackbar } from '@mui/material';
+import { useEffect } from 'react';
 
 const PostForum = inject("store")(observer((props) => {
 
-
-
-  
-
- 
     useEffect(() => {
 
         props.store.getProductsNameList()
@@ -21,14 +16,12 @@ const PostForum = inject("store")(observer((props) => {
 
     }, [props.store])
 
+
+
+
+
     return (
         <div className="Form">
-
-            <Snackbar
-                open={props.store.clickOnAddPost}
-                autoHideDuration={5000}
-                message={props.store.addPostStatus ? "Store was added successfully" : "Adding store failed"}
-            />
 
             <label>Select Store</label>
             <select name="storeName" onChange={props.store.handelInputs} defaultValue={'default'}>
@@ -85,17 +78,13 @@ const PostForum = inject("store")(observer((props) => {
 
                 <div className="AddIMage">
                     <label>Upload Image</label>
-                    
-                    <img src={props.store.imageUrl} sx={{ width: 150, height: 150 }} alt='no pics' />
-                    <input type="file" onChange={props.store.handleImageChange} />
-                    
-                    
+                    <input type="file" id="img" name="img" accept="image/*" onChange={props.store.handleImageChange} />
                 </div>
 
             </div>
 
-            <Button onClick={props.store.handelAddClick} className="addPostButton">Add Post</Button>
-            
+            <button onClick={props.store.handelAddClick} className="addPostButton">Add Post</button>
+
         </div>
     )
 

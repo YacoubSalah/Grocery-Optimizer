@@ -1,6 +1,10 @@
 import { action, makeObservable, observable } from 'mobx'
 import axios from 'axios'
 
+import { storage } from "./firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { async } from '@firebase/util';
+
 export class Store {
   constructor() {
     this.productName = '';
@@ -9,11 +13,13 @@ export class Store {
     this.price = 0;
     this.score = 50;
     this.note = '';
+    this.imageUrl = '';
+    this.image = null;
     this.storesNameList = [];
     this.storesLocationList = [];
-    this.productsNameList = [] ;
-    this.addPostStatus = false ;
-    this.clickOnAddPost = false ;
+    this.productsNameList = [];
+    this.addPostStatus = false;
+    this.clickOnAddPost = false;
 
     makeObservable(this, {
       productName: observable,
@@ -22,7 +28,9 @@ export class Store {
       price: observable,
       score: observable,
       note: observable,
-      addPostStatus : observable ,
+      imageUrl: observable,
+      image: observable,
+      addPostStatus: observable,
       storesLocationList: observable,
       storesNameList: observable,
       productsNameList: observable,
@@ -31,11 +39,39 @@ export class Store {
       handelAddClick: action,
       updateProductsNameList: action,
       updateStoresLocationList: action,
-      updateStoresNameList: action ,
-      updateAddPostStatus : action
+      updateStoresNameList: action,
+      updateAddPostStatus: action,
+      handleImageChange: action,
+      handleSubmit: action
 
     })
   }
+
+
+  handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      this.image = e.target.files[0];
+      this.handleSubmit()
+    }
+  };
+  handleSubmit = () => {
+    const imageRef = ref(storage, "image");
+    uploadBytes(imageRef, this.image)
+      .then(() => {
+        getDownloadURL(imageRef)
+          .then((newURL) => {
+            this.imageUrl = newURL
+          })
+          .catch((error) => {
+            console.log(error.message, "error getting the image url");
+          });
+        this.image = null
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
 
   handelInputs = (event) => {
 
@@ -78,15 +114,16 @@ export class Store {
       "storeLocation": this.storeLocation,
       "score": parseInt(this.score),
       "price": parseInt(this.price),
-      "note": this.note
+      "note": this.note,
+      "imageUrl":this.imageUrl
     })
-      .then((response) =>  this.updateAddPostStatus(true))
+      .then((response) => this.updateAddPostStatus(true))
       .catch((error) => this.updateAddPostStatus(false))
   }
 
-  updateAddPostStatus (value){
-       this.addPostStatus = value
-       this.clickOnAddPost = true
+  updateAddPostStatus(value) {
+    this.addPostStatus = value
+    this.clickOnAddPost = true
   }
 
   getProductsNameList = () => {
@@ -94,6 +131,7 @@ export class Store {
       .then((response) => this.updateProductsNameList(response.data))
       .catch((error) => alert(error))
   }
+
 
   updateProductsNameList(newProductsNameList) {
     this.productsNameList = newProductsNameList
