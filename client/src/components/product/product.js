@@ -22,7 +22,7 @@ const Product = inject("products")(observer((props) => {
       </div>
 
        <input
-        className='productQuantityValue' name={productName} type="number"
+        className='productQuantityValue' name={productName} type="number" min="0"
         value={products[productName].quantity} onChange={props.products.updateProductQuantity}
       />
  

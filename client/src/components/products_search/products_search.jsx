@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 
 import Product from '../product/product'
@@ -21,7 +21,7 @@ const ProductsSearch = inject("products")(observer((props) => {
     <div className='productSearchContainer'>
 
       <div className='categoryMenu'>
-        <Categories key={Math.random()}/>
+        <Categories key={Math.random()} />
       </div>
 
       <div className='productsAndSearchBar'>
@@ -38,19 +38,23 @@ const ProductsSearch = inject("products")(observer((props) => {
       </div>
 
       <div className='cart'>
-      <h2>CART</h2>
-        {Object.keys(props.products.cart).map(cartItem => <CartItem key={cartItem} cartItem={cartItem} />)}
-      <p>Total average price :</p>  {props.products.cartAveragePrice}
 
-      <Link  to={"/stores"} >
+        <div className='cartTitle'>Cart</div>
 
-        <h3>Calculate Cart</h3>
+        {Object.keys(props.products.cart).map(cartItem => <CartItem className="cartItem" key={cartItem} cartItem={cartItem} />)}
 
-      </Link>
+        <div className='totalPriceContainer'>
+          <div className='totalPriceText'>Total average price :</div>
+          <div className='totalPriceValue'>{props.products.cartAveragePrice} ₪</div>
+        </div>
+
+        <Link to={"/stores"}  >
+          <button className='cartButton'>Process Cart</button>
+        </Link>
 
       </div>
 
-    </div>
+    </div >
   )
 }))
 

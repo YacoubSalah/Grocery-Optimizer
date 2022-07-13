@@ -1,19 +1,33 @@
-.allCategories{
-    width: 10vw;
-    text-align: left;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
+
+.categories {
+    font-family: 'Noto Serif', serif;
 }
 
-.mainCategory{
-    text-align: left;
-    padding-left: 5%;
+.allCategories {
+    color: #414341;
+    font-size: 1.25rem;
+    font-weight: 600;
+    padding: .5rem 0 .5rem 0;
 }
 
-.subCategory{
-    text-align: left;
-    padding-left: 10%;
+.mainCategory {
+    color: #414341;
+    font-size: 1.1rem;
+    font-weight: 400;
+    padding: .6rem 0 .3rem 5%;
 }
 
-.allCategories:hover, .mainCategory:hover, .subCategory:hover{
-    color:cadetblue;
-    cursor:pointer;
+.subCategory {
+    color: #6d716d;
+    font-size: 1rem;
+    font-weight: 200;
+    padding: .3rem 0 .3rem 10%;
+}
+
+.allCategories:hover,
+.mainCategory:hover,
+.subCategory:hover {
+    color: cadetblue;
+    cursor: pointer;
 }

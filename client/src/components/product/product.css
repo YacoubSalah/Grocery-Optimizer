@@ -4,8 +4,8 @@
     grid-template-rows : 20vh;
     grid-gap: .5rem;
     padding: .5rem;
-    border-radius: 5px;
-    background-color: rgba(211, 211, 211, 0.5);
+    border-radius: 10px;
+    background-color: rgb(211, 211, 211 , .7);
     box-shadow: 1px 1px 2.5px rgba(0, 0, 0, 0.5);
     justify-items: center;
 }
