@@ -10,6 +10,7 @@ export class Products {
     this.categories = {}
     this.searchWord = ''
     this.cart = JSON.parse(localStorage.cart || "{}")
+    this.prices = {}
 
 
     makeObservable(this, {
@@ -19,7 +20,7 @@ export class Products {
       categories: observable,
       searchWord: observable,
       cart: observable,
-
+      prices: observable,
       cartAveragePrice: computed,
 
       handelInputChange: action,
@@ -49,6 +50,7 @@ export class Products {
   checkInCartAndUpdateProducts(newProducts) {
     this.productsNameList = Object.keys(newProducts)
     for (let productName of this.productsNameList) {
+      this.prices[productName] = newProducts[productName].averagePrice
       newProducts[productName].quantity = 1
       if (this.cart[productName]) {
         newProducts[productName].inCart = true
@@ -80,7 +82,7 @@ export class Products {
     let cartItems = Object.keys(this.cart)
     for (let cartItem of cartItems) {
       let cartItemQuantity = this.cart[cartItem]
-      let cartItemPrice = this.products[cartItem] ? this.products[cartItem].averagePrice : 0
+      let cartItemPrice = this.prices[cartItem] ? this.prices[cartItem] : 0
       price += cartItemPrice * cartItemQuantity
     }
     return (Math.round(price * 100) / 100)
