@@ -13,7 +13,7 @@ const StoresSearch = inject("carts" , "products")(observer((props) => {
 
     props.carts.calculateTotalPrices(props.products.cart)
 
-  } , [props.products.cart])
+  } , [(props.products.cart)])
 
   return (
     <div className='containerStores'>
