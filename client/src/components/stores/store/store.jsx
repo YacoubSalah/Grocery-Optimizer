@@ -4,18 +4,11 @@ import { Rating } from 'react-simple-star-rating'
 import { Link } from 'react-router-dom'
 import './store.css'
 import { observer, inject } from 'mobx-react'
-import { useEffect } from 'react'
 
 
 const store = inject("carts" , "products")(observer((props) => {
 
   const id = props.store.id
-
-  useEffect(() => {
-    
-    props.carts.calculateTotalPrices()
-
-  } , [props.carts])
 
   return (
     <div className='storeCard'>

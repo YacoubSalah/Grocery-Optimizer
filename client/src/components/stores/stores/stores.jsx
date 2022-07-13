@@ -11,17 +11,9 @@ const StoresSearch = inject("carts" , "products")(observer((props) => {
 
   useEffect(() => {
 
-    props.carts.getStoresByProducts(props.products.cart)
+    props.carts.calculateTotalPrices(props.products.cart)
 
-  },[props.carts, props.products.cart]);
-
-  
-
-  useEffect(() => {
-
-    props.carts.calculateTotalPrices()
-
-  } , [props.carts])
+  } , [props.products.cart])
 
   return (
     <div className='containerStores'>

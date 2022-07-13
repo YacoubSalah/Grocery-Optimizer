@@ -3,8 +3,11 @@ import './search_bar.css'
 import { observer, inject } from 'mobx-react'
 
 
-const storesSearchBar = inject("store")(observer((props) => {
+const storesSearchBar = inject("store" , "carts" , "products")(observer((props) => {
 
+  function searchProductStores(){
+    props.carts.getStoresByProducts(props.products.cart)
+  }
 
   return (
     <div className='searchBar'>
@@ -35,7 +38,7 @@ const storesSearchBar = inject("store")(observer((props) => {
         </div>
 
         {/* <button className='findPriceButton'>Find price</button> */}
-        <button className='searchButton'>Search</button>
+        <button className='searchButton' onClick={searchProductStores}>Search</button>
 
       </div>
 

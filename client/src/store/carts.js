@@ -2,23 +2,25 @@ import { observable, makeObservable, action } from 'mobx'
 import axios from 'axios'
 
 export class Carts {
+
     constructor() {
 
-        this.storesCartsList = [];
-        this.itemToShow = null ; 
-        this.feedBack = [] ; 
+        this.storesCartsList = [];  //more accurate name : storesDataFromServer
+        this.itemToShow = null;
+        this.feedBack = [];
         this.totalPrice = 0
 
         makeObservable(this, {
             storesCartsList: observable,
             itemToShow: observable,
-            feedBack : observable ,
-            totalPrice : observable ,
+            feedBack: observable,
+            totalPrice: observable,
             updateStoresCartList: action,
-            addItemToShow: action ,
-            updateFeedBack: action ,
-            calculateTotalPrices : action
+            addItemToShow: action,
+            updateFeedBack: action,
+            calculateTotalPrices: action
         })
+
     }
 
     getStoresByProducts = (cart) => {
@@ -26,21 +28,21 @@ export class Carts {
         axios.post(`http://localhost:3020/cartPrices`, { cart })
             .then((response) => {
                 this.updateStoresCartList(response.data)
-                this.calculateTotalPrices()
+                this.calculateTotalPrices(cart)
             })
             .catch((error) => alert(error))
 
     }
 
-    calculateTotalPrices = () => {
-        
-        let cart = JSON.parse(localStorage.cart || "{}")
+    calculateTotalPrices = (productsCart) => {
 
-        if(this.storesCartsList.length!==0){
+        let cart = productsCart
+
+        if (this.storesCartsList.length !== 0) {
             this.storesCartsList.forEach(store => {
-                 Object.keys(store.productCart).forEach(key => {
-                      store.productCart[key]['totalPrice'] = store.productCart[key].initialPrice * cart[key]
-                 })
+                Object.keys(store.productCart).forEach(key => {
+                    store.productCart[key]['totalPrice'] = store.productCart[key].initialPrice * cart[key]
+                })
             })
 
         }
@@ -57,16 +59,15 @@ export class Carts {
     getFeedBack = (itemName, id) => {
 
         axios.get(`http://localhost:3020/postsProduct/?productName=${itemName}&&storeId=${id}`)
-            .then((response) =>  {
-                console.log(response.data)
-                this.updateFeedBack(response.data) 
+            .then((response) => {
+                this.updateFeedBack(response.data)
             })
             .catch((error) => alert(error))
 
     }
 
     updateFeedBack = (posts) => {
-          this.feedBack = posts
+        this.feedBack = posts
     }
 
     sumTotalPriceForStore = (itemsCart) => {

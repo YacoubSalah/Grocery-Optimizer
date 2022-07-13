@@ -19,9 +19,6 @@ async function getStores(stores, products) {
         dommyStore.isComplete = true
 
         for (let product of stores[store]) {
-            let p = await productModel.findOne({ 'name': Object.keys(product)[0] })
-                .populate("stores.store")
-                .exec()
             let productData = await getScoreProduct(Object.keys(product)[0], s.id)
             productCart[Object.keys(product)[0]] = {
                 "initialPrice": Object.values(product)[0],

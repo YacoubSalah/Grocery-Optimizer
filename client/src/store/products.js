@@ -9,7 +9,7 @@ export class Products {
     this.productsNameList = []
     this.categories = {}
     this.searchWord = ''
-    this.cart = JSON.parse(localStorage.cart || "{}")
+    this.cart = this.cart ? {} : JSON.parse(localStorage.cart || "{}")
     this.prices = {}
 
 

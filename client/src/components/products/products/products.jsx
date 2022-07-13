@@ -10,7 +10,11 @@ import background from '../../../images/no_cart.jpg'
 
 import './products.css'
 
-const ProductsSearch = inject("products")(observer((props) => {
+const ProductsSearch = inject("carts", "products")(observer((props) => {
+
+  function searchProductStores() {
+    props.carts.getStoresByProducts(props.products.cart)
+  }
 
   useEffect(() => {
 
@@ -53,7 +57,7 @@ const ProductsSearch = inject("products")(observer((props) => {
           </div>
 
           <Link to={"/stores"}  >
-            <button className='cartButton'>Process Cart</button>
+            <button className='cartButton' onClick={searchProductStores}>Process Cart</button>
           </Link>
 
         </div>
