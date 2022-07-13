@@ -45,14 +45,14 @@ const ProductsSearch = inject("products")(observer((props) => {
 
         <div className='totalPriceContainer'>
           <div className='totalPriceText'>Total average price :</div>
-          <div className='totalPriceValue'>{props.products.cartAveragePrice}</div>
+          <div className='totalPriceValue'>{props.products.cartAveragePrice} ₪</div>
         </div>
 
-        <Link to={"/stores"} >
-          <button className='cartButton'>Calculate Cart</button>
-      </Link>
+        <Link to={"/stores"}  >
+          <button className='cartButton'>Process Cart</button>
+        </Link>
 
-    </div>
+      </div>
 
     </div >
   )

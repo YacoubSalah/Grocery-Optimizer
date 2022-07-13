@@ -17,33 +17,33 @@ async function getStores(stores, products) {
         dommyStore.id = s.id
         dommyStore.score = s.score
         dommyStore.isComplete = true
-        
+
         for (let product of stores[store]) {
-            let p = await productModel.findOne({'name':Object.keys(product)[0]})
-            .populate("stores.store")
-            .exec()
-            
+            let p = await productModel.findOne({ 'name': Object.keys(product)[0] })
+                .populate("stores.store")
+                .exec()
+            let productData = await getScoreProduct(Object.keys(product)[0], s.id)
             productCart[Object.keys(product)[0]] = {
                 "initialPrice": Object.values(product)[0],
-                "score":await getScoreProduct(Object.keys(product)[0], s.id)
+                "score": productData.score,
+                "postQuantity": productData.postQuantity
             }
             productshelp.push(Object.keys(product)[0])
-            
+
         }
         products.map(p => {
-            
             if (!productshelp.includes(p)) {
                 productCart[p] = {
                     "initialPrice": null,
-                    "score": 0
+                    "score": 0,
+                    "postQuantity": 0
                 }
-                
                 dommyStore.isComplete = false
             }
         })
         dommyStore.productCart = productCart
         allStoresFinal.push(dommyStore)
-        
+
     }
     return allStoresFinal
 }
@@ -52,14 +52,15 @@ async function getStores(stores, products) {
 async function getScoreProduct(productName, storeId) {
     let posts = await getPostsProduct(productName, storeId)
     let score = 0
-    count = 0
+    postQuantity = 0
     if (posts.length === 0)
-        return 0
+        return {score,postQuantity}
     posts.map(p => {
         score += p.score
-        count += 1
+        postQuantity += 1
     })
-    return Math.round((score / count) * 100) / 100
+    score = Math.round((score / postQuantity) * 100) / 100
+    return { score, postQuantity }
 }
 async function getProductsByCart(cart) {
     let products = []
