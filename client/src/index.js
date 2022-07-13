@@ -21,6 +21,8 @@ const stores = {
     carts
 }
 
+window.React1 = require('react');
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider {...stores}>

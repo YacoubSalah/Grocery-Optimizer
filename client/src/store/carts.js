@@ -6,7 +6,7 @@ export class Carts {
 
         this.storesCartsList = [];
         this.itemToShow = null ; 
-        this.feedBack = 0 ; 
+        this.feedBack = [] ; 
         this.totalPrice = 0
 
         makeObservable(this, {
@@ -56,19 +56,16 @@ export class Carts {
 
     getFeedBack = (itemName, id) => {
 
-        console.log(itemName , id)
-
         axios.get(`http://localhost:3020/postsProduct/?productName=${itemName}&&storeId=${id}`)
             .then((response) =>  {
-                console.log(response.data)
-                this.updateFeedBack(response.data.length) 
+                this.updateFeedBack(response.data) 
             })
             .catch((error) => alert(error))
 
     }
 
-    updateFeedBack = (value) => {
-          this.feedBack = value
+    updateFeedBack = (posts) => {
+          this.feedBack = posts
     }
 
     sumTotalPriceForStore = (itemsCart) => {
