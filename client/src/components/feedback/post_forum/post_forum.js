@@ -4,12 +4,6 @@ import { observer, inject } from 'mobx-react'
 import React , { useEffect } from 'react'
 import { Button, Snackbar } from '@mui/material';
 
-//firebase
-import { useState } from "react";
-import { storage } from "./firebase";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { async } from '@firebase/util';
-//
 
 const PostForum = inject("store")(observer((props) => {
 {/* //firebas */}
