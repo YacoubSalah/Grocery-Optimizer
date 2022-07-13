@@ -32,7 +32,7 @@ const ProductsSearch = inject("products")(observer((props) => {
 
           <div className='searchMenu'>
             <input className='searchInput' name='searchWord' onChange={props.products.handelInputChange} placeholder='Enter name to search' />
-            <button className='searchButton' onClick={props.products.search}>Serach</button>
+            <button className='searchButton' onClick={props.products.search}>Search</button>
           </div>
 
           <div className='products'>

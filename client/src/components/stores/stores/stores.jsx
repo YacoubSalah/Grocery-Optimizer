@@ -1,8 +1,8 @@
 import React from 'react'
 import { useEffect } from 'react'
-import SearchBar from '../store_search_bar/stores_search_bar'
 import { observer, inject } from 'mobx-react'
 
+import SearchBar from '../search_bar/search_bar'
 import StoresElem from '../stores_elem/stores-elem'
 
 import './stores.css'

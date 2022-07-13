@@ -1,5 +1,5 @@
 import React from 'react'
-import './stores_search_bar.css'
+import './search_bar.css'
 import { observer, inject } from 'mobx-react'
 
 
@@ -34,7 +34,8 @@ const storesSearchBar = inject("store")(observer((props) => {
           </select>
         </div>
 
-        <button className='findPriceButton'>Find price</button>
+        {/* <button className='findPriceButton'>Find price</button> */}
+        <button className='searchButton'>Search</button>
 
       </div>
 
