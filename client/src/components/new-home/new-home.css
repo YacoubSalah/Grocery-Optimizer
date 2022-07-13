@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
 
+.background {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+    width: 100%;
+    opacity: .7;
+}
+
 .homeContainer {
     padding: 2rem;
     display: grid;
@@ -31,7 +40,7 @@
 }
 
 .homeButton {
-    
+
     width: 100%;
     color: #666866;
     background-color: rgba(128, 128, 128, 0.05);
@@ -44,7 +53,7 @@
 
 }
 
-.homeButton:hover{
+.homeButton:hover {
     background-color: rgba(128, 128, 128, 0.3);
     box-shadow: .5px .5px 5px 1px rgba(141, 141, 141, 0.2);
 }

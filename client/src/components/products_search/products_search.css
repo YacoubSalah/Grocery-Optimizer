@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
 
+.background {
+    position: fixed;
+    top: 0px;
+    z-index: -1;
+    width: 100%;
+    opacity: .7;
+}
+
 .productSearchContainer {
     padding: .5rem;
     display: grid;
@@ -9,13 +17,15 @@
 }
 
 .categoryMenu {
-    background-color: rgba(165, 165, 165, 0.2);
+    background-color: rgb(211, 211, 211, .3);
     border-radius: 10px;
     padding: .5rem;
+    height: max-content;
 }
 
 .productsAndSearchBar {
-    background-color: rgba(165, 165, 165, 0.2);
+    background-color: rgb(211, 211, 211 , .3);
+    /* background-color: rgba(165, 165, 165, 0.2); */
     border-radius: 10px;
     padding: .5rem;
 }
@@ -73,15 +83,16 @@
 }
 
 .cart {
-    padding-bottom: 2rem;
+    background-color: rgb(211, 211, 211 , .3);
+    /* background-color: rgba(165, 165, 165, 0.2); */
+    padding: 0.5rem;
     height: max-content;
     grid-gap: .3rem;
-    background-color: rgba(165, 165, 165, 0.2);
     border-radius: 10px;
 }
 
 .cartTitle {
-    padding: 1rem;
+    padding: .8rem;
     color: #414341;
     font-size: 2.2rem;
     text-align: center;
@@ -105,7 +116,7 @@
 }
 
 .totalPriceText {
-    
+
     grid-column: 1;
     justify-self: center;
 }
@@ -132,11 +143,11 @@
 }
 
 .cartButton:hover {
-    background-color:hsla(187, 53%, 35%, 0.75);
+    background-color: hsla(187, 53%, 35%, 0.75);
     box-shadow: none;
 }
 
-.cart>a{
+.cart>a {
     text-decoration: none;
 }
 

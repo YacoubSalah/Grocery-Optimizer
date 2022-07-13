@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Navbar from './components/navigation_bar/navigation_bar'
-import Home from './components/home/home';
+// import Home from './components/home/home';
 import ProductsSearch from './components/products_search/products_search'
 import StoreSearch from './components/stores_search/stores_search'
 import Details from './components/details_component/details_component'
@@ -11,6 +11,7 @@ import SnackbarProvider from 'react-simple-snackbar'
 import './app.css'
 
 function App() {
+
   return (
     <SnackbarProvider>
       <div className='app'>

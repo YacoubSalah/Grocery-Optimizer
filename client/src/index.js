@@ -15,6 +15,7 @@ const store = new Store()
 const products = new Products()
 const carts = new Carts()
 
+
 const stores = {
     store,
     products,
