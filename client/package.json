@@ -15,7 +15,11 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
+<<<<<<< HEAD
+    "imgbb-uploader": "^1.5.0",
+=======
     "firebase": "^9.9.0",
+>>>>>>> 691c929fc56bff1344cb968038c5e9d718a13801
     "mobx": "^6.6.1",
     "mobx-react": "^7.5.1",
     "react": "^18.2.0",
