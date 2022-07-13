@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import background from "../../images/cart.jpg"
 
-import './new-home.css'
+import './home.css'
 
 function Home() {
 

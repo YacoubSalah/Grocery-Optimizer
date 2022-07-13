@@ -1,8 +1,10 @@
 import React from 'react'
-import './stores.css'
-import Store from '../store/store'
 import { observer, inject } from 'mobx-react'
 import { toJS } from 'mobx'
+
+import Store from '../store/store'
+
+import './stores_elem.css'
 
 const stores = inject("carts")(observer((props) => {
 

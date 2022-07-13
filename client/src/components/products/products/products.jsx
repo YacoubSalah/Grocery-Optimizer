@@ -6,9 +6,9 @@ import Product from '../product/product'
 import Categories from '../categories/categories'
 import CartItem from '../cart/cartItem'
 
-import background from '../../images/no_cart.jpg'
+import background from '../../../images/no_cart.jpg'
 
-import './products_search.css'
+import './products.css'
 
 const ProductsSearch = inject("products")(observer((props) => {
 

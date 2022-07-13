@@ -1,6 +1,6 @@
 import React from 'react'
-import './snackbar.css'
-import Post from '../post/post'
+import './snackbar_component.css'
+import Post from './post/post'
 import {Button } from '@mui/material';
 
 function snackbar(props) {

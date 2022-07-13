@@ -1,11 +1,13 @@
 import React , { useEffect, useState } from 'react'
-import './details_component.css'
 import { observer, inject } from 'mobx-react'
-import GridHeader from './GridHeader' 
 import { useLocation } from 'react-router-dom';
-import Item from './item'
 import { Link } from 'react-router-dom'
+import GridHeader from './GridHeader' 
 import Snackbarcomponent from '../snackbar_component/snackbar_component'
+
+import Item from './item'
+
+import './details.css'
 
 const details_component = inject("carts")(observer((props) => {
 
