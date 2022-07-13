@@ -1,0 +1,69 @@
+/* --------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
+
+.container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  justify-items: center;
+  transform: translate(-50%, -50%);
+  height: max-content;
+  width: 90%;
+  background: #f2f2f2;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 0 20px 8px #d0d0d0;
+  text-align: center;
+}
+
+.content {
+  text-align: justify;
+  color: black;
+  padding: 40px;
+  font-family: 'Merriweather', serif;
+}
+
+.content>h1 {
+  font-weight: 900;
+  text-align: center;
+}
+
+.content>h3 {
+  font-weight: 300;
+  text-align: center;
+}
+
+.gridcontent {
+  display: grid;
+  row-gap: 10px;
+  align-items: center;
+  padding-left: 0.5vw;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.gridcontent > span {
+  border: 1px solid #CCDBDC;
+  padding: 3px;
+  font-size: 1rem;
+  text-align: center;
+  margin: 1rem;
+}
+.hideDetailsButton{
+  color: palevioletred;
+  font-size: 2em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+  display: block;
+  cursor: pointer;
+  text-align: center;
+}
+
+.container > a {
+  text-decoration: none;
+}
+
+.hideDetailsButton:hover{
+  background-color: #80CED7;
+}

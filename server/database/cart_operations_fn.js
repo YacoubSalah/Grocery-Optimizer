@@ -10,44 +10,40 @@ async function getStores(stores, products) {
         productCart = {}
         dommyStore = {}
         productshelp = []
+
         let s = await storeModel.findById(store).exec()
-       
         dommyStore.name = s.name
         dommyStore.location = s.location
         dommyStore.id = s.id
-        totalPrice = 0
+        dommyStore.score = s.score
         dommyStore.isComplete = true
+        
         for (let product of stores[store]) {
             let p = await productModel.findOne({'name':Object.keys(product)[0]})
             .populate("stores.store")
             .exec()
-            let initialPrice = 0
-            p.stores.map(s=> {
-                if(s.store.id === store){
-                    initialPrice = s.initialPrice
-                }   
-            })
+            
             productCart[Object.keys(product)[0]] = {
-                "initialPrice": initialPrice,
-                "score":await getScoreProduct(Object.keys(product)[0], s.id),
-                "quentity": Object.values(product)[0]
+                "initialPrice": Object.values(product)[0],
+                "score":await getScoreProduct(Object.keys(product)[0], s.id)
             }
-            totalPrice += Object.values(product)[0]
             productshelp.push(Object.keys(product)[0])
+            
         }
-        dommyStore.totalPrice = totalPrice
         products.map(p => {
+            
             if (!productshelp.includes(p)) {
                 productCart[p] = {
                     "initialPrice": null,
-                    "score": 0,
-                    "quentity": Object.values(product)[0]
+                    "score": 0
                 }
+                
                 dommyStore.isComplete = false
             }
         })
         dommyStore.productCart = productCart
         allStoresFinal.push(dommyStore)
+        
     }
     return allStoresFinal
 }
@@ -69,6 +65,7 @@ async function getProductsByCart(cart) {
     let products = []
     for (let item in cart) {
         products.push(item)
+
     }
     return products
 }

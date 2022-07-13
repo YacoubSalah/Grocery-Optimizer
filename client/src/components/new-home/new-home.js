@@ -18,7 +18,7 @@ function Home() {
                     <button class="homeButton">Explore products</button>
                 </Link>
                 <Link to="/stores">
-                    <button class="homeButton">Add feedback</button>
+                    <button className="homeButton">Add feedback</button>
                 </Link>
             </div>
         </div >

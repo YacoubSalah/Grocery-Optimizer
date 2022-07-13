@@ -104,7 +104,14 @@ async function getStoresByStoreName(storeNameFilter) {
         .exec()
     return stores
 }
+async function updateScoreStore(storeName,locationStore,score){
+    let store = await storeModel.findOne({name:storeName,location:locationStore }).exec()
+    store.score = (store.score*store.countScore + score)/(store.countScore+1)
+    store.countScore += 1
+    // let store = new storeModel(storeData)
+    await store.save()
 
+}
 module.exports = {
     validateStoreData,
     validateStoreDoesntAlreadyExists,
@@ -115,5 +122,6 @@ module.exports = {
     getStoresByStoreLocation,
     getAllStores,
     getStoresByProductNameAndStoreName,
-    getStoresByStoreName
+    getStoresByStoreName,
+    updateScoreStore
 }

@@ -1,12 +1,14 @@
 .stores{
     margin-top: 20px;
     display: grid;
-    grid-template-columns: repeat(3 , 1fr);
+    grid-template-columns: repeat(4 , 1fr);
     gap: 20px;
+    margin-top: 3rem;
+    justify-content: center;
 }
 
 .stores > div {
-    background-color: F5F5F5;
+    background-color: #F5F5F5;
     border-radius: 20px;
 }
 
@@ -14,7 +16,7 @@
     .stores{
         margin-top: 20px;
         display: grid;
-        grid-template-columns: repeat(1 , 1fr);
+        grid-template-columns: repeat(2 , 1fr);
         gap: 20px;
     }
   }

@@ -72,7 +72,7 @@ async function addProductStorePost(postData) {
     let porductStorePost = productFunctions.createProductStorePost(postData)
 
     await productFunctions.addProductStorePostAndSave(porductStorePost, currentProduct, postData.storeName, postData.storeLocation, feedback)
-
+    await storeFunctions.updateScoreStore(postData.storeName,postData.storeLocation,porductStorePost.score)
     return feedback
 
 }
