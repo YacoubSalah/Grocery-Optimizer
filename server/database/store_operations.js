@@ -31,6 +31,20 @@ async function getAllStores() {
     return stores
 }
 
+/* "storeName": "Yacoub",
+"locationName": "Jerusalem", */
+async function getfilteredStores(filterData){
+
+    let status = {}
+    status.message = 'no stores available'
+    status.code = 500
+    
+    if(this.getAllStores() === []) { return status }
+    else{
+        
+    }
+}
+
 async function getStoresNameList(filter) {
 
     let stores = []

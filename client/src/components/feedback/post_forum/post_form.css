@@ -92,6 +92,13 @@ select {
     border-color: rgba(0, 0, 0, 0.295);
     border-style:groove;
 }
+.AddIMage > img{
+    width: 50%;
+    height: 50%;
+}
+.AddIMage{
+    margin-left: 2rem;
+}
 
 .addPostButton:hover {
     background-image: radial-gradient(circle, rgba(33,158,188,1) 0%, rgba(142,202,230,1) 100%);

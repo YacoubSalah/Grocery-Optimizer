@@ -26,4 +26,10 @@ api.get("/storesLocationList", async function (req, res) {
     res.send(storesLocationList)
 })
 
+api.get("/storesfiltered", async function (req, res) {
+    const filter = req.query
+    console.log(filter)
+    res.end()
+})
+
 module.exports = api

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { observer, inject } from 'mobx-react'
 import { Button, Snackbar } from '@mui/material';
-import { Rating } from 'react-simple-star-rating'
+import { Rating } from 'react-simple-star-rating';
 
 import './post_form.css';
 
@@ -21,9 +21,14 @@ const PostForum = inject("store")(observer((props) => {
         <div className="Form">
 
             <Snackbar
-                open={props.store.clickOnAddPost}
-                autoHideDuration={5000}
-                message={props.store.addPostStatus ? "Store was added successfully" : "Adding store failed"}
+                message={props.store.clickOnAddPost ? "post was added successfully" : "post store failed"}
+                autoHideDuration={1000}
+                open={props.store.addPostStatus}
+                onClose={props.store.closeSnackbar}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center'
+                }}
             />
 
             <label>Select Store</label>
@@ -84,8 +89,7 @@ const PostForum = inject("store")(observer((props) => {
                     
                     <img src={props.store.imageUrl} sx={{ width: 150, height: 150 }} alt='no pics' />
                     <input type="file" onChange={props.store.handleImageChange} />
-                    
-                    
+                       
                 </div>
 
             </div>
