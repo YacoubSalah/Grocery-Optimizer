@@ -22,7 +22,7 @@ function Home() {
                     <Link to="/products">
                         <button className="homeButton">Explore products</button>
                     </Link>
-                    <Link to="/stores">
+                    <Link to="/feedback">
                         <button className="homeButton">Add feedback</button>
                     </Link>
                 </div>

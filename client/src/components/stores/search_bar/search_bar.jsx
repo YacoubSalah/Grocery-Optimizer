@@ -4,38 +4,26 @@ import { observer, inject } from 'mobx-react'
 
 import './search_bar.css'
 
-const storesSearchBar = inject("store", "carts", "products")(observer((props) => {
-
-  useEffect(() => {
-    props.carts.getStoresNameList()
-    props.carts.getStoresLocationList()
-  }, [props.carts])
-
-  function searchProductStores() {
-    props.carts.getStoresByProducts(props.products.cart)
-  }
+const storesSearchBar = inject("store", "carts")(observer((props) => {
 
   return (
     <div className='storesSearchbar'>
 
       <div className='selectorMenu'>
-        <select defaultValue={'default'}>
+        <select name="cityNameFilter" defaultValue="" onChange={props.carts.updatedFilteredStoresCarts}>
           <option value="" >Choose City...</option>
-          {props.carts.storesLocationList.map(city => <option key={city} value={city}>{city}</option>)}
+          {props.carts.citiesNameList.map(city => <option key={city} value={city}>{city}</option>)}
         </select>
       </div>
 
       <div className='selectorMenu'>
-        <select defaultValue={'default'}>
+        <select name="storeNameFilter" defaultValue="" onChange={props.carts.updatedFilteredStoresCarts}>
           <option value="">Choose a Store...</option>
           {props.carts.storesNameList.map(store => <option key={store} value={store}>{store}</option>)}
         </select>
       </div>
 
-      <div >
-        <button className='searchButton' onClick={searchProductStores}>Search</button>
-      </div>
-      
+
     </div >
 
   )

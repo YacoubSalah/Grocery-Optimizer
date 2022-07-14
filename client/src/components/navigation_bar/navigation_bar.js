@@ -12,7 +12,7 @@ function navigationBar() {
                 <div>GroceryOptimizer</div>
             </Link>
             <Link className='link' to="/products">Products</Link>
-            <Link className='link' to="/stores">Stores</Link>
+            {/* <Link className='link' to="/stores">Stores</Link> */}
             <Link className='link' to="/feedback">Feedback</Link>
         </div >
     );

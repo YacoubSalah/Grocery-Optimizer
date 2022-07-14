@@ -7,7 +7,7 @@ import './stores_elem.css'
 
 const stores = inject("carts")(observer((props) => {
 
-  let storesList = (props.carts.storesCartsList)
+  let storesList = (props.carts.filteredStoresCarts)
 
   return (
     <div className='stores'>

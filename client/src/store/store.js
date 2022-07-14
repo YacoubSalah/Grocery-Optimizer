@@ -53,7 +53,8 @@ export class Store {
       this.image = e.target.files[0];
       this.handleSubmit()
     }
-  };
+  }
+
   handleSubmit = () => {
     const imageRef = ref(storage, "image");
     uploadBytes(imageRef, this.image)
@@ -70,8 +71,7 @@ export class Store {
       .catch((error) => {
         console.log(error.message);
       });
-  };
-
+  }
 
   handelInputs = (event) => {
 

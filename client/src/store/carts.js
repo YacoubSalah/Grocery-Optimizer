@@ -5,51 +5,78 @@ export class Carts {
 
     constructor() {
 
-        this.storesCartsList = [];  //more accurate name : storesDataFromServer
-        this.itemToShow = null;
-        this.feedBack = [];
-        this.totalPrice = 0;
-        this.loadingStoresSnackBar = false;
+        this.storesCarts = []
+        this.filteredStoresCarts = []
+        this.itemToShow = null
+        this.feedBack = []
+        this.totalPrice = 0
+        this.loadingStoresSnackBar = false
         this.requsetStoresStatus = true
-        this.storesNameList = [];
-        this.storesLocationList = [];
-        this.selectedCityName= "";
-        this.selectedStoreName =""
+        this.storesNameList = []
+        this.citiesNameList = []
+        this.cityNameFilter = ""
+        this.storeNameFilter = ""
 
         makeObservable(this, {
-            storesCartsList: observable,
+            storesCarts: observable,
+            filteredStoresCarts: observable,
             itemToShow: observable,
             feedBack: observable,
             totalPrice: observable,
             loadingStoresSnackBar: observable,
             requsetStoresStatus: observable,
-            storesLocationList: observable,
+            citiesNameList: observable,
             storesNameList: observable,
-            updateStoresCartList: action,
+
+            updateStoresCarts: action,
+            updatedFilteredStoresCarts: action,
             addItemToShow: action,
             updateFeedBack: action,
             calculateTotalPrices: action,
             handleLoadinStoresSnackBar: action,
             UpdateRequestStatus: action,
-            updateStoresLocationList: action,
+            updateCitiesNameList: action,
             updateStoresNameList: action
         })
 
     }
 
+    updatedFilteredStoresCarts = (event) => {
+        if (event) {
+            this[event.target.name] = event.target.value
+        }
+        this.filteredStoresCarts = []
+        if (this.cityNameFilter && this.storeNameFilter) {
+            this.filteredStoresCarts = this.storesCarts.filter(storecart => storecart.name === this.storeNameFilter && storecart.location === this.cityNameFilter)
+        } else if (this.cityNameFilter) {
+            this.filteredStoresCarts = this.storesCarts.filter(storecart => storecart.location === this.cityNameFilter)
+        }
+        else if (this.storeNameFilter) {
+            this.filteredStoresCarts = this.storesCarts.filter(storecart => storecart.name === this.storeNameFilter)
+        }
+        else {
+            this.filteredStoresCarts = this.storesCarts
+        }
+        this.updateCitiesNameList()
+        this.updateStoresNameList()
+    }
+
     getStoresByProducts = (cart) => {
-
         this.loadingStoresSnackBar = true
-
         axios.post(`http://localhost:3020/cartPrices`, { cart })
             .then((response) => {
                 this.handleLoadinStoresSnackBar()
-                this.updateStoresCartList(response.data)
+                this.updateStoresCarts(response.data)
+                this.updatedFilteredStoresCarts()
                 this.calculateTotalPrices(cart)
             })
-            .catch((error) => {
+            .catch(() => {
                 this.UpdateRequestStatus()
             })
+    }
+
+    updateStoresCarts = (newStoresCarts) => {
+        this.storesCarts = newStoresCarts
     }
 
     handleLoadinStoresSnackBar() {
@@ -64,18 +91,13 @@ export class Carts {
 
         let cart = productsCart
 
-        if (this.storesCartsList.length !== 0) {
-            this.storesCartsList.forEach(store => {
+        if (this.storesCarts.length !== 0) {
+            this.storesCarts.forEach(store => {
                 Object.keys(store.productCart).forEach(key => {
                     store.productCart[key]['totalPrice'] = store.productCart[key].initialPrice * cart[key]
                 })
             })
-
         }
-    }
-
-    updateStoresCartList = (storesList) => {
-        this.storesCartsList = storesList
     }
 
     addItemToShow = (id) => {
@@ -108,24 +130,45 @@ export class Carts {
 
     }
 
-    getStoresLocationList = () => {
-        axios.get(`http://localhost:3020/storesLocationList`)
-            .then((response) => this.updateStoresLocationList(response.data))
-            .catch((error) => alert(error))
+    updateCitiesNameList() {
+        let citiesList = []
+        if (this.storeNameFilter) {
+            for (let storeCart of this.storesCarts) {
+                if (storeCart.name === this.storeNameFilter) {
+                    citiesList.push(storeCart.location)
+                }
+            }
+        } else {
+            for (let storeCart of this.storesCarts) {
+                citiesList.push(storeCart.location)
+            }
+        }
+        this.citiesNameList = this.returnArrayWithoutDuplicates(citiesList)
     }
 
-    updateStoresLocationList(newStoresLocationList) {
-        this.storesLocationList = newStoresLocationList
+    updateStoresNameList() {
+        let storesList = []
+        if (this.cityNameFilter) {
+            for (let storeCart of this.storesCarts) {
+                if (storeCart.location === this.cityNameFilter) {
+                    storesList.push(storeCart.name)
+                }
+            }
+        } else {
+            for (let storeCart of this.storesCarts) {
+                storesList.push(storeCart.name)
+            }
+        }
+        this.storesNameList = this.returnArrayWithoutDuplicates(storesList)
     }
 
-    getStoresNameList = () => {
-        axios.get(`http://localhost:3020/storesNameList`)
-            .then((response) => this.updateStoresNameList(response.data))
-            .catch((error) => alert(error))
-    }
-
-    updateStoresNameList(newStoresNameList) {
-        this.storesNameList = newStoresNameList
+    returnArrayWithoutDuplicates(inputArray) {
+        let inputsSet = new Set()
+        for (let input of inputArray) {
+            inputsSet.add(input)
+        }
+        let outputArray = Array.from(inputsSet)
+        return outputArray
     }
 
 }

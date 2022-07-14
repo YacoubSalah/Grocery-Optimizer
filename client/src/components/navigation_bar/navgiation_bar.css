@@ -3,7 +3,7 @@
     justify-content: center;
     display: grid;
     width: 100%;
-    grid-template-columns: 4rem 3fr repeat(3 , 1fr);
+    grid-template-columns: 4rem 3fr repeat(2 , 1fr);
     grid-template-rows: minmax(3rem , 3rem);
     justify-items: center;
     align-items: center;
