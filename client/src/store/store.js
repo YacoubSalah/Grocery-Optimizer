@@ -41,8 +41,8 @@ export class Store {
       updateStoresNameList: action,
       updateAddPostStatus: action,
       handleImageChange: action,
-      handleSubmit: action ,
-      closeSnackbar : action
+      handleSubmit: action,
+      closeSnackbar: action
 
     })
   }
@@ -115,7 +115,7 @@ export class Store {
       "score": parseInt(this.score),
       "price": parseInt(this.price),
       "note": this.note,
-      "imageUrl":this.imageUrl
+      "imageUrl": this.imageUrl
     })
       .then((response) => this.updateAddPostStatus(true))
       .catch((error) => this.updateAddPostStatus(false))
@@ -126,7 +126,7 @@ export class Store {
     this.addPostStatus = true
   }
 
-  closeSnackbar(){
+  closeSnackbar = () => {
     this.addPostStatus = false
   }
 

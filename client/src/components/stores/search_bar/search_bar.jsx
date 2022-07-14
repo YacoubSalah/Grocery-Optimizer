@@ -1,74 +1,45 @@
 import React from 'react'
-import './search_bar.css'
+import { useEffect } from 'react'
 import { observer, inject } from 'mobx-react'
 
+import './search_bar.css'
 
-const storesSearchBar = inject("store" , "carts" , "products")(observer((props) => {
+const storesSearchBar = inject("store", "carts", "products")(observer((props) => {
 
-  function searchProductStores(){
+  useEffect(() => {
+    props.carts.getStoresNameList()
+    props.carts.getStoresLocationList()
+  }, [props.carts])
+
+  function searchProductStores() {
     props.carts.getStoresByProducts(props.products.cart)
   }
 
   return (
-    <div className='searchBar'>
-      <div className='selectsDiv'>
-        
-        <div className='CitySelectedDiv'>
-          <span>City Name :</span>
-          <select defaultValue={'default'}>
-            <option value="" >Choose a Location...</option>
-            {props.store.storesLocationList.map(city => {
-              return (
-                <option key={city} value={city}>{city}</option>
-              )
-            })}
-          </select>
-        </div>
+    <div className='storesSearchbar'>
 
-        <div className='StoreSelectedDiv'>
-          <span>Store :</span>
-          <select defaultValue={'default'}>
-            <option value="">Choose a Store...</option>
-            {props.store.storesNameList.map(store => {
-              return (
-                <option key={store} value={store}>{store}</option>
-              )
-            })}
-          </select>
-        </div>
+      <div className='selectorMenu'>
+        <select defaultValue={'default'}>
+          <option value="" >Choose City...</option>
+          {props.carts.storesLocationList.map(city => <option key={city} value={city}>{city}</option>)}
+        </select>
+      </div>
 
-        {/* <button className='findPriceButton'>Find price</button> */}
+      <div className='selectorMenu'>
+        <select defaultValue={'default'}>
+          <option value="">Choose a Store...</option>
+          {props.carts.storesNameList.map(store => <option key={store} value={store}>{store}</option>)}
+        </select>
+      </div>
+
+      <div >
         <button className='searchButton' onClick={searchProductStores}>Search</button>
-
       </div>
-
       
-      <div className='Checkboxes'>
-        <span>Sort :</span>
-        <label className="containerCheckbox">By Price
-          <input type="checkbox" />
-          <span className="checkmark"></span>
-        </label>
-        <label className="containerCheckbox">By Score
-          <input type="checkbox" />
-          <span className="checkmark"></span>
-        </label>
+    </div >
 
-        {/* --------------------------------- */}
-
-        <span>filter :</span>
-
-        <label className="containerCheckbox">Incomplete
-          <input type="checkbox" />
-          <span className="checkmark"></span>
-        </label>
-        <label className="containerCheckbox">Only scored
-          <input type="checkbox" />
-          <span className="checkmark"></span>
-        </label>
-      </div>
-    </div>
   )
+
 }))
 
 export default storesSearchBar

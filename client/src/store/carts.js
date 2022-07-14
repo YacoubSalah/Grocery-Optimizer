@@ -9,22 +9,30 @@ export class Carts {
         this.itemToShow = null;
         this.feedBack = [];
         this.totalPrice = 0;
-        this.loadingStoresSnackBar = false ; 
+        this.loadingStoresSnackBar = false;
         this.requsetStoresStatus = true
+        this.storesNameList = [];
+        this.storesLocationList = [];
+        this.selectedCityName= "";
+        this.selectedStoreName =""
 
         makeObservable(this, {
             storesCartsList: observable,
             itemToShow: observable,
             feedBack: observable,
             totalPrice: observable,
-            loadingStoresSnackBar : observable , 
-            requsetStoresStatus : observable ,
+            loadingStoresSnackBar: observable,
+            requsetStoresStatus: observable,
+            storesLocationList: observable,
+            storesNameList: observable,
             updateStoresCartList: action,
             addItemToShow: action,
             updateFeedBack: action,
-            calculateTotalPrices: action , 
-            handleLoadinStoresSnackBar : action , 
-            UpdateRequestStatus : action
+            calculateTotalPrices: action,
+            handleLoadinStoresSnackBar: action,
+            UpdateRequestStatus: action,
+            updateStoresLocationList: action,
+            updateStoresNameList: action
         })
 
     }
@@ -44,11 +52,11 @@ export class Carts {
             })
     }
 
-    handleLoadinStoresSnackBar(){
+    handleLoadinStoresSnackBar() {
         this.loadingStoresSnackBar = false
     }
 
-    UpdateRequestStatus(){
+    UpdateRequestStatus() {
         this.requsetStoresStatus = false
     }
 
@@ -99,4 +107,25 @@ export class Carts {
         return sum
 
     }
+
+    getStoresLocationList = () => {
+        axios.get(`http://localhost:3020/storesLocationList`)
+            .then((response) => this.updateStoresLocationList(response.data))
+            .catch((error) => alert(error))
+    }
+
+    updateStoresLocationList(newStoresLocationList) {
+        this.storesLocationList = newStoresLocationList
+    }
+
+    getStoresNameList = () => {
+        axios.get(`http://localhost:3020/storesNameList`)
+            .then((response) => this.updateStoresNameList(response.data))
+            .catch((error) => alert(error))
+    }
+
+    updateStoresNameList(newStoresNameList) {
+        this.storesNameList = newStoresNameList
+    }
+
 }
