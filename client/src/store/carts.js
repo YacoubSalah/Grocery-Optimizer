@@ -8,30 +8,48 @@ export class Carts {
         this.storesCartsList = [];  //more accurate name : storesDataFromServer
         this.itemToShow = null;
         this.feedBack = [];
-        this.totalPrice = 0
+        this.totalPrice = 0;
+        this.loadingStoresSnackBar = false ; 
+        this.requsetStoresStatus = true
 
         makeObservable(this, {
             storesCartsList: observable,
             itemToShow: observable,
             feedBack: observable,
             totalPrice: observable,
+            loadingStoresSnackBar : observable , 
+            requsetStoresStatus : observable ,
             updateStoresCartList: action,
             addItemToShow: action,
             updateFeedBack: action,
-            calculateTotalPrices: action
+            calculateTotalPrices: action , 
+            handleLoadinStoresSnackBar : action , 
+            UpdateRequestStatus : action
         })
 
     }
 
     getStoresByProducts = (cart) => {
 
+        this.loadingStoresSnackBar = true
+
         axios.post(`http://localhost:3020/cartPrices`, { cart })
             .then((response) => {
+                this.handleLoadinStoresSnackBar()
                 this.updateStoresCartList(response.data)
                 this.calculateTotalPrices(cart)
             })
-            .catch((error) => alert(error))
+            .catch((error) => {
+                this.UpdateRequestStatus()
+            })
+    }
 
+    handleLoadinStoresSnackBar(){
+        this.loadingStoresSnackBar = false
+    }
+
+    UpdateRequestStatus(){
+        this.requsetStoresStatus = false
     }
 
     calculateTotalPrices = (productsCart) => {

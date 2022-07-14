@@ -41,7 +41,8 @@ export class Store {
       updateStoresNameList: action,
       updateAddPostStatus: action,
       handleImageChange: action,
-      handleSubmit: action
+      handleSubmit: action ,
+      closeSnackbar : action
 
     })
   }
@@ -121,8 +122,12 @@ export class Store {
   }
 
   updateAddPostStatus(value) {
-    this.addPostStatus = value
-    this.clickOnAddPost = true
+    this.clickOnAddPost = value
+    this.addPostStatus = true
+  }
+
+  closeSnackbar(){
+    this.addPostStatus = false
   }
 
   getProductsNameList = () => {
