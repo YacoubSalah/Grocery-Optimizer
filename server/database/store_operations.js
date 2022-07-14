@@ -31,18 +31,22 @@ async function getAllStores() {
     return stores
 }
 
-/* "storeName": "Yacoub",
-"locationName": "Jerusalem", */
 async function getfilteredStores(filterData){
 
     let status = {}
-    status.message = 'no stores available'
-    status.code = 500
+    let stores = []
+    status.StatusMessage = 'no stores available'
+    status.StatusCode = 500
     
     if(this.getAllStores() === []) { return status }
-    else{
-        
+    else if(filterData.storeName === 'null' && filterData.locationName === 'null') {
+        status.message = 'please select store or city to search!!'
+        status.code = 400
+        return status
     }
+
+    stores = await storeFunctions.getFilteredStoresByNameOrLocation(filterData.storeName , filterData.locationName) 
+    return stores
 }
 
 async function getStoresNameList(filter) {
@@ -87,5 +91,6 @@ module.exports = {
     addStore,
     getAllStores,
     getStoresNameList,
-    getStoresLocationList
+    getStoresLocationList,
+    getfilteredStores
 }

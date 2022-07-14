@@ -1,4 +1,4 @@
-import { action, makeObservable, observable } from 'mobx'
+  import { action, makeObservable, observable } from 'mobx'
 import axios from 'axios'
 
 import { storage } from "./firebase";
@@ -126,7 +126,7 @@ export class Store {
     this.addPostStatus = true
   }
 
-  closeSnackbar = () => {
+  closeSnackbar =()=>{
     this.addPostStatus = false
   }
 
