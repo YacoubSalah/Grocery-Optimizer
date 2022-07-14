@@ -28,8 +28,8 @@ api.get("/storesLocationList", async function (req, res) {
 
 api.get("/storesfiltered", async function (req, res) {
     const filter = req.query
-    console.log(filter)
-    res.end()
+    let stores = await storeOperations.getfilteredStores(filter)
+    res.send(stores)
 })
 
 module.exports = api

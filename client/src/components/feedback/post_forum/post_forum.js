@@ -22,7 +22,7 @@ const PostForum = inject("store")(observer((props) => {
 
             <Snackbar
                 message={props.store.clickOnAddPost ? "post was added successfully" : "post store failed"}
-                autoHideDuration={1000}
+                autoHideDuration={2000}
                 open={props.store.addPostStatus}
                 onClose={props.store.closeSnackbar}
                 anchorOrigin={{

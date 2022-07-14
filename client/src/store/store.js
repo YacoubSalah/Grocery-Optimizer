@@ -126,7 +126,7 @@ export class Store {
     this.addPostStatus = true
   }
 
-  closeSnackbar(){
+  closeSnackbar =()=>{
     this.addPostStatus = false
   }
 

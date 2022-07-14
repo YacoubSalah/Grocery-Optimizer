@@ -112,8 +112,24 @@ async function updateScoreStore(storeName,locationStore,score){
     await store.save()
 
 }
+
+async function getFilteredStoresByNameOrLocation(storeName , locationName){
+
+    let stores = []
+
+    if( storeName !== 'null' && locationName !== 'null' ){
+        stores = await storeModel.find({ location: locationName , name: storeName }).exec()
+    }else if(storeName !== 'null'){
+        stores = await storeModel.find({ name: storeName }).exec()
+    }else if(locationName !== 'null'){
+        stores = await storeModel.find({ location: locationName }).exec()
+    }
+    
+    return stores
+}
 module.exports = {
     validateStoreData,
+    getFilteredStoresByNameOrLocation,
     validateStoreDoesntAlreadyExists,
     createAndSaveStoreModelInstance,
     validateStoreExists,
