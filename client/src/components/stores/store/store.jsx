@@ -5,23 +5,34 @@ import { observer, inject } from 'mobx-react'
 
 import './store.css'
 
-const store = inject("carts" , "products")(observer((props) => {
+const store = inject("carts", "products")(observer((props) => {
 
   const id = props.store.id
 
   return (
     <div className='storeCard'>
-      <div className='imagAndScoreDiv'>
+
+      <label className='incompletelabel'>{props.store.isComplete ? null : "*InComplete"}</label>
+
+      <div className='storeImageContainer'>
         <img className='storeImage' src={props.store.image} alt="defult" />
-        <div><Rating className='ratingSpan' ratingValue={20} readonly={true} /></div>
       </div>
-      <div className='DetailsDiv'>
-         <h3>{props.store.name}</h3>
-         <h3>{props.store.location}</h3>
-         <h3>Total Price : {props.carts.sumTotalPriceForStore(props.store.productCart)}$</h3>
+
+      <div className='ratingSpan'><Rating ratingValue={20} readonly={true} /></div>
+
+      <div className='storeData'>
+        <span className='storeName'>{props.store.name} store</span>
+        <span className='storeLocation'> {props.store.location}</span>
       </div>
-      <label className='incompletelabel'>{ props.store.isComplete ? null : "InComplete" }</label>
-      <Link  to="/details" state={id}><button className="btn">Details</button></Link>
+
+      <div className='storePriceValue'> {props.carts.sumTotalPriceForStore(props.store.productCart)} ₪</div>
+
+      <div className='buttonContainer'>
+        <Link to="/details" state={id}>
+          <button className="button">Details</button>
+        </Link>
+      </div>
+
     </div>
   )
 }))

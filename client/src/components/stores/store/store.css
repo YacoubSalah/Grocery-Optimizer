@@ -1,35 +1,76 @@
-.storeCard{
-   background-color: #F5F5F5;
-   border-radius: 20px;
+.storeCard {
    display: grid;
-   justify-content: center;
-}
-.storeImage{
-   width: 100px;
-   height: 100px;
+   background-color: #F5F5F5;
+   background: radial-gradient(circle, rgba(250, 250, 250, 1) 35%, rgba(220, 220, 220, 1) 100%);
+   box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.5);
+   grid-gap: .5rem;
+   border-radius: 1.5rem;
+   padding: 1.5rem;
+   align-items: center;
+   justify-items: center;
+   
 }
 
-.incompletelabel{
+.storeImageContainer {
+   justify-self: center;
+   max-width: 80%;
+}
+
+.storeImage {
+   border-radius: .5rem;
+   box-shadow: 1px 1px 4px .54px rgba(0, 0, 0, 0.5);
+   max-height: 30vh;
+}
+
+.ratingSpan {
+   height: 2.5rem;
+   justify-self: center;
+}
+
+
+.storeName{
+   font-size: 1.4rem;
+}
+
+.storeLocation{
+   justify-self: left;
+   font-size: 1rem;
+   color: darkgray;
+}
+
+.storePriceValue{
+   width: 60%;
+   text-align: center;
+   border-style: solid none solid none;
+   border-width: .05rem;
+   border-color: lightgray;
+   font-size: 1.6rem;
+   text-shadow:1px 1px 4px .54px rgba(0, 0, 0, 0.5); ;
+}
+
+
+.incompletelabel {
+   justify-self: left;
    color: red;
 }
 
-.btn
-{
-  display: block;
-  margin: 40px 0;
-  width: 240px;
-  height: 80px;
-  border: none;
-  background-color: #00a8ff;
-  color: #fff;
-  font-size: 18px;
-  border-radius: 6px;
-  outline: none;
-  cursor: pointer;
-  transition: .3s linear;
+.buttonContainer{
+   width: 80%;
 }
 
-.btn:hover {
-   transform: rotateY(-15deg);
-   box-shadow: 15px 0 15px #00a8ff;
- }
+.button{
+   width: 100%;
+   margin-top: .5rem;
+   padding: .8rem;
+   border: none;
+   background-color: #5456575e;
+   color: #ffff;
+   font-size: 1.2rem;
+   border-radius: .5rem;
+   outline: none;
+   cursor: pointer;
+}
+
+a{
+   text-decoration: none;
+}
