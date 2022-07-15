@@ -16,6 +16,7 @@ async function getStores(stores, products) {
         productshelp = []
         dommyStore.name = s.name
         dommyStore.location = s.location
+        dommyStore.image = s.image || ""
         dommyStore.id = s.id
         dommyStore.score = s.score
         dommyStore.isComplete = true

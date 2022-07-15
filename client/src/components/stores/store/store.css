@@ -1,4 +1,6 @@
 .storeCard{
+   background-color: #F5F5F5;
+   border-radius: 20px;
    display: grid;
    justify-content: center;
 }

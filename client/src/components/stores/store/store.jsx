@@ -1,10 +1,9 @@
 import React from 'react'
-import './store.css'
 import { Rating } from 'react-simple-star-rating'
 import { Link } from 'react-router-dom'
-import './store.css'
 import { observer, inject } from 'mobx-react'
 
+import './store.css'
 
 const store = inject("carts" , "products")(observer((props) => {
 
@@ -13,7 +12,7 @@ const store = inject("carts" , "products")(observer((props) => {
   return (
     <div className='storeCard'>
       <div className='imagAndScoreDiv'>
-        <img className='storeImage' src='https://bombyxplm.com/wp-content/uploads/2021/01/421-4213053_default-avatar-icon-hd-png-download.png' alt="defult" />
+        <img className='storeImage' src={props.store.image} alt="defult" />
         <div><Rating className='ratingSpan' ratingValue={20} readonly={true} /></div>
       </div>
       <div className='DetailsDiv'>
