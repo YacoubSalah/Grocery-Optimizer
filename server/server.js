@@ -1,8 +1,8 @@
 const mongoose = require("mongoose")
 const express = require("express")
-const productApi = require('./server/routes/product_api')
-const storeApi = require("./server/routes/store_api")
-const cartApi = require("./server/routes/cart_api")
+const productApi = require('./routes/product_api')
+const storeApi = require("./routes/store_api")
+const cartApi = require("./routes/cart_api")
 
 const app = express()
 
@@ -22,12 +22,14 @@ app.use('/', storeApi)
 app.use('/', cartApi)
 
 //heroku
- //if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"))
+ if (process.env.NODE_ENV === "production") {
+    app.use(express.static("../client/build"))
     app.get('*', (req, res) => {
-        req.sendFile(path.resolve(__dirname, '/client/build', 'index.html'))
+        console.log("here we go");
+        req.sendFile(path.resolve(__dirname, '../build', 'index.html'))
     })
-//}
+
+}
 //heroku
 
 const port = process.env.PORT || 3020

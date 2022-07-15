@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const configuration = require('../../configuration')
+const configuration = require('../configuration')
 
 let postSchema = new mongoose.Schema({
     imageUrl: { type: String, default: configuration.productNoImageUrl },
