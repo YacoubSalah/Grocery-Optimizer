@@ -7,14 +7,14 @@ import './feedback.css'
 
 function Home() {
   return (
-    <>
+    <div className='feedbackContainer'>
     <img className='background' src={background} alt='background'></img>
     <div className='feedbackContainer'>
     <Fragment>
          <PostForum />
     </Fragment>
     </div>
-    </>
+    </div>
   )
 }
 

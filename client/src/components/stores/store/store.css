@@ -8,7 +8,6 @@
    padding: 1.5rem;
    align-items: center;
    justify-items: center;
-   
 }
 
 .storeImageContainer {
@@ -18,6 +17,7 @@
 
 .storeImage {
    border-radius: .5rem;
+   width: 100%;
    box-shadow: 1px 1px 4px .54px rgba(0, 0, 0, 0.5);
    max-height: 30vh;
 }
@@ -26,7 +26,6 @@
    height: 2.5rem;
    justify-self: center;
 }
-
 
 .storeName{
    font-size: 1.4rem;

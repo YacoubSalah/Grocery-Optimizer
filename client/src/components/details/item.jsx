@@ -12,10 +12,10 @@ const item = inject("carts" , "products")(observer((props) => {
     <Fragment>
         <span>{props.itemName}</span>
         <span className='ratingInDetails'><Rating size={20} initialValue={props.item.score} readonly={true}/></span>
-        <span>{props.item.initialPrice === null ? "Not in store" : props.item.initialPrice}</span>
+        <span>{props.item.initialPrice === null ? "Not in store" : props.item.initialPrice}  ₪</span>
         <span>{props.products.cart[props.itemName]}</span> 
         <span>{props.item.initialPrice === null ?  "Not in store" :  
-        Math.round(props.item.totalPrice * 100 ) / 100}</span>
+        Math.round(props.item.totalPrice * 100 ) / 100}  ₪</span>
         <span><Button onClick={() => props.handelClickOpenSnackbar(props.itemName , props.id)} >{props.item.postQuantity}</Button></span>
     </Fragment>
   )

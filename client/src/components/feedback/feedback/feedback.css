@@ -6,3 +6,8 @@
     width: 100%;
     /* opacity: .7; */
 }
+
+.feedbackContainer{
+justify-self: left;
+width: auto;
+}

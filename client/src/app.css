@@ -11,6 +11,8 @@
 }
 
 .appBody{
+  display: grid;
+  justify-items: center;
   min-height: 100%;
   object-fit: fill;
   padding: .5rem;

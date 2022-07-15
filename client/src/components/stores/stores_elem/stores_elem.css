@@ -1,4 +1,4 @@
-.stores {
+.storesElemContainer {
     padding: 1rem;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -8,14 +8,14 @@
 
 
 @media only screen and (max-width: 1000px) {
-    .stores {
+    .storesElemContainer {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
 }
 
 @media only screen and (max-width: 600px) {
-    .stores {
+    .storesElemContainer {
         grid-template-columns: repeat(1, 1fr);
     }
 }

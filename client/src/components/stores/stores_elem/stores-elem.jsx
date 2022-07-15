@@ -10,7 +10,7 @@ const stores = inject("carts")(observer((props) => {
   let storesList = (props.carts.filteredStoresCarts)
 
   return (
-    <div className='stores'>
+    <div className='storesElemContainer'>
       {storesList.map(store => <Store key={store.id} store={store} />)}
     </div>
   )

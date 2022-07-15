@@ -1,54 +1,56 @@
-/* --------------------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
+.background {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+  width: 100%;
+}
 
-.container {
-  position: absolute;
-  left: 50%;
-  top: 50%;
+.detailsContainer {
+  display: grid;
   justify-items: center;
-  transform: translate(-50%, -50%);
-  height: max-content;
-  width: 90%;
-  background: #f2f2f2;
-  overflow: hidden;
-  border-radius: 20px;
+  background-color: #f2f2f2;
+  border-radius: 1.5rem;
   box-shadow: 0 0 20px 8px #d0d0d0;
-  text-align: center;
+  padding: 1rem;
+  font-family: 'Noto Serif', serif;
+  justify-self: center;
+
 }
 
-.content {
-  text-align: justify;
+.detailsStoreData {
+  padding: .5rem;
+  justify-self: left;
   color: black;
-  padding: 40px;
-  font-family: 'Merriweather', serif;
 }
 
-.content>h1 {
-  font-weight: 900;
-  text-align: center;
+.detailsStoreName{
+  font-size: 2.5rem;
 }
 
-.content>h3 {
-  font-weight: 300;
-  text-align: center;
+.detailsStoreLocation{
+  justify-self: left;
+  font-size: 1.2rem;
+  color: darkgray;
 }
 
 .gridcontent {
   display: grid;
-  row-gap: 10px;
+  row-gap: .2rem;
   align-items: center;
-  padding-left: 0.5vw;
   grid-template-columns: repeat(6, 1fr);
 }
 
-.gridcontent > span {
+.gridcontent>span {
   border: 1px solid #CCDBDC;
   padding: 3px;
   font-size: 1rem;
   text-align: center;
   margin: 1rem;
 }
-.hideDetailsButton{
+
+.hideDetailsButton {
   color: palevioletred;
   font-size: 2em;
   margin: 1em;
@@ -60,10 +62,10 @@
   text-align: center;
 }
 
-.container > a {
+.container>a {
   text-decoration: none;
 }
 
-.hideDetailsButton:hover{
+.hideDetailsButton:hover {
   background-color: #80CED7;
 }
