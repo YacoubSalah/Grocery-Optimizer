@@ -1,5 +1,6 @@
-  import { action, makeObservable, observable } from 'mobx'
+import { action, makeObservable, observable } from 'mobx'
 import axios from 'axios'
+import { URL } from '../config'
 
 import { storage } from "./firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -108,7 +109,7 @@ export class Store {
 
   handelAddClick = () => {
 
-    axios.post('http://localhost:3020/productStorePost', {
+    axios.post(`${URL}productStorePost`, {
       "productName": this.productName,
       "storeName": this.storeName,
       "storeLocation": this.storeLocation,
@@ -131,7 +132,7 @@ export class Store {
   }
 
   getProductsNameList = () => {
-    axios.get(`http://localhost:3020/productsNameList?storeNameFilter=${this.storeName}&storeLocationFilter=${this.storeLocation}`)
+    axios.get(`${URL}productsNameList?storeNameFilter=${this.storeName}&storeLocationFilter=${this.storeLocation}`)
       .then((response) => this.updateProductsNameList(response.data))
       .catch((error) => alert(error))
   }
@@ -142,7 +143,7 @@ export class Store {
   }
 
   getStoresLocationList = () => {
-    axios.get(`http://localhost:3020/storesLocationList?storeNameFilter=${this.storeName}&productNameFilter=${this.productName}`)
+    axios.get(`${URL}storesLocationList?storeNameFilter=${this.storeName}&productNameFilter=${this.productName}`)
       .then((response) => this.updateStoresLocationList(response.data))
       .catch((error) => alert(error))
   }
@@ -152,7 +153,7 @@ export class Store {
   }
 
   getStoresNameList = () => {
-    axios.get(`http://localhost:3020/storesNameList?storeLocationFilter=${this.storeLocation}&productNameFilter=${this.productName}`)
+    axios.get(`${URL}storesNameList?storeLocationFilter=${this.storeLocation}&productNameFilter=${this.productName}`)
       .then((response) => this.updateStoresNameList(response.data))
       .catch((error) => alert(error))
   }
