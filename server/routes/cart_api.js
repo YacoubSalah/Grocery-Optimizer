@@ -12,7 +12,7 @@ api.post("/cartPrices", async function (req, res) {
 })
  api.get("/postsProduct", async function (req, res){
     const param = req.query
-    let posts = await cartOperations.getPostsProduct(param.productName, param.storeId)
+    let posts = await cartOperations.getPostsProductApi(param.productName, param.storeId)
     res.send(posts)
  })
 
