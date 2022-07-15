@@ -17,11 +17,22 @@ app.use(function (req, res, next) {
     next()
 })
 
-app.use( '/' , productApi)
-app.use( '/' , storeApi)
+app.use('/', productApi)
+app.use('/', storeApi)
 app.use('/', cartApi)
 
-const port = 3020
+//heroku
+ if (process.env.NODE_ENV === "production") {
+    app.use(express.static("../client/build"))
+    app.get('*', (req, res) => {
+        console.log("here we go");
+        req.sendFile(path.resolve(__dirname, '../build', 'index.html'))
+    })
+
+}
+//heroku
+
+const port = process.env.PORT || 3020
 app.listen(port, () => console.log(`GroceryOptimizer server is running on port: ${port}`))
 
 mongoose.connect("mongodb+srv://GroceryOptimizer:GroceryOptimizer@cluster0.uiyjv.mongodb.net/GroceryOptimizerTesting?retryWrites=true&w=majority")
