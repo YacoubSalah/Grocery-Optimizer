@@ -1,4 +1,3 @@
-const productModel = require("../models/product")
 const cartFunctions = require("./cart_operations_fn")
 
 async function getStoresPrices(cart) {
