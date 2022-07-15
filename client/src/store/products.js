@@ -1,5 +1,6 @@
 import { observable, makeObservable, action, computed } from 'mobx'
 import axios from 'axios'
+import { URL } from '../config'
 
 
 export class Products {
@@ -42,7 +43,7 @@ export class Products {
     if (!this.searchWord) {
       this.searchWord = 'Initiate'
     }
-    axios.get(`http://localhost:3020/products/${this.searchWord}`)
+    axios.get(`${URL}products/${this.searchWord}`)
       .then((newProductsList) => this.checkInCartAndUpdateProducts(newProductsList.data))
       .catch((error) => alert(error))
   }
@@ -89,7 +90,7 @@ export class Products {
   }
 
   getCategories = () => {
-    const response = axios.get('http://localhost:3020/categories')
+    const response = axios.get(`${URL}categories`)
       .then((response) => this.updateCategories(response.data))
       .catch((error) => alert(error))
     this.categories = response.data
@@ -102,7 +103,7 @@ export class Products {
   getproductsByCategory = (event) => {
     let mainCategory = event.target.dataset.mainCategory || ''
     let subCategory = event.target.dataset.subCategory || ''
-    axios.get(`http://localhost:3020/categoryProducts?mainCategory=${mainCategory}&subCategory=${subCategory}`)
+    axios.get(`${URL}categoryProducts?mainCategory=${mainCategory}&subCategory=${subCategory}`)
       .then((newProducts) => this.checkInCartAndUpdateProducts(newProducts.data))
       .catch((error) => alert(error))
   }

@@ -1,5 +1,6 @@
 import { observable, makeObservable, action } from 'mobx'
 import axios from 'axios'
+import { URL } from '../config'
 
 export class Carts {
 
@@ -54,7 +55,7 @@ export class Carts {
 
     getStoresByProducts = (cart) => {
         this.loadingStoresSnackBar = true
-        axios.post(`http://localhost:3020/cartPrices`, { cart })
+        axios.post(`${URL}cartPrices`, { cart })
             .then((response) => {
                 this.handleLoadinStoresSnackBar()
                 this.updateStoresCarts(response.data)
@@ -160,7 +161,7 @@ export class Carts {
 
     getFeedBack = (itemName, id) => {
 
-        axios.get(`http://localhost:3020/postsProduct/?productName=${itemName}&&storeId=${id}`)
+        axios.get(`${URL}postsProduct/?productName=${itemName}&&storeId=${id}`)
             .then((response) => {
                 this.updateFeedBack(response.data)
             })
