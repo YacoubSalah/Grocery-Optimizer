@@ -52,7 +52,7 @@ const details_component = inject("carts")(observer((props) => {
         <div className='detailsTotalPriceContainer' >
           <span className='detailsTotalPriceTitle'>Total Price :</span>
           {props.carts.itemToShow !== null ?
-          <span className='detailsTotalPriceValue'> {Math.round(props.carts.sumTotalPriceForStore(props.carts.itemToShow.productCart)*100)/100}  ₪</span> : null
+          <span className='detailsTotalPriceValue'> {props.carts.itemToShow.totalPrice}  ₪</span> : null
           }
         </div>
 
@@ -79,10 +79,6 @@ const details_component = inject("carts")(observer((props) => {
 
       </div>
 
-      {props.carts.itemToShow !== null ?
-        <h1>Total Price : {props.carts.itemToShow.totalPrice}  ₪</h1> :
-        null
-      }
       <Link to="/stores" ><button className='hideDetailsButton'>Back to stores</button></Link>
 
       <Snackbarcomponent
