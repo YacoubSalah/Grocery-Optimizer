@@ -76,22 +76,6 @@ export class Carts {
             })
     }
 
-    sortStores(){
-
-        let CompleteStores = []
-        let InCompleteStores = []
-
-        this.storesCarts.forEach(store => {
-            store.isComplete ? CompleteStores.push(store) : InCompleteStores.push(store)
-        })
-
-        CompleteStores.sort(function (x, y) {
-            return x.totalPrice - y.totalPrice;
-        });
-
-        this.storesCarts = CompleteStores.concat(InCompleteStores)
-    }
-
     updateStoresCarts = (newStoresCarts) => {
         this.storesCarts = newStoresCarts
     }
@@ -114,6 +98,40 @@ export class Carts {
         }
         this.updateCitiesNameList()
         this.updateStoresNameList()
+        this.sortStores()
+    }
+
+    sortStores(){
+
+        let CompleteStores = []
+        let InCompleteStores = []
+        let sumTotalPriceForStore = 0
+
+        this.filteredStoresCarts.forEach(store => {
+        
+            Object.keys(store.productCart).forEach(keys => {
+                sumTotalPriceForStore += store.productCart[keys].totalPrice
+            })
+
+            let number = sumTotalPriceForStore.toString();
+            let result = Number(number.slice(0, 4));
+            store['totalPrice'] = result
+            sumTotalPriceForStore = 0
+
+            store.isComplete ? CompleteStores.push(store) : InCompleteStores.push(store)
+        })
+
+        CompleteStores.sort(function (x, y) {
+            console.log(x,y)
+            return x.totalPrice - y.totalPrice;
+        });
+
+        InCompleteStores.sort(function (x, y) {
+            return x.totalPrice - y.totalPrice;
+        });
+
+        this.filteredStoresCarts = CompleteStores.concat(InCompleteStores)
+
     }
 
     handleLoadinStoresSnackBar() {
@@ -197,19 +215,5 @@ export class Carts {
     updateFeedBack = (posts) => {
         this.feedBack = posts
     }
-
-    sumTotalPriceForStore = (itemsCart) => {
-
-        let sum = 0
-
-        Object.keys(itemsCart).forEach(key => {
-            sum += Math.round(itemsCart[key].totalPrice * 100) / 100
-        })
-
-        return sum
-
-    }
-
-
 
 }

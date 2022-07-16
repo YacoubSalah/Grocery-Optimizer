@@ -68,7 +68,7 @@ const details_component = inject("carts")(observer((props) => {
       </div>
 
       {props.carts.itemToShow !== null ?
-        <h1>Total Price : {props.carts.sumTotalPriceForStore(props.carts.itemToShow.productCart)}  ₪</h1> :
+        <h1>Total Price : {props.carts.itemToShow.totalPrice}  ₪</h1> :
         null
       }
       <Link to="/stores" ><button className='hideDetailsButton'>Back to stores</button></Link>
