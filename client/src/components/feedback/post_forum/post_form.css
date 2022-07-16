@@ -1,6 +1,6 @@
 .Form {
     display: grid;
-    max-width: 50%;
+    max-width: 100%;
     background-color: rgba(242, 242, 242, 0.518);
     padding: .5rem;
     border-radius: 10px;
