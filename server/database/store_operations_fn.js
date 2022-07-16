@@ -104,6 +104,7 @@ async function getStoresByStoreName(storeNameFilter) {
         .exec()
     return stores
 }
+
 async function updateScoreStore(storeName,locationStore,score){
     let store = await storeModel.findOne({name:storeName,location:locationStore }).exec()
     store.score = (store.score*store.countScore + score)/(store.countScore+1)

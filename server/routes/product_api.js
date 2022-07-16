@@ -13,7 +13,6 @@ api.post("/product", async function (req, res) {
     res.send(feedback)
 })
 
-
 api.post("/productStore", async function (req, res) {
     const productStoreData = req.body
     let feedback = await productOperations.addProductStore(productStoreData)

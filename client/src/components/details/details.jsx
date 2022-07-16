@@ -79,7 +79,11 @@ const details_component = inject("carts")(observer((props) => {
 
       </div>
 
-      <Link to="/stores" ><button className='hideDetailsButton'>Hide Details</button></Link>
+      {props.carts.itemToShow !== null ?
+        <h1>Total Price : {props.carts.itemToShow.totalPrice}  ₪</h1> :
+        null
+      }
+      <Link to="/stores" ><button className='hideDetailsButton'>Back to stores</button></Link>
 
       <Snackbarcomponent
         open={open}
