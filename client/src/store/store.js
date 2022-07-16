@@ -4,7 +4,7 @@ import { URL } from '../config'
 
 import { storage } from "./firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
+import {v4} from 'uuid'
 export class Store {
   constructor() {
     this.productName = '';
@@ -57,11 +57,13 @@ export class Store {
   }
 
   handleSubmit = () => {
-    const imageRef = ref(storage, "image");
+    console.log(v4())
+    const imageRef = ref(storage, `images/${v4()}`);
     uploadBytes(imageRef, this.image)
       .then(() => {
         getDownloadURL(imageRef)
           .then((newURL) => {
+            console.log(newURL)
             this.imageUrl = newURL
           })
           .catch((error) => {
