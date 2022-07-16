@@ -25,7 +25,7 @@ const store = inject("carts", "products")(observer((props) => {
         <span className='storeLocation'> {props.store.location}</span>
       </div>
 
-      <div className='storePriceValue'> {props.carts.sumTotalPriceForStore(props.store.productCart)} ₪</div>
+      <div className='storePriceValue'> {Math.round(props.carts.sumTotalPriceForStore(props.store.productCart)*100)/100} ₪</div>
 
       <div className='buttonContainer'>
         <Link to="/details" state={id}>

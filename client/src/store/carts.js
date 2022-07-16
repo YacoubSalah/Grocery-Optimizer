@@ -28,6 +28,9 @@ export class Carts {
             loadingStoresSnackBar: observable,
             citiesNameList: observable,
             storesNameList: observable,
+            cityNameFilter: observable,
+            storeNameFilter: observable,
+
 
             //not revised
             itemToShow: observable,
@@ -37,6 +40,7 @@ export class Carts {
             requsetStoresStatus: observable,
             //not revised
 
+            getStoresByProducts: action,
             updateStoresCarts: action,
             updatedFilteredStoresCarts: action,
             handleLoadinStoresSnackBar: action,
@@ -55,6 +59,8 @@ export class Carts {
 
     getStoresByProducts = (cart) => {
         this.loadingStoresSnackBar = true
+        this.cityNameFilter = ""
+        this.storeNameFilter =""
         axios.post(`${URL}cartPrices`, { cart })
             .then((response) => {
                 this.handleLoadinStoresSnackBar()
