@@ -65,7 +65,7 @@
 
 .gridcontent>span {
   border: 1px solid #CCDBDC;
-  padding: .05rem;
+  padding: .05rem 1rem;
   font-size: 1rem;
   height: 2.5rem;
   justify-self: stretch;
@@ -92,5 +92,7 @@
 }
 
 .hideDetailsButton:hover {
-  background-color: #80CED7;
+  box-shadow: rgba(128, 205, 215, 0.5) 0 1px 5px;
+  transition-duration: .2s;
+  background-color:rgba(128, 205, 215, 0.5);
 }

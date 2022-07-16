@@ -73,10 +73,11 @@
 }
 
 .DetailsButton:hover{
-   box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+   box-shadow: rgba(128, 205, 215, 0.5) 0 1px 5px;
    transition-duration: .2s;
-   background-color:rgba(80, 63, 205, 0.5);
+   background-color:rgba(128, 205, 215, 0.5);
 }
+
 a{
    text-decoration: none;
 }
