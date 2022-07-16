@@ -46,6 +46,7 @@ export class Carts {
             handleLoadinStoresSnackBar: action,
             updateCitiesNameList: action,
             updateStoresNameList: action,
+            sortStores: action,
 
             //not revised
             addItemToShow: action,
@@ -61,16 +62,34 @@ export class Carts {
         this.loadingStoresSnackBar = true
         this.cityNameFilter = ""
         this.storeNameFilter =""
+        
         axios.post(`${URL}cartPrices`, { cart })
             .then((response) => {
                 this.handleLoadinStoresSnackBar()
                 this.updateStoresCarts(response.data)
                 this.updatedFilteredStoresCarts()
                 this.calculateTotalPrices(cart)
+                this.sortStores()
             })
             .catch(() => {
                 this.UpdateRequestStatus()
             })
+    }
+
+    sortStores(){
+
+        let CompleteStores = []
+        let InCompleteStores = []
+
+        this.storesCarts.forEach(store => {
+            store.isComplete ? CompleteStores.push(store) : InCompleteStores.push(store)
+        })
+
+        CompleteStores.sort(function (x, y) {
+            return x.totalPrice - y.totalPrice;
+        });
+
+        this.storesCarts = CompleteStores.concat(InCompleteStores)
     }
 
     updateStoresCarts = (newStoresCarts) => {
