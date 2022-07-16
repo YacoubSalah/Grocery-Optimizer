@@ -29,7 +29,7 @@ api.post("/productStorePost", async function (req, res) {
     if (!feedback.status) {
         return res.status(500).send(feedback.message)
     }
-    res.send(feedback)
+    res.send(feedback) 
 })
 
 api.get("/allProducts", async function (req, res) {
