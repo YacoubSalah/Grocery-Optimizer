@@ -11,9 +11,10 @@
     transform: translate( -50% , -50%);
     width: 60vw;
     height: 60vh;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: #F2A6B3;
     display: grid;
+    text-align: center;
 }
 
 #show{

@@ -18,7 +18,7 @@ const store = inject("carts", "products")(observer((props) => {
         <img className='storeImage' src={props.store.image} alt="defult" />
       </div>
 
-      <div className='ratingSpan'><Rating ratingValue={20} readonly={true} /></div>
+      <div className='ratingSpan'><Rating ratingValue={props.store.score * 20} readonly={true} /></div>
 
       <div className='storeData'>
         <span className='storeName'>{props.store.name} store</span>
@@ -29,7 +29,7 @@ const store = inject("carts", "products")(observer((props) => {
 
       <div className='buttonContainer'>
         <Link to="/details" state={id}>
-          <button className="button">Details</button>
+          <button className="DetailsButton">Details</button>
         </Link>
       </div>
 
