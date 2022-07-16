@@ -43,35 +43,43 @@ const details_component = inject("carts")(observer((props) => {
       <img className='background' src={background} alt='background'></img>
 
       <div className="detailsStoreData">
-        <span className='detailsStoreName'>{props.carts.itemToShow ? props.carts.itemToShow.name : null} Store</span>
-        <span className='detailsStoreLocation'> {props.carts.itemToShow ? props.carts.itemToShow.location : null}</span>
+
+        <div>
+          <span className='detailsStoreName'>{props.carts.itemToShow ? props.carts.itemToShow.name : null} Store</span>
+          <span className='detailsStoreLocation'> {props.carts.itemToShow ? props.carts.itemToShow.location : null}</span>
+        </div>
+
+        <div className='detailsTotalPriceContainer' >
+          <span className='detailsTotalPriceTitle'>Total Price :</span>
+          {props.carts.itemToShow !== null ?
+          <span className='detailsTotalPriceValue'> {Math.round(props.carts.sumTotalPriceForStore(props.carts.itemToShow.productCart)*100)/100}  ₪</span> : null
+          }
+        </div>
+
       </div>
 
       <div className='gridcontent'>
 
         <GridHeader />
 
-        {props.carts.itemToShow ?
-          Object.keys(props.carts.itemToShow.productCart).map(key => {
-            return (
-              <Item key={key}
-                handelClickOpenSnackbar={handleClickEvent}
-                id={props.carts.itemToShow.id !== null ? props.carts.itemToShow.id : null}
-                item={props.carts.itemToShow.productCart[key]} itemName={key}
-              />
-            )
-          })
-          :
-          null
+        {
+          props.carts.itemToShow ?
+            Object.keys(props.carts.itemToShow.productCart).map(key => {
+              return (
+                <Item key={key}
+                  handelClickOpenSnackbar={handleClickEvent}
+                  id={props.carts.itemToShow.id !== null ? props.carts.itemToShow.id : null}
+                  item={props.carts.itemToShow.productCart[key]} itemName={key}
+                />
+              )
+            })
+            :
+            null
         }
 
       </div>
 
-      {props.carts.itemToShow !== null ?
-        <h1>Total Price : {props.carts.sumTotalPriceForStore(props.carts.itemToShow.productCart)}  ₪</h1> :
-        null
-      }
-      <Link to="/stores" ><button className='hideDetailsButton'>Back to stores</button></Link>
+      <Link to="/stores" ><button className='hideDetailsButton'>Hide Details</button></Link>
 
       <Snackbarcomponent
         open={open}
@@ -79,7 +87,9 @@ const details_component = inject("carts")(observer((props) => {
         storeName={props.carts.itemToShow ? props.carts.itemToShow.name : null}
         storeLocation={props.carts.itemToShow ? props.carts.itemToShow.location : null}
         itemName={item}
-        handleToClose={handleToClose} />
+        handleToClose={handleToClose}
+      />
+
     </div>
   )
 }))

@@ -9,7 +9,7 @@
 }
 
 .containerStores{
-    width: 70%;
+    width: 100%;
     display: grid;
     padding: .5rem;
     font-family: 'Noto Serif', serif;
