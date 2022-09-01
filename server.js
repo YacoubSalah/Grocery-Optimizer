@@ -1,11 +1,14 @@
 const mongoose = require("mongoose")
 const express = require("express")
+const path = require("path")
+
 const productApi = require('./server/routes/product_api')
 const storeApi = require("./server/routes/store_api")
 const cartApi = require("./server/routes/cart_api")
 
 const app = express()
 
+app.use(express.static('build'))
 app.use(express.urlencoded())
 app.use(express.json())
 
@@ -17,11 +20,11 @@ app.use(function (req, res, next) {
     next()
 })
 
-app.use( '/' , productApi)
-app.use( '/' , storeApi)
+app.use('/', productApi)
+app.use('/', storeApi)
 app.use('/', cartApi)
 
-const port = 3020
+const port = process.env.port || 3020
 app.listen(port, () => console.log(`GroceryOptimizer server is running on port: ${port}`))
 
 mongoose.connect("mongodb+srv://GroceryOptimizer:GroceryOptimizer@cluster0.uiyjv.mongodb.net/GroceryOptimizerTesting?retryWrites=true&w=majority")
