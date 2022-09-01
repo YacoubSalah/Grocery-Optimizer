@@ -1,8 +1,8 @@
 const mongoose = require("mongoose")
 const express = require("express")
-const productApi = require('./routes/product_api')
-const storeApi = require("./routes/store_api")
-const cartApi = require("./routes/cart_api")
+const productApi = require('./server/routes/product_api')
+const storeApi = require("./server/routes/store_api")
+const cartApi = require("./server/routes/cart_api")
 
 const app = express()
 
